@@ -19,7 +19,9 @@ from agents import (
 # =========================
 
 client = OpenAI(
-    api_key="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")
+    api_key=st.secrets["OPENAI_API_KEY"]
+)
+
 
 
 # =========================
