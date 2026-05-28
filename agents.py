@@ -16,18 +16,18 @@ class RequirementAgent:
     def extract_requirements(self, text):
 
         prompt = f"""
-        Analyze the BRD below.
+Analyze the BRD below.
 
-        Extract:
-        - business objectives
-        - functional requirements
-        - operational requirements
-        - data requirements
-        - key modules
+Extract:
+- business objectives
+- functional requirements
+- operational requirements
+- data requirements
+- key modules
 
-        BRD:
-        {text}
-        """
+BRD:
+{text}
+"""
 
         response = self.client.chat.completions.create(
 
@@ -53,7 +53,6 @@ class RequirementAgent:
         return response.choices[0].message.content
 
 
-```python id="jbh1zt"
 # =========================
 # HLD AGENT
 # =========================
@@ -68,86 +67,86 @@ class HLDAgent:
     def generate_hld(self, requirements):
 
         prompt = f"""
-        Generate enterprise High Level Design.
+Generate enterprise High Level Design.
 
-        IMPORTANT:
-        This is a SQL-driven manufacturing intelligence platform.
+IMPORTANT:
+This is a SQL-driven manufacturing intelligence platform.
 
-        The SQL database is the source of truth.
+The SQL database is the source of truth.
 
-        AI agents are used for:
-        - orchestration
-        - requirement understanding
-        - query generation
-        - insight generation
-        - executive summaries
+AI agents are used for:
+- orchestration
+- requirement understanding
+- query generation
+- insight generation
+- executive summaries
 
-        The architecture must include:
+The architecture must include:
 
-        1. SQL database layer
-        2. Data ingestion layer
-        3. AI orchestration layer
-        4. Query generation engine
-        5. Operational analytics layer
-        6. Pandas transformation layer
-        7. Streamlit visualization layer
-        8. Executive dashboard layer
+1. SQL database layer
+2. Data ingestion layer
+3. AI orchestration layer
+4. Query generation engine
+5. Operational analytics layer
+6. Pandas transformation layer
+7. Streamlit visualization layer
+8. Executive dashboard layer
 
-        Explain clearly:
+Explain clearly:
 
-        - how SQL tables are joined
-        - join keys
-        - lineage flow
-        - operational workflow
-        - defect analytics
-        - bottleneck analytics
-        - customer impact analytics
+- how SQL tables are joined
+- join keys
+- lineage flow
+- operational workflow
+- defect analytics
+- bottleneck analytics
+- customer impact analytics
 
-        Use these manufacturing tables:
+Use these manufacturing tables:
 
-        1. PRODUCTION_DATA
-       - MAT_ID
-       - ORDER_NO
-       - PROD_UNIT
-       - ROUTE
+1. PRODUCTION_DATA
+   - MAT_ID
+   - ORDER_NO
+   - PROD_UNIT
+   - ROUTE
 
-        2. DEFECT_DATA
-       - MAT_ID
-       - DEFECT_NAME
-       - BLOCKING_DEFECT
+2. DEFECT_DATA
+   - MAT_ID
+   - DEFECT_NAME
+   - BLOCKING_DEFECT
 
-        3. ORDER_DATA
-       - ORDER_NO
-       - CUSTOMER_NAME
-       - PROMISED_DELIVERY_DATE
+3. ORDER_DATA
+   - ORDER_NO
+   - CUSTOMER_NAME
+   - PROMISED_DELIVERY_DATE
 
-        4. MATERIAL_FLOW_DATA
-       - MAT_ID_PREV
-       - MAT_ID_NEXT
+4. MATERIAL_FLOW_DATA
+   - MAT_ID_PREV
+   - MAT_ID_NEXT
 
-        IMPORTANT JOIN LOGIC:
+IMPORTANT JOIN LOGIC:
 
-        - PRODUCTION_DATA.MAT_ID
-          joins with
-          DEFECT_DATA.MAT_ID
+- PRODUCTION_DATA.MAT_ID
+  joins with
+  DEFECT_DATA.MAT_ID
 
-        - PRODUCTION_DATA.ORDER_NO
-          joins with
-          ORDER_DATA.ORDER_NO
+- PRODUCTION_DATA.ORDER_NO
+  joins with
+  ORDER_DATA.ORDER_NO
 
-        - MATERIAL_FLOW_DATA.MAT_ID_NEXT
-          joins with
-          PRODUCTION_DATA.MAT_ID
+- MATERIAL_FLOW_DATA.MAT_ID_NEXT
+  joins with
+  PRODUCTION_DATA.MAT_ID
 
-        Explain:
-        - why joins are needed
-        - operational purpose
-        - business impact
-        - SQL-driven architecture
+Explain:
+- why joins are needed
+- operational purpose
+- business impact
+- SQL-driven architecture
 
-        Requirements:
-        {requirements}
-        """
+Requirements:
+{requirements}
+"""
 
         response = self.client.chat.completions.create(
 
@@ -171,7 +170,6 @@ class HLDAgent:
         )
 
         return response.choices[0].message.content
-```
 
 
 # =========================
@@ -192,22 +190,23 @@ class SolutionAgent:
     ):
 
         prompt = f"""
-        Generate enterprise implementation solution.
+Generate enterprise implementation solution.
 
-        Include:
-        - technology stack
-        - AI architecture
-        - deployment approach
-        - implementation phases
-        - operational workflow
-        - agentic AI architecture
+Include:
+- technology stack
+- SQL architecture
+- AI orchestration
+- deployment architecture
+- operational workflow
+- dashboard layer
+- analytics layer
 
-        Requirements:
-        {requirements}
+Requirements:
+{requirements}
 
-        HLD:
-        {hld}
-        """
+HLD:
+{hld}
+"""
 
         response = self.client.chat.completions.create(
 
@@ -251,40 +250,30 @@ class QueryAgent:
     ):
 
         prompt = f"""
-        You are a senior manufacturing data engineer.
+Generate executable Python Pandas code.
 
-        Generate executable Python Pandas code.
+STRICT RULES:
 
-        STRICT RULES:
+- Generate ONLY Python code
+- No markdown
+- No explanations
+- Use Pandas
+- Use proper joins
+- Use safe null handling
+- Generate NEXT_INSTALLATION dynamically
 
-        - Generate ONLY executable Python code
-        - No markdown
-        - No explanations
-        - Use Pandas
-        - Use proper joins
-        - Use safe null handling
-        - Use route parsing logic
-        - Generate NEXT_INSTALLATION dynamically
+Use these dataframe names:
+- production_df
+- defect_df
+- order_df
+- material_flow_df
 
-        Use these dataframe names:
-        - production_df
-        - defect_df
-        - order_df
-        - material_flow_df
+Requirements:
+{requirements}
 
-        Include:
-        - defect analysis
-        - customer impact
-        - bottleneck logic
-        - next installation derivation
-        - operational filtering
-
-        Requirements:
-        {requirements}
-
-        Solution:
-        {solution}
-        """
+Solution:
+{solution}
+"""
 
         response = self.client.chat.completions.create(
 
@@ -295,10 +284,7 @@ class QueryAgent:
                 {
                     "role": "system",
                     "content":
-                    """
-You are an enterprise manufacturing
-AI analytics engineer.
-"""
+                    "You are a manufacturing analytics engineer."
                 },
 
                 {
@@ -332,24 +318,24 @@ class InsightAgent:
     ):
 
         prompt = f"""
-        Generate executive summary.
+Generate executive summary.
 
-        Include:
-        - business value
-        - operational impact
-        - AI benefits
-        - scalability
-        - implementation recommendation
+Include:
+- business value
+- operational impact
+- AI benefits
+- SQL analytics impact
+- implementation recommendation
 
-        Requirements:
-        {requirements}
+Requirements:
+{requirements}
 
-        HLD:
-        {hld}
+HLD:
+{hld}
 
-        Solution:
-        {solution}
-        """
+Solution:
+{solution}
+"""
 
         response = self.client.chat.completions.create(
 
