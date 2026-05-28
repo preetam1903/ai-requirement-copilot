@@ -3,8 +3,6 @@ import streamlit as st
 
 from openai import OpenAI
 
-from audio_recorder_streamlit import audio_recorder
-
 from agents import (
     RequirementAgent,
     HLDAgent,
@@ -23,7 +21,6 @@ client = OpenAI(
 )
 
 
-
 # =========================
 # PAGE CONFIG
 # =========================
@@ -37,12 +34,12 @@ st.title("🎤 AI Requirement Engineering Copilot")
 
 st.write(
     """
-Speak your business requirement and let AI generate:
+Upload your requirement audio and let AI generate:
 
 - BRD
 - Requirements
 - HLD
-- Table Join Architecture
+- Manufacturing Join Architecture
 - Solution Design
 - Python Query
 - Executive Summary
@@ -51,40 +48,36 @@ Speak your business requirement and let AI generate:
 
 
 # =========================
-# AUDIO RECORDER
+# AUDIO FILE UPLOAD
 # =========================
 
-audio_bytes = audio_recorder()
-
-
-# =========================
-# AUDIO PLAYBACK
-# =========================
-
-if audio_bytes:
-
-    st.audio(
-        audio_bytes,
-        format="audio/wav"
-    )
+uploaded_audio = st.file_uploader(
+    "Upload Requirement Audio",
+    type=["wav", "mp3", "m4a"]
+)
 
 
 # =========================
-# SAVE AUDIO FILE
+# PROCESS AUDIO
 # =========================
 
-if audio_bytes:
+if uploaded_audio is not None:
+
+    st.audio(uploaded_audio)
+
+
+    # =========================
+    # SAVE AUDIO FILE
+    # =========================
 
     with open("requirement.wav", "wb") as f:
 
-        f.write(audio_bytes)
+        f.write(uploaded_audio.read())
 
 
-# =========================
-# SPEECH TO TEXT
-# =========================
-
-if audio_bytes:
+    # =========================
+    # SPEECH TO TEXT
+    # =========================
 
     with open("requirement.wav", "rb") as audio_file:
 
@@ -190,7 +183,7 @@ if audio_bytes:
 
 
     # =========================
-    # TABLE RELATIONSHIP VIEW
+    # TABLE JOIN ARCHITECTURE
     # =========================
 
     st.subheader("🔗 Manufacturing Table Join Architecture")
