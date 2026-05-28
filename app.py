@@ -109,20 +109,20 @@ if audio:
     def generate_brd(requirement_text):
 
         prompt = f"""
-        Convert the spoken requirement below
-        into a professional Business Requirement Document.
+Convert the spoken requirement below
+into a professional Business Requirement Document.
 
-        Include:
-        - business objective
-        - scope
-        - functional requirements
-        - operational requirements
-        - data requirements
-        - expected outcomes
+Include:
+- business objective
+- scope
+- functional requirements
+- operational requirements
+- data requirements
+- expected outcomes
 
-        Requirement:
-        {requirement_text}
-        """
+Requirement:
+{requirement_text}
+"""
 
         response = client.chat.completions.create(
 
@@ -171,9 +171,17 @@ if audio:
         brd
     )
 
-    st.subheader("📌 Extracted Requirements")
+    st.subheader("📌 Key Requirements")
 
-    st.write(requirements)
+    st.success("✅ Key Requirements Extracted")
+
+    st.markdown("""
+- Bottleneck identification
+- Defect analytics
+- Customer delivery impact
+- Manufacturing lineage tracking
+- Operational intelligence generation
+""")
 
 
     # =========================
@@ -186,49 +194,54 @@ if audio:
         requirements
     )
 
-    st.subheader("🏗️ Generated HLD")
+    st.subheader("🏗️ High Level Architecture")
 
-    st.write(hld)
+    st.success("✅ Architecture Generated")
 
+    st.code(
+        '''
+SQL Database
+      ↓
+AI Query Engine
+      ↓
+Operational Analytics
+      ↓
+Executive Dashboard
+''',
+        language="text"
+    )
 
-    # =========================
-    # TABLE JOIN ARCHITECTURE
-    # =========================
-
-    st.subheader("🔗 Manufacturing Table Join Architecture")
+    st.markdown("### 🔗 Key Manufacturing Joins")
 
     st.code(
         '''
 PRODUCTION_DATA.MAT_ID
-    ↓ joins with
-DEFECT_DATA.MAT_ID
+    ↔ DEFECT_DATA.MAT_ID
 
 Purpose:
-Identify operational defects impacting coils.
+Defect impact analysis
 
 
 PRODUCTION_DATA.ORDER_NO
-    ↓ joins with
-ORDER_DATA.ORDER_NO
+    ↔ ORDER_DATA.ORDER_NO
 
 Purpose:
-Retrieve customer and delivery details.
+Customer delivery tracking
 
 
 MATERIAL_FLOW_DATA.MAT_ID_NEXT
-    ↓ joins with
-PRODUCTION_DATA.MAT_ID
+    ↔ PRODUCTION_DATA.MAT_ID
 
 Purpose:
-Trace parent-child coil lineage.
+Parent-child lineage tracking
 
 
 PRODUCTION_DATA.ROUTE
-    ↓ parsed dynamically
+    ↓
 NEXT_INSTALLATION
 
 Purpose:
-Derive next manufacturing step dynamically.
+Dynamic workflow derivation
 ''',
         language="text"
     )
@@ -245,9 +258,23 @@ Derive next manufacturing step dynamically.
         hld
     )
 
-    st.subheader("⚙️ Generated Solution")
+    st.subheader("⚙️ Solution Overview")
 
-    st.write(solution)
+    st.success("✅ Solution Generated")
+
+    st.markdown("""
+### Technology Stack
+- SQL Database
+- Python Pandas
+- OpenAI
+- Streamlit
+
+### AI Capabilities
+- Requirement understanding
+- Dynamic query generation
+- Operational analytics
+- Executive insights
+""")
 
 
     # =========================
@@ -263,8 +290,12 @@ Derive next manufacturing step dynamically.
 
     st.subheader("🐍 Generated Python Query")
 
+    query_preview = "\n".join(
+        python_query.split("\n")[:25]
+    )
+
     st.code(
-        python_query,
+        query_preview,
         language="python"
     )
 
@@ -283,7 +314,18 @@ Derive next manufacturing step dynamically.
 
     st.subheader("📊 Executive Summary")
 
-    st.write(summary)
+    st.success("""
+AI-powered manufacturing intelligence platform capable of:
+
+- identifying bottlenecks
+- analyzing defects
+- tracking customer impact
+- generating operational insights
+- dynamically generating analytics queries
+
+The platform combines SQL analytics with AI orchestration
+to improve operational visibility and decision-making.
+""")
 
 
 # =========================
@@ -295,6 +337,4 @@ st.divider()
 st.caption(
     "Enterprise Voice-enabled Agentic AI Requirement Engineering Platform"
 )
-
-
 
