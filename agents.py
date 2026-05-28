@@ -53,6 +53,7 @@ class RequirementAgent:
         return response.choices[0].message.content
 
 
+```python id="jbh1zt"
 # =========================
 # HLD AGENT
 # =========================
@@ -69,13 +70,80 @@ class HLDAgent:
         prompt = f"""
         Generate enterprise High Level Design.
 
-        Include:
-        - architecture
-        - modules
-        - integrations
-        - AI components
-        - data flow
-        - dashboards
+        IMPORTANT:
+        This is a SQL-driven manufacturing intelligence platform.
+
+        The SQL database is the source of truth.
+
+        AI agents are used for:
+        - orchestration
+        - requirement understanding
+        - query generation
+        - insight generation
+        - executive summaries
+
+        The architecture must include:
+
+        1. SQL database layer
+        2. Data ingestion layer
+        3. AI orchestration layer
+        4. Query generation engine
+        5. Operational analytics layer
+        6. Pandas transformation layer
+        7. Streamlit visualization layer
+        8. Executive dashboard layer
+
+        Explain clearly:
+
+        - how SQL tables are joined
+        - join keys
+        - lineage flow
+        - operational workflow
+        - defect analytics
+        - bottleneck analytics
+        - customer impact analytics
+
+        Use these manufacturing tables:
+
+        1. PRODUCTION_DATA
+       - MAT_ID
+       - ORDER_NO
+       - PROD_UNIT
+       - ROUTE
+
+        2. DEFECT_DATA
+       - MAT_ID
+       - DEFECT_NAME
+       - BLOCKING_DEFECT
+
+        3. ORDER_DATA
+       - ORDER_NO
+       - CUSTOMER_NAME
+       - PROMISED_DELIVERY_DATE
+
+        4. MATERIAL_FLOW_DATA
+       - MAT_ID_PREV
+       - MAT_ID_NEXT
+
+        IMPORTANT JOIN LOGIC:
+
+        - PRODUCTION_DATA.MAT_ID
+          joins with
+          DEFECT_DATA.MAT_ID
+
+        - PRODUCTION_DATA.ORDER_NO
+          joins with
+          ORDER_DATA.ORDER_NO
+
+        - MATERIAL_FLOW_DATA.MAT_ID_NEXT
+          joins with
+          PRODUCTION_DATA.MAT_ID
+
+        Explain:
+        - why joins are needed
+        - operational purpose
+        - business impact
+        - SQL-driven architecture
 
         Requirements:
         {requirements}
@@ -90,7 +158,7 @@ class HLDAgent:
                 {
                     "role": "system",
                     "content":
-                    "You are an enterprise solution architect."
+                    "You are an enterprise manufacturing solution architect."
                 },
 
                 {
@@ -103,6 +171,7 @@ class HLDAgent:
         )
 
         return response.choices[0].message.content
+```
 
 
 # =========================
