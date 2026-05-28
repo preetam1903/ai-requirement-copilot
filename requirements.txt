@@ -1,0 +1,7 @@
+streamlit
+openai
+audio-recorder-streamlit
+pandas
+python-docx
+pypdf
+
