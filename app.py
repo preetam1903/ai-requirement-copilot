@@ -1,8 +1,9 @@
 
-
 import streamlit as st
 
 from openai import OpenAI
+
+from streamlit_mic_recorder import mic_recorder
 
 from agents import (
     RequirementAgent,
@@ -35,7 +36,7 @@ st.title("🎤 AI Requirement Engineering Copilot")
 
 st.write(
     """
-Upload your requirement audio and let AI generate:
+Speak your business requirement and let AI generate:
 
 - BRD
 - Requirements
@@ -49,12 +50,14 @@ Upload your requirement audio and let AI generate:
 
 
 # =========================
-# AUDIO FILE UPLOAD
+# MICROPHONE RECORDER
 # =========================
 
-uploaded_audio = st.file_uploader(
-    "Upload Requirement Audio",
-    type=["wav", "mp3", "m4a", "mpeg"]
+audio = mic_recorder(
+    start_prompt="🎙️ Start Recording",
+    stop_prompt="⏹️ Stop Recording",
+    just_once=True,
+    use_container_width=True
 )
 
 
@@ -62,27 +65,30 @@ uploaded_audio = st.file_uploader(
 # PROCESS AUDIO
 # =========================
 
-if uploaded_audio is not None:
+if audio:
 
-    st.audio(uploaded_audio)
+    audio_bytes = audio["bytes"]
+
+    st.audio(
+        audio_bytes,
+        format="audio/wav"
+    )
 
 
     # =========================
-    # SAVE ORIGINAL AUDIO FILE
+    # SAVE AUDIO FILE
     # =========================
 
-    audio_path = uploaded_audio.name
+    with open("recorded_audio.wav", "wb") as f:
 
-    with open(audio_path, "wb") as f:
-
-        f.write(uploaded_audio.getbuffer())
+        f.write(audio_bytes)
 
 
     # =========================
     # SPEECH TO TEXT
     # =========================
 
-    with open(audio_path, "rb") as audio_file:
+    with open("recorded_audio.wav", "rb") as audio_file:
 
         transcript = client.audio.transcriptions.create(
             model="whisper-1",
@@ -192,7 +198,7 @@ if uploaded_audio is not None:
     st.subheader("🔗 Manufacturing Table Join Architecture")
 
     st.code(
-        """
+        '''
 PRODUCTION_DATA.MAT_ID
     ↓ joins with
 DEFECT_DATA.MAT_ID
@@ -223,7 +229,7 @@ NEXT_INSTALLATION
 
 Purpose:
 Derive next manufacturing step dynamically.
-""",
+''',
         language="text"
     )
 
@@ -289,5 +295,6 @@ st.divider()
 st.caption(
     "Enterprise Voice-enabled Agentic AI Requirement Engineering Platform"
 )
+
 
 
