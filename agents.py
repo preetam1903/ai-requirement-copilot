@@ -510,10 +510,10 @@ Based on:
     
 class ArchitectureDiagramAgent:
 
-def __init__(self, client):
-    self.client = client
+    def __init__(self, client):
+        self.client = client
 
-def generate_diagram(self, requirements, hld):
+    def generate_diagram(self, requirements, hld):
 
     prompt = f"""
 
