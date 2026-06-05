@@ -176,7 +176,7 @@ if uploaded_file:
 
     for i, step in enumerate(steps):
 
-    st.markdown(f"**{step}**")
+        st.markdown(f"**{step}**")
 
     if i < len(steps) - 1:
         st.markdown("⬇️")
