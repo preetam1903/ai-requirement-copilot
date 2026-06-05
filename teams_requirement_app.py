@@ -12,7 +12,8 @@ from agents import (
     InsightAgent,
     MeetingAgent,
     JiraAgent,
-    TestCaseAgent
+    TestCaseAgent,
+    ArchitectureDiagramAgent
 )
 
 # =========================
@@ -205,6 +206,22 @@ if uploaded_file:
     st.subheader("🏗️ High Level Design")
 
     st.write(hld)
+    diagram_agent = ArchitectureDiagramAgent(
+    client
+    )
+
+    diagram = diagram_agent.generate_diagram(
+    requirements,
+    hld
+    )
+
+    st.subheader("🏛️ Architecture Diagram")
+
+    st.code(
+    diagram,
+    language="text"
+    )
+
 
     # =========================
     # SOLUTION

@@ -507,3 +507,45 @@ Based on:
         )
 
         return response.choices[0].message.content
+    
+class ArchitectureDiagramAgent:
+
+def __init__(self, client):
+    self.client = client
+
+def generate_diagram(self, requirements, hld):
+
+    prompt = f"""
+
+
+You are a Solution Architect.
+
+Generate a concise Mermaid architecture diagram.
+
+Return ONLY Mermaid syntax.
+
+Requirements:
+{requirements}
+
+HLD:
+{hld}
+"""
+
+    response = self.client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": "Return only Mermaid diagram syntax."
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        temperature=0.1
+    )
+
+    return response.choices[0].message.content
+
+
