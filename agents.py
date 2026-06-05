@@ -515,7 +515,7 @@ class ArchitectureDiagramAgent:
 
     def generate_diagram(self, requirements, hld):
 
-    prompt = f"""
+        prompt = f"""
 
 
 You are a Solution Architect.
