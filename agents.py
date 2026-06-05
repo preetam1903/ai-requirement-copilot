@@ -1,6 +1,18 @@
 
 from openai import OpenAI
 
+PROFESSIONAL_STYLE = """
+Output Style:
+
+* Professional and concise
+* Suitable for enterprise stakeholders
+* Avoid generic AI language
+* Avoid repetition
+* Use bullet points where appropriate
+* Focus on actionable information
+* Avoid unnecessary explanations
+* Write like a Senior Business Analyst or Architect
+  """
 
 # =========================
 # REQUIREMENT AGENT
@@ -16,6 +28,8 @@ class RequirementAgent:
     def extract_requirements(self, text):
 
         prompt = f"""
+{PROFESSIONAL_STYLE}
+
 You are a Senior Business Analyst.
 Generate professional business requirements.
 
@@ -83,6 +97,8 @@ class HLDAgent:
     def generate_hld(self, requirements):
 
         prompt = f"""
+{PROFESSIONAL_STYLE}
+
 You are a Senior Solution Architect.
 Generate a professional High Level Design.
 
@@ -150,6 +166,8 @@ class SolutionAgent:
     ):
 
         prompt = f"""
+{PROFESSIONAL_STYLE}
+
 Generate enterprise implementation solution.
 
 Include:
@@ -210,6 +228,8 @@ class QueryAgent:
     ):
 
         prompt = f"""
+{PROFESSIONAL_STYLE}
+
 Generate executable Python Pandas code.
 
 STRICT RULES:
@@ -278,6 +298,8 @@ class InsightAgent:
     ):
 
         prompt = f"""
+{PROFESSIONAL_STYLE}
+
 You are a Senior Delivery Manager.
 Generate an executive summary.
 Output Style:
@@ -348,6 +370,8 @@ class MeetingAgent:
     def process_transcript(self, transcript):
 
         prompt = f"""
+{PROFESSIONAL_STYLE}
+
 You are a Senior Business Analyst.
 
 Analyze the meeting transcript.
@@ -410,6 +434,8 @@ class JiraAgent:
     def generate_jira(self, requirements):
 
         prompt = f"""
+{PROFESSIONAL_STYLE}
+
 Generate:
 
 1. Epic
@@ -453,6 +479,8 @@ class TestCaseAgent:
     def generate_test_cases(self, jira_output):
 
         prompt = f"""
+{PROFESSIONAL_STYLE}
+
 Generate:
 
 - Functional Test Cases
@@ -490,6 +518,7 @@ class ArchitectureDiagramAgent:
 
         prompt = f"""
 
+{PROFESSIONAL_STYLE}
 
 You are a Solution Architect.
 
