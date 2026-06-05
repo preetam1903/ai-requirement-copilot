@@ -550,6 +550,7 @@ HLD:
 
         return response.choices[0].message.content
 
+
 # =========================
 
 # BUSINESS PROCESS AGENT
@@ -557,6 +558,7 @@ HLD:
 # =========================
 
 class BusinessProcessAgent:
+
 
     def __init__(self, client):
         self.client = client
@@ -586,7 +588,6 @@ Transcript:
 {transcript}
 """
 
-
         response = self.client.chat.completions.create(
             model="gpt-4.1-mini",
             messages=[
@@ -599,10 +600,12 @@ Transcript:
                     "content": prompt
                 }
             ],
-            temperature=0.1
+        temperature=0.1
         )
 
-    return response.choices[0].message.content
+        return response.choices[0].message.content
+
+
 
 
 
