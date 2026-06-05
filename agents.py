@@ -531,21 +531,21 @@ HLD:
 {hld}
 """
 
-    response = self.client.chat.completions.create(
-        model="gpt-4.1-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": "Return only Mermaid diagram syntax."
-            },
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Return only Mermaid diagram syntax."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
         temperature=0.1
-    )
+        )
 
-    return response.choices[0].message.content
+        return response.choices[0].message.content
 
 
