@@ -278,14 +278,27 @@ class InsightAgent:
     ):
 
         prompt = f"""
-Generate executive summary.
+You are a Senior Delivery Manager.
+Generate an executive summary.
+Output Style:
+Professional
+Leadership focused
+Concise
+Decision-oriented
+Structure:
+Objective
+Key Capabilities
+(Maximum 5 bullets)
+Business Impact
+Key Risks
+Expected Outcome
+Rules:
+Maximum 6 bullet points per section
+Avoid repeating requirements
+Avoid AI-generated language
+No generic recommendations
+Focus on business value and implementation readiness
 
-Include:
-- business value
-- operational impact
-- AI benefits
-- SQL analytics impact
-- implementation recommendation
 
 Requirements:
 {requirements}
