@@ -1,9 +1,5 @@
 streamlit
 openai
+python-docx
 streamlit-mic-recorder
 pandas
-python-docx
-pypdf
-
-
-

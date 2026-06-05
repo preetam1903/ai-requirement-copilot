@@ -360,3 +360,150 @@ Solution:
 
         return response.choices[0].message.content
 
+# =========================
+# MEETING AGENT
+# =========================
+
+import json
+
+
+class MeetingAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def process_transcript(self, transcript):
+
+        prompt = f"""
+You are a Senior Business Analyst.
+
+Analyze the meeting transcript.
+
+Extract:
+
+- Project Name
+- Business Objective
+- Stakeholders
+- Functional Requirements
+- Non Functional Requirements
+- Risks
+- Assumptions
+- Action Items
+- Open Questions
+- Success Metrics
+
+Return ONLY valid JSON.
+
+Transcript:
+
+{transcript}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a senior business analyst."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        content = response.choices[0].message.content
+
+        try:
+            return json.loads(content)
+
+        except:
+            return {
+                "business_objective": content
+            }
+
+
+# =========================
+# JIRA AGENT
+# =========================
+
+class JiraAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_jira(self, requirements):
+
+        prompt = f"""
+Generate:
+
+1. Epic
+2. Features
+3. User Stories
+4. Acceptance Criteria
+5. Story Points
+6. Priority
+
+Requirements:
+
+{requirements}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a Jira expert."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
+
+        return response.choices[0].message.content
+
+
+# =========================
+# TEST CASE AGENT
+# =========================
+
+class TestCaseAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_test_cases(self, jira_output):
+
+        prompt = f"""
+Generate:
+
+- Functional Test Cases
+- Negative Test Cases
+- UAT Test Cases
+- Expected Results
+
+Based on:
+
+{jira_output}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a QA architect."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
+
+        return response.choices[0].message.content
