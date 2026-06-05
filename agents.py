@@ -550,4 +550,60 @@ HLD:
 
         return response.choices[0].message.content
 
+# =========================
+
+# BUSINESS PROCESS AGENT
+
+# =========================
+
+class BusinessProcessAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_process_flow(self, transcript):
+
+        prompt = f"""
+
+
+{PROFESSIONAL_STYLE}
+
+You are a Senior Business Analyst.
+
+Analyze the transcript and identify the business process flow.
+
+Rules:
+
+* Maximum 10 steps
+* One step per line
+* Keep names short
+* Return only process steps
+* No explanations
+* No numbering
+
+Transcript:
+
+{transcript}
+"""
+
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Return only business process steps."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+    return response.choices[0].message.content
+
+
+
 

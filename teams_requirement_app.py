@@ -13,7 +13,8 @@ from agents import (
     MeetingAgent,
     JiraAgent,
     TestCaseAgent,
-    ArchitectureDiagramAgent
+    ArchitectureDiagramAgent,
+    BusinessProcessAgent
 )
 
 # =========================
@@ -158,10 +159,28 @@ if uploaded_file:
             transcript_text
         )
     )
-
+    process_agent = BusinessProcessAgent(client)
+    process_flow = process_agent.generate_process_flow(
+    transcript_text
+    )
     st.subheader("🧠 Meeting Analysis")
 
     st.json(meeting_data)
+    st.subheader("🔄 Business Process Flow")
+
+    steps = [
+    s.strip()
+    for s in process_flow.split("\n")
+    if s.strip()
+    ]
+
+    for i, step in enumerate(steps):
+
+    st.markdown(f"**{step}**")
+
+    if i < len(steps) - 1:
+        st.markdown("⬇️")
+
 
     # =========================
     # BRD
