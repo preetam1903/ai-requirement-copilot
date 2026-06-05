@@ -179,7 +179,7 @@ if uploaded_file:
         st.markdown(f"**{step}**")
 
     if i < len(steps) - 1:
-        st.write("↓")
+        st.markdown(f"-----")
 
 
 
