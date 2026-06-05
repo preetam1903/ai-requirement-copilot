@@ -16,14 +16,30 @@ class RequirementAgent:
     def extract_requirements(self, text):
 
         prompt = f"""
-Analyze the BRD below.
+You are a Senior Business Analyst.
+Generate professional business requirements.
 
-Extract:
-- business objectives
-- functional requirements
-- operational requirements
-- data requirements
-- key modules
+Output Style:
+Professional and concise
+Suitable for BA and Product Owner review
+Avoid generic AI language
+Avoid repetition
+Focus only on actionable requirements
+
+Structure:
+Business Objective
+Must Have Requirements
+(Maximum 5 items)
+Should Have Requirements
+(Maximum 3 items)
+Risks
+Success Metrics
+
+Rules:
+Use bullet points
+Keep output under one page
+No unnecessary explanations
+No assumptions unless explicitly stated
 
 BRD:
 {text}
