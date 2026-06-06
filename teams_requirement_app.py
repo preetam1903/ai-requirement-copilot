@@ -176,35 +176,35 @@ if uploaded_file:
 # BUSINESS PROCESS FLOW
 # =========================
 
-process_agent = BusinessProcessAgent(client)
+    process_agent = BusinessProcessAgent(client)
 
-process_flow = process_agent.generate_process_flow(
-    transcript_text
-)
+    process_flow = process_agent.generate_process_flow(
+        transcript_text
+    )
 
-st.write(process_flow)
-st.subheader(
-    "🔄 Business Process Visualization"
-)
+    st.write(process_flow)
+    st.subheader(
+        "🔄 Business Process Visualization"
+    )
 
-steps = process_flow.splitlines()
+    steps = process_flow.splitlines()
 
-steps = [
-    step.strip()
-    for step in steps
-    if step.strip()
-]
+    steps = [
+        step.strip()
+        for step in steps
+        if step.strip()
+    ]
 
-for i, step in enumerate(steps):
+    for i, step in enumerate(steps):
 
-    st.info(f"📦 {step}")
+        st.info(f"📦 {step}")
 
-    if i < len(steps) - 1:
+        if i < len(steps) - 1:
 
-        st.markdown(
-            "<h2 style='text-align:center'>⬇️</h2>",
-            unsafe_allow_html=True
-        )
+            st.markdown(
+                "<h2 style='text-align:center'>⬇️</h2>",
+                unsafe_allow_html=True
+            )
 
 
 
