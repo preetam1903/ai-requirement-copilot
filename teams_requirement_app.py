@@ -387,11 +387,11 @@ if uploaded_file:
     coverage_review
     )
     if st.button(
-    "🚀 Ready For Jira"
+        "🚀 Ready For Jira"
     ):
-    st.success(
-    "Test Cases Reviewed and Ready For Jira"
-    )
+        st.success(
+        "Test Cases Reviewed and Ready For Jira"
+        )
 
 
     # =========================
