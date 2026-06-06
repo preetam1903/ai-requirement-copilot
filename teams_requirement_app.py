@@ -187,12 +187,12 @@ st.subheader(
     "🔄 Business Process Visualization"
 )
 
+steps = process_flow.splitlines()
+
 steps = [
-    s.replace("-", "")
-     .replace("•", "")
-     .strip()
-    for s in process_flow.split("\n")
-    if s.strip()
+    step.strip()
+    for step in steps
+    if step.strip()
 ]
 
 for i, step in enumerate(steps):
