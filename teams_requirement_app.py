@@ -171,7 +171,8 @@ if uploaded_file:
 
     st.json(meeting_data)
     st.subheader("🔄 Business Process Flow")
-    # =========================
+
+ # =========================
 # BUSINESS PROCESS FLOW
 # =========================
 
@@ -186,18 +187,19 @@ st.subheader(
 )
 
 steps = [
-    s.strip()
+    s.replace("-", "")
+     .replace("•", "")
+     .strip()
     for s in process_flow.split("\n")
     if s.strip()
 ]
 
 for i, step in enumerate(steps):
 
-    st.info(
-            f"📦 {step}"
-    )
+    st.info(f"📦 {step}")
 
     if i < len(steps) - 1:
+
         st.markdown(
             "<h2 style='text-align:center'>⬇️</h2>",
             unsafe_allow_html=True
