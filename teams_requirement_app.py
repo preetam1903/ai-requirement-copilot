@@ -523,7 +523,7 @@ if uploaded_file:
         st.subheader(
             "📈 Business Impact Dashboard"
         )
-
+        col1, col2, col3, col4 = st.columns(4)
         col1.metric(
             "Hours Saved",
             "12"
@@ -590,7 +590,7 @@ if uploaded_file:
         st.subheader(
             "📈 Business Impact Dashboard"
         )
-
+        col1, col2, col3, col4 = st.columns(4)
         col1.metric(
             "Hours Saved",
             "24"
