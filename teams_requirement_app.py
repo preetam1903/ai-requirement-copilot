@@ -404,7 +404,32 @@ if uploaded_file:
         )
     )
     with dashboard_placeholder.container():
+        st.subheader(
+            "📈 Business Impact Dashboard"
+        )
 
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric(
+            "Hours Saved",
+            "8"
+        )
+
+        col2.metric(
+            "Cost Saved",
+            "₹12K"
+        )
+
+        col3.metric(
+            "Risk Reduction",
+            "Medium"
+        )
+
+        col4.metric(
+            "Readiness",
+            "25%"
+        )
+        
         st.subheader(
             "📊 Executive Dashboard"
         )
@@ -495,7 +520,29 @@ if uploaded_file:
         )
     )
     with dashboard_placeholder.container():
+        st.subheader(
+            "📈 Business Impact Dashboard"
+        )
 
+        col1.metric(
+            "Hours Saved",
+            "12"
+        )
+
+        col2.metric(
+            "Cost Saved",
+            "₹18K"
+        )
+
+        col3.metric(
+            "Risk Reduction",
+            "Medium"
+        )
+
+        col4.metric(
+            "Readiness",
+            "60%"
+        )
         st.subheader(
             "📊 Executive Dashboard"
         )
@@ -540,7 +587,29 @@ if uploaded_file:
     )
 
     with dashboard_placeholder.container():
+        st.subheader(
+            "📈 Business Impact Dashboard"
+        )
 
+        col1.metric(
+            "Hours Saved",
+            "24"
+        )
+
+        col2.metric(
+            "Cost Saved",
+            "₹36K"
+        )
+
+        col3.metric(
+            "Risk Reduction",
+            "High"
+        )
+
+        col4.metric(
+            "Readiness",
+            "85%"
+        )
         st.subheader(
             "📊 Executive Dashboard"
         )
