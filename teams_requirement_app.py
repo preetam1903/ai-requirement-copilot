@@ -166,7 +166,31 @@ if uploaded_file:
   
     dashboard_placeholder = st.empty()
     with dashboard_placeholder.container():
+        st.subheader(
+            "📈 Business Impact Dashboard"
+        )
 
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric(
+            "Hours Saved",
+            "24"
+        )
+
+        col2.metric(
+            "Cost Saved",
+            "₹36K"
+        )
+
+        col3.metric(
+            "Risk Reduction",
+            "High"
+        )
+
+        col4.metric(
+            "Readiness",
+            "0%"
+        )
         st.subheader(
             "📊 Executive Dashboard"
         )
