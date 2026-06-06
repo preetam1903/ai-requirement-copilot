@@ -566,22 +566,28 @@ class BusinessProcessAgent:
     def generate_process_flow(self, transcript):
 
         prompt = f"""
+You are a Business Process Consultant.
 
-
-{PROFESSIONAL_STYLE}
-
-You are a Senior Business Analyst.
-
-Analyze the transcript and identify the business process flow.
+Generate a business process flow.
 
 Rules:
 
-* Maximum 10 steps
-* One step per line
-* Keep names short
-* Return only process steps
-* No explanations
-* No numbering
+- Return 5 to 8 process steps
+- One step per line
+- No bullets
+- No numbering
+- Keep each step short
+- Use business language
+
+Example:
+
+Receive Data
+Validate Data
+Analyze Production
+Identify Bottlenecks
+Generate Insights
+Review Results
+
 
 Transcript:
 
