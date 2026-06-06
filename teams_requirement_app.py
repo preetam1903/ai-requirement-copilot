@@ -538,6 +538,67 @@ if uploaded_file:
     st.subheader("📊 Executive Summary")
 
     st.write(executive_summary)
+    # =========================
+# EXECUTIVE DASHBOARD
+# =========================
+
+    st.subheader(
+        "📊 Executive Dashboard"
+    )
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(
+            "Requirements",
+            len(requirements.split("\n"))
+        )
+
+    with col2:
+        st.metric(
+            "Jira Stories",
+            len(jira_output.split("\n"))
+        )
+
+    with col3:
+        st.metric(
+            "Test Cases",
+            len(test_cases.split("\n"))
+        )
+
+    with col4:
+        st.metric(
+            "Status",
+            delivery_status
+        )
+
+    st.subheader(
+        "🚦 Executive Status"
+    )
+
+    if delivery_status == "Ready For Jira":
+
+        st.success(
+            "Project Ready For Jira"
+        )
+
+    elif delivery_status == "Approved":
+
+        st.info(
+            "Approved and Awaiting Jira Push"
+        )
+
+    elif delivery_status == "Reviewed":
+
+        st.warning(
+            "Reviewed But Not Approved"
+        )
+
+    else:
+
+        st.warning(
+            "Work In Progress"
+        )
 
     # =========================
     # DOWNLOADS
