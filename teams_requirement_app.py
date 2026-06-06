@@ -206,7 +206,7 @@ if uploaded_file:
             if i < len(process_flow.splitlines()) - 1:
 
                 st.markdown(
-                    "<div style='text-align:center;'>⬇️</div>",
+                    "<div style='text-align:left;'>⬇️</div>",
                     unsafe_allow_html=True
                 )
 
