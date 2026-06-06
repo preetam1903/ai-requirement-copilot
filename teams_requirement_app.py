@@ -14,7 +14,9 @@ from agents import (
     JiraAgent,
     TestCaseAgent,
     ArchitectureDiagramAgent,
-    BusinessProcessAgent
+    BusinessProcessAgent,
+    AIChallengeAgent
+
 )
 
 # =========================
@@ -194,6 +196,25 @@ if uploaded_file:
     st.subheader("📄 Business Requirement Document")
 
     st.write(brd)
+
+    challenge_agent = AIChallengeAgent(
+    client
+    )
+
+    challenge_review = (
+    challenge_agent.challenge_requirements(
+    brd
+    )
+    )
+
+    st.subheader(
+    "🔍 AI Challenge Review"
+    )
+
+    st.write(
+    challenge_review
+    )
+
 
     # =========================
     # REQUIREMENTS

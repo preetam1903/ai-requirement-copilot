@@ -605,6 +605,71 @@ Transcript:
 
         return response.choices[0].message.content
 
+# =========================
+
+# AI CHALLENGE AGENT
+
+# =========================
+
+class AIChallengeAgent:
+
+
+    def __init__(self, client):
+        self.client = client
+
+    def challenge_requirements(self, brd):
+
+        prompt = f"""
+
+{PROFESSIONAL_STYLE}
+
+You are a Senior Business Analyst and Solution Architect.
+
+Review the BRD and identify:
+
+1. Missing Information
+2. Questions To Clarify
+3. Recommendations
+
+Rules:
+
+* Maximum 5 items per section
+* Use bullet points
+* Be specific to the business context
+* Focus on missing business, data, operational and technical details
+* Avoid generic AI language
+
+Examples:
+
+* Timeline not specified
+* Active vs historical data not specified
+* Product category not specified
+* User volume not specified
+* Success criteria not defined
+
+BRD:
+
+{brd}
+"""
+
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert BA reviewer."
+                },
+                {
+                "role": "user",
+                "content": prompt
+                }
+            ],
+        temperature=0.1
+        )
+
+        return response.choices[0].message.content
+
 
 
 
