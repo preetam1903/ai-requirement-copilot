@@ -795,6 +795,61 @@ BRD:
 
         return response.choices[0].message.content
 
+# =========================
+# REQUIREMENT REFINEMENT AGENT
+# =========================
 
+class RequirementRefinementAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def refine_requirements(
+        self,
+        brd,
+        challenge_review
+    ):
+
+        prompt = f"""
+{PROFESSIONAL_STYLE}
+
+You are a Senior Business Analyst.
+
+Improve the BRD using the AI Challenge Review.
+
+Rules:
+
+- Keep concise
+- Remove repetition
+- Incorporate missing information where possible
+- Improve clarity
+- Improve implementation readiness
+- Keep output professional
+
+Original BRD:
+
+{brd}
+
+Challenge Review:
+
+{challenge_review}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a senior enterprise business analyst."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        return response.choices[0].message.content
 
 

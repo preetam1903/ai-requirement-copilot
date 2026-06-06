@@ -17,7 +17,8 @@ from agents import (
     BusinessProcessAgent,
     AIChallengeAgent,
     TestCoverageAgent,
-    RequirementCompletenessAgent
+    RequirementCompletenessAgent,
+    RequirementRefinementAgent
 )
 
 # =========================
@@ -216,6 +217,26 @@ if uploaded_file:
     challenge_review
     )
 
+    if st.button("✨ Refine Requirements"):
+
+        refinement_agent = RequirementRefinementAgent(
+            client
+        )
+
+        refined_brd = (
+            refinement_agent.refine_requirements(
+                brd,
+                challenge_review
+            )
+        )
+
+        st.subheader(
+            "✨ Refined BRD"
+        )
+
+        st.write(
+            refined_brd
+        )
     # =========================
 # REQUIREMENT COMPLETENESS
 # =========================
