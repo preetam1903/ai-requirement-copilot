@@ -163,36 +163,35 @@ if uploaded_file:
             transcript_text
         )
     )
-    st.subheader(
-    "📊 Executive Dashboard"
-    )
+  
+    dashboard_placeholder = st.empty()
+    with dashboard_placeholder.container():
 
-    col1, col2, col3, col4 = st.columns(4)
+        st.subheader(
+            "📊 Executive Dashboard"
+        )
 
-    with col1:
-        st.metric(
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric(
             "Requirements",
-            "-"
+            "⏳"
         )
 
-    with col2:
-        st.metric(
+        col2.metric(
             "Jira Stories",
-            "-"
+            "⏳"
         )
 
-    with col3:
-        st.metric(
+        col3.metric(
             "Test Cases",
-            "-"
+            "⏳"
         )
 
-    with col4:
-        st.metric(
+        col4.metric(
             "Status",
-            "Draft"
+            "Processing"
         )
-
     st.subheader(
         "🚦 Delivery Health"
     )
@@ -380,7 +379,33 @@ if uploaded_file:
             brd
         )
     )
+    with dashboard_placeholder.container():
 
+        st.subheader(
+            "📊 Executive Dashboard"
+        )
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric(
+            "Requirements",
+            len(requirements.split("\n"))
+        )
+
+        col2.metric(
+            "Jira Stories",
+            "⏳"
+        )
+
+        col3.metric(
+            "Test Cases",
+            "⏳"
+        )
+
+        col4.metric(
+            "Status",
+            "Requirements Ready"
+        )
     st.subheader("📌 Requirements")
 
     st.write(requirements)
@@ -445,7 +470,33 @@ if uploaded_file:
             requirements
         )
     )
+    with dashboard_placeholder.container():
 
+        st.subheader(
+            "📊 Executive Dashboard"
+        )
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric(
+            "Requirements",
+            len(requirements.split("\n"))
+        )
+
+        col2.metric(
+            "Jira Stories",
+            len(jira_output.split("\n"))
+        )
+
+        col3.metric(
+            "Test Cases",
+            "⏳"
+        )
+
+        col4.metric(
+            "Status",
+            "Jira Ready"
+        )
     st.subheader("📋 Jira Stories")
 
     st.write(jira_output)
@@ -464,6 +515,33 @@ if uploaded_file:
         )
     )
 
+    with dashboard_placeholder.container():
+
+        st.subheader(
+            "📊 Executive Dashboard"
+        )
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric(
+            "Requirements",
+            len(requirements.split("\n"))
+        )
+
+        col2.metric(
+            "Jira Stories",
+            len(jira_output.split("\n"))
+        )
+
+        col3.metric(
+            "Test Cases",
+            len(test_cases.split("\n"))
+        )
+
+        col4.metric(
+            "Status",
+            "QA Ready"
+        )
     st.subheader("🧪 Test Cases Review")
 
     edited_test_cases = st.text_area(
@@ -601,63 +679,6 @@ if uploaded_file:
 # EXECUTIVE DASHBOARD
 # =========================
 
-    st.subheader(
-        "📊 Executive Dashboard"
-    )
-
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        st.metric(
-            "Requirements",
-            len(requirements.split("\n"))
-        )
-
-    with col2:
-        st.metric(
-            "Jira Stories",
-            len(jira_output.split("\n"))
-        )
-
-    with col3:
-        st.metric(
-            "Test Cases",
-            len(test_cases.split("\n"))
-        )
-
-    with col4:
-        st.metric(
-            "Status",
-            delivery_status
-        )
-
-    st.subheader(
-        "🚦 Executive Status"
-    )
-
-    if delivery_status == "Ready For Jira":
-
-        st.success(
-            "Project Ready For Jira"
-        )
-
-    elif delivery_status == "Approved":
-
-        st.info(
-            "Approved and Awaiting Jira Push"
-        )
-
-    elif delivery_status == "Reviewed":
-
-        st.warning(
-            "Reviewed But Not Approved"
-        )
-
-    else:
-
-        st.warning(
-            "Work In Progress"
-        )
 
     # =========================
     # DOWNLOADS
