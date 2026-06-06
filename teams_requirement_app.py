@@ -216,35 +216,35 @@ if uploaded_file:
             "Status",
             "Processing"
         )
-    st.subheader(
-        "🚦 Delivery Health"
-    )
-
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        st.metric(
-            "Requirements",
-            "78%"
+        st.subheader(
+            "🚦 Delivery Health"
         )
 
-    with col2:
-        st.metric(
-            "Design",
-            "85%"
-        )
+        col1, col2, col3, col4 = st.columns(4)
 
-    with col3:
-        st.metric(
-            "Testing",
-            "72%"
-        )
+        with col1:
+            st.metric(
+                "Requirements",
+                "78%"
+            )
 
-    with col4:
-        st.metric(
-            "Overall",
-            "78%"
-        )
+        with col2:
+            st.metric(
+                "Design",
+                "85%"
+            )
+
+        with col3:
+            st.metric(
+                "Testing",
+                "72%"
+            )
+
+        with col4:
+            st.metric(
+                "Overall",
+                "78%"
+            )
     process_agent = BusinessProcessAgent(client)
     process_flow = process_agent.generate_process_flow(
     transcript_text
