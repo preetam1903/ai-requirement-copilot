@@ -182,10 +182,6 @@ if uploaded_file:
         transcript_text
     )
 
-    st.write(process_flow)
-    st.subheader(
-        "🔄 Business Process Visualization"
-    )
 
     steps = process_flow.splitlines()
 
@@ -468,25 +464,58 @@ if uploaded_file:
     )
 
     coverage_review = (
-    coverage_agent.review_coverage(
-    brd,
-    jira_output,
-    edited_test_cases
-    )
+        coverage_agent.review_coverage(
+            brd,
+            jira_output,
+            edited_test_cases
+        )
     )
 
     st.subheader(
-    "📊 Test Coverage Review"
+        "📊 Test Coverage Review"
     )
 
     st.write(
-    coverage_review
+        coverage_review
     )
-    if st.button(
-        "🚀 Ready For Jira"
-    ):
+
+    st.subheader(
+        "🚀 Delivery Status"
+    )
+
+    delivery_status = st.selectbox(
+        "Current Status",
+        [
+
+            "Draft",
+            "Reviewed",
+            "Approved",
+            "Ready For Jira"
+        ]
+    )
+
+    if delivery_status == "Draft":
+
+        st.warning(
+            "Draft in Progress"
+        )
+
+    elif delivery_status == "Reviewed":
+
+        st.info(
+            "Review Completed"
+        )
+
+    elif delivery_status == "Approved":
+
         st.success(
-        "Test Cases Reviewed and Ready For Jira"
+            "Approved by Reviewer"
+        )
+
+    elif delivery_status == "Ready For Jira":
+
+        st.success(
+            "Ready For Jira Deployment"
         )
 
 
