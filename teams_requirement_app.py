@@ -171,6 +171,25 @@ if uploaded_file:
 
     st.json(meeting_data)
     st.subheader("🔄 Business Process Flow")
+    # =========================
+# BUSINESS PROCESS FLOW
+# =========================
+
+process_agent = BusinessProcessAgent(client)
+
+process_flow = process_agent.generate_process_flow(
+    transcript_text
+)
+
+st.subheader(
+    "🔄 Business Process Visualization"
+)
+
+steps = [
+    s.strip()
+    for s in process_flow.split("\n")
+    if s.strip()
+]
 
     for i, step in enumerate(steps):
 
