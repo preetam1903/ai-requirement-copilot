@@ -299,12 +299,28 @@ if uploaded_file:
         value=test_cases,
         height=500
     )
+    reviewer_name = st.text_input(
+        "Reviewer Name"
+    )
 
+    review_comments = st.text_area(
+        "Review Comments",
+        height=100
+    )
+    
     if st.button("✅ Approve Test Cases"):
 
-        st.session_state["approved_test_cases"] = (
-            edited_test_cases
-        )
+        st.session_state[
+            "approved_test_cases"
+        ] = edited_test_cases
+
+        st.session_state[
+            "reviewer_name"
+        ] = reviewer_name
+
+        st.session_state[
+            "review_comments"
+        ] = review_comments
 
         st.success(
             "Test Cases Approved"
@@ -314,6 +330,14 @@ if uploaded_file:
 
         st.subheader(
             "📋 Approved Test Cases"
+        )
+
+        st.write(
+            f"Reviewer: {st.session_state['reviewer_name']}"
+        )
+
+        st.write(
+        f"Comments: {st.session_state['review_comments']}"
         )
 
         st.write(
