@@ -15,7 +15,8 @@ from agents import (
     TestCaseAgent,
     ArchitectureDiagramAgent,
     BusinessProcessAgent,
-    AIChallengeAgent
+    AIChallengeAgent,
+    TestCoverageAgent
 )
 
 # =========================
@@ -365,6 +366,34 @@ if uploaded_file:
                 "approved_test_cases"
             ]
         )
+
+    coverage_agent = TestCoverageAgent(
+    client
+    )
+
+    coverage_review = (
+    coverage_agent.review_coverage(
+    brd,
+    jira_output,
+    edited_test_cases
+    )
+    )
+
+    st.subheader(
+    "📊 Test Coverage Review"
+    )
+
+    st.write(
+    coverage_review
+    )
+    if st.button(
+    "🚀 Ready For Jira"
+    ):
+    st.success(
+    "Test Cases Reviewed and Ready For Jira"
+    )
+
+
     # =========================
     # EXECUTIVE SUMMARY
     # =========================

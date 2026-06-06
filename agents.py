@@ -670,6 +670,77 @@ BRD:
 
         return response.choices[0].message.content
 
+# =========================
+
+# TEST COVERAGE AGENT
+
+# =========================
+
+class TestCoverageAgent:
+
+
+    def __init__(self, client):
+        self.client = client
+
+    def review_coverage(
+        self,
+        brd,
+        jira_output,
+        test_cases
+    ):
+
+        prompt = f"""
+
+
+{PROFESSIONAL_STYLE}
+
+You are a Senior QA Architect.
+
+Review the BRD, Jira Stories and Test Cases.
+
+Generate:
+
+1. Covered Areas
+2. Potential Missing Tests
+3. Coverage Assessment
+
+Rules:
+
+* Maximum 5 bullets per section
+* Keep output concise
+* Focus on gaps
+* Identify missing negative tests
+* Identify missing edge cases
+* Identify missing security or performance tests
+
+BRD:
+{brd}
+
+Jira Stories:
+{jira_output}
+
+Test Cases:
+{test_cases}
+"""
+
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a senior QA architect."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+        temperature=0.1
+        )
+
+        return response.choices[0].message.content
+
 
 
 
