@@ -195,17 +195,20 @@ if uploaded_file:
         if step.strip()
     ]
 
-    for i, step in enumerate(steps):
+    for i, step in enumerate(process_flow.splitlines()):
 
-        st.info(f"📦 {step}")
-
-        if i < len(steps) - 1:
+        if step.strip():
 
             st.markdown(
-                f"➡️ {step.strip()}",
-                unsafe_allow_html=True
+                f"**📦 {step.strip()}**"
             )
 
+            if i < len(process_flow.splitlines()) - 1:
+
+                st.markdown(
+                    "<div style='text-align:center;'>⬇️</div>",
+                    unsafe_allow_html=True
+                )
 
 
     # =========================
