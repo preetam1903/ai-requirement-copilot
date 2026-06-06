@@ -178,8 +178,8 @@ if uploaded_file:
 
         st.markdown(f"**{step}**")
 
-    if i < len(steps) - 1:
-        st.markdown(f"-----")
+        if i < len(steps) - 1:
+            st.markdown(f"-----")
 
 
 
@@ -279,8 +279,8 @@ if uploaded_file:
     st.write(jira_output)
 
     # =========================
-    # TEST CASES
-    # =========================
+# TEST CASES
+# =========================
 
     testcase_agent = TestCaseAgent(
         client
@@ -295,37 +295,32 @@ if uploaded_file:
     st.subheader("🧪 Test Cases Review")
 
     edited_test_cases = st.text_area(
-    "Review and update test cases before approval",
-    value=test_cases,
-    height=500
+        "Review and update test cases before approval",
+        value=test_cases,
+        height=500
     )
 
     if st.button("✅ Approve Test Cases"):
 
+        st.session_state["approved_test_cases"] = (
+            edited_test_cases
+        )
 
-    st.session_state["approved_test_cases"] = (
-        edited_test_cases
-    )
-
-    st.success(
-        "Test Cases Approved"
-    )
-
+        st.success(
+            "Test Cases Approved"
+        )
 
     if "approved_test_cases" in st.session_state:
 
+        st.subheader(
+            "📋 Approved Test Cases"
+        )
 
-    st.subheader(
-        "📋 Approved Test Cases"
-    )
-
-    st.write(
-        st.session_state[
-            "approved_test_cases"
-        ]
-    )
-
-
+        st.write(
+            st.session_state[
+                "approved_test_cases"
+            ]
+        )
     # =========================
     # EXECUTIVE SUMMARY
     # =========================
