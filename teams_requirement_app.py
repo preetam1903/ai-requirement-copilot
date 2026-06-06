@@ -292,9 +292,39 @@ if uploaded_file:
         )
     )
 
-    st.subheader("🧪 Test Cases")
+    st.subheader("🧪 Test Cases Review")
 
-    st.write(test_cases)
+    edited_test_cases = st.text_area(
+    "Review and update test cases before approval",
+    value=test_cases,
+    height=500
+    )
+
+    if st.button("✅ Approve Test Cases"):
+
+
+    st.session_state["approved_test_cases"] = (
+        edited_test_cases
+    )
+
+    st.success(
+        "Test Cases Approved"
+    )
+
+
+    if "approved_test_cases" in st.session_state:
+
+
+    st.subheader(
+        "📋 Approved Test Cases"
+    )
+
+    st.write(
+        st.session_state[
+            "approved_test_cases"
+        ]
+    )
+
 
     # =========================
     # EXECUTIVE SUMMARY
