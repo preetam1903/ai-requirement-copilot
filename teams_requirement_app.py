@@ -16,7 +16,8 @@ from agents import (
     ArchitectureDiagramAgent,
     BusinessProcessAgent,
     AIChallengeAgent,
-    TestCoverageAgent
+    TestCoverageAgent,
+    RequirementCompletenessAgent
 )
 
 # =========================
@@ -215,7 +216,27 @@ if uploaded_file:
     challenge_review
     )
 
+    # =========================
+# REQUIREMENT COMPLETENESS
+# =========================
 
+    completeness_agent = RequirementCompletenessAgent(
+        client
+    )
+
+    completeness_review = (
+        completeness_agent.assess_completeness(
+            brd
+        )
+    )
+
+    st.subheader(
+        "📊 Requirement Completeness"
+    )
+
+    st.write(
+        completeness_review
+    )
     # =========================
     # REQUIREMENTS
     # =========================

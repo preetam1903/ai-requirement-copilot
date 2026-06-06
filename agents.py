@@ -741,7 +741,59 @@ Test Cases:
 
         return response.choices[0].message.content
 
+# =========================
+# REQUIREMENT COMPLETENESS AGENT
+# =========================
 
+class RequirementCompletenessAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def assess_completeness(self, brd):
+
+        prompt = f"""
+{PROFESSIONAL_STYLE}
+
+You are a Senior Delivery Architect.
+
+Review the BRD.
+
+Return in this format:
+
+Requirement Completeness Score: XX%
+
+Business Context: ✅ / ⚠️ / ❌
+Functional Scope: ✅ / ⚠️ / ❌
+Data Scope: ✅ / ⚠️ / ❌
+Timeline: ✅ / ⚠️ / ❌
+Success Metrics: ✅ / ⚠️ / ❌
+Security Requirements: ✅ / ⚠️ / ❌
+
+Implementation Readiness:
+Ready / Needs Clarification / Not Ready
+
+BRD:
+
+{brd}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an enterprise delivery reviewer."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        return response.choices[0].message.content
 
 
 
