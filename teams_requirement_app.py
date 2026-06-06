@@ -182,6 +182,7 @@ process_flow = process_agent.generate_process_flow(
     transcript_text
 )
 
+st.write(process_flow)
 st.subheader(
     "🔄 Business Process Visualization"
 )
