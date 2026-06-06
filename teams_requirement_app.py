@@ -202,7 +202,7 @@ if uploaded_file:
         if i < len(steps) - 1:
 
             st.markdown(
-                "<h2 style='text-align:center'>⬇️</h2>",
+                f"➡️ {step.strip()}",
                 unsafe_allow_html=True
             )
 
