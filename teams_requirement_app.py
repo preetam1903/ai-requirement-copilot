@@ -592,18 +592,76 @@ if uploaded_file:
             "Status",
             "Requirements Ready"
         )
-    st.subheader("📌 Requirements")
+    st.subheader(
+        "📌 Requirements Review"
+    )
 
-    st.write(requirements)
+    edited_requirements = st.text_area(
+        "Review and update Requirements",
+        value=requirements,
+        height=500
+    )
+
+    requirements_reviewer = st.text_input(
+        "Requirements Reviewer"
+    )
+
+    requirements_comments = st.text_area(
+        "Requirements Comments",
+        height=100
+    )
+
+    if st.button(
+        "✅ Approve Requirements"
+    ):
+
+        st.session_state[
+            "approved_requirements"
+        ] = edited_requirements
+
+        st.session_state[
+            "requirements_reviewer"
+        ] = requirements_reviewer
+
+        st.session_state[
+            "requirements_comments"
+        ] = requirements_comments
+
+        st.success(
+            "Requirements Approved"
+        )
+
+    if "approved_requirements" in st.session_state:
+
+        st.subheader(
+            "📋 Approved Requirements"
+        )
+
+        st.write(
+            f"Reviewer: {st.session_state['requirements_reviewer']}"
+        )
+
+        st.write(
+            f"Comments: {st.session_state['requirements_comments']}"
+        )
+
+        st.write(
+            st.session_state[
+                "approved_requirements"
+            ]
+        )
 
     # =========================
     # HLD
     # =========================
 
     hld_agent = HLDAgent(client)
-
-    hld = hld_agent.generate_hld(
+    final_requirements = st.session_state.get(
+        "approved_requirements",
         requirements
+    )
+    hld = hld_agent.generate_hld(
+        final_requirements
     )
 
     st.subheader("🏗️ High Level Design")
@@ -636,7 +694,7 @@ if uploaded_file:
 
     solution = (
         solution_agent.generate_solution(
-            requirements,
+            final_requirements,
             hld
         )
     )
@@ -653,7 +711,7 @@ if uploaded_file:
 
     jira_output = (
         jira_agent.generate_jira(
-            requirements
+            final_requirements
         )
     )
     with dashboard_placeholder.container():
