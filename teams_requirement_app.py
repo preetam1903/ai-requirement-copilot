@@ -994,11 +994,26 @@ if uploaded_file:
             st.success(
                 "Requirement Package Finalized"
             )
-
+            st.info(
+                "Status: Locked and Ready For Jira"
+            )
     else:
 
         st.warning(
             "Complete all approvals before Final Sign-Off"
+        )
+
+    if st.session_state.get(
+        "final_signoff",
+        False
+    ):
+
+        st.success(
+            "🏆 Requirement Package Finalized"
+        )
+
+        st.info(
+            "Editing Complete • Ready For Jira Deployment"
         )
     st.subheader(
         "🚀 Delivery Status"
