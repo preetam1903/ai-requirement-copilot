@@ -97,30 +97,54 @@ class HLDAgent:
     def generate_hld(self, requirements):
 
         prompt = f"""
-{PROFESSIONAL_STYLE}
+        {PROFESSIONAL_STYLE}
 
-You are a Senior Solution Architect.
-Generate a professional High Level Design.
+You are an experienced  Business Solution Architect focused on SQL reporting and Spotfire Analytic.
 
-Output Style:
-Professional and concise
-Suitable for architecture review
-Avoid generic AI language
-Avoid repetition
-Structure:
-Architecture Overview
-Core Components
-(Maximum 5)
-Data Flow
-Integrations
-Security Considerations
+Generate a concise High Level Design.
+
+Audience:
+Business stakeholders, delivery managers and product owners.
+
+Output Format:
+
+🏗️ High Level Design
+
+1. Data Source
+- Source system(s)
+
+2. Tables / Data Used
+- Mention actual table names if available
+
+3. Processing Logic
+- Business calculations or KPI generation
+
+4. Output
+- Dashboard, report or analytics output
+
+5. Users
+- Business teams using the solution
+
+6. Refresh Frequency
+- Daily, weekly or real-time if mentioned
 
 Rules:
-Use bullet points
-Maximum 2 pages
-Focus on implementation
-No unnecessary explanations
+
+- Maximum 10 bullets total
+- Keep each bullet under 1 line
+- Use business language
+- Avoid cloud architecture terms
+- Avoid microservices
+- Avoid API gateway
+- Avoid security framework discussions
+- Avoid monitoring discussions
+- Avoid enterprise architecture jargon
+- Reference SQL tables when available
+- Reference Spotfire when applicable
+- Focus on how data moves from source to dashboard
+
 Requirements:
+
 {requirements}
 """
 
