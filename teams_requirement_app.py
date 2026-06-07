@@ -763,9 +763,68 @@ if uploaded_file:
             "Status",
             "Jira Ready"
         )
-    st.subheader("📋 Jira Stories")
+    st.subheader(
+        "📋 Jira Stories Review"
+    )
 
-    st.write(jira_output)
+    edited_jira = st.text_area(
+        "Review and update Jira Stories",
+        value=jira_output,
+        height=500
+    )
+
+    jira_reviewer = st.text_input(
+        "Jira Reviewer"
+    )
+
+    jira_comments = st.text_area(
+        "Jira Review Comments",
+        height=100
+    )
+
+    if st.button(
+        "✅ Approve Jira Stories"
+    ):
+
+        st.session_state[
+            "approved_jira"
+        ] = edited_jira
+
+        st.session_state[
+            "jira_reviewer"
+        ] = jira_reviewer
+
+        st.session_state[
+            "jira_comments"
+        ] = jira_comments
+
+        st.success(
+            "Jira Stories Approved"
+        )
+
+    if "approved_jira" in st.session_state:
+
+        st.subheader(
+            "📋 Approved Jira Stories"
+        )
+
+        st.write(
+            f"Reviewer: {st.session_state['jira_reviewer']}"
+        )
+
+        st.write(
+            f"Comments: {st.session_state['jira_comments']}"
+        )
+
+        st.write(
+            st.session_state[
+                "approved_jira"
+            ]
+        )
+    final_jira = st.session_state.get(
+        "approved_jira",
+        jira_output
+    )
 
     # =========================
 # TEST CASES
@@ -777,7 +836,7 @@ if uploaded_file:
 
     test_cases = (
         testcase_agent.generate_test_cases(
-            jira_output
+            final_jira
         )
     )
 
@@ -891,7 +950,7 @@ if uploaded_file:
     coverage_review = (
         coverage_agent.review_coverage(
             brd,
-            jira_output,
+            final_jira,
             edited_test_cases
         )
     )
