@@ -335,12 +335,63 @@ if uploaded_file:
     )
 
     st.subheader(
-    "🔍 AI Challenge Review"
+        "🔍 AI Challenge Review"
     )
 
-    st.write(
-    challenge_review
+    edited_challenge_review = st.text_area(
+        "Review and update challenge findings",
+        value=challenge_review,
+        height=300
     )
+
+    challenge_reviewer = st.text_input(
+        "Challenge Reviewer"
+    )
+
+    challenge_comments = st.text_area(
+        "Challenge Review Comments",
+        height=100
+    )
+
+    if st.button(
+        "✅ Approve Challenge Review"
+    ):
+
+        st.session_state[
+            "approved_challenge_review"
+        ] = edited_challenge_review
+
+        st.session_state[
+            "challenge_reviewer"
+        ] = challenge_reviewer
+
+        st.session_state[
+            "challenge_comments"
+        ] = challenge_comments
+
+        st.success(
+            "Challenge Review Approved"
+        )
+
+    if "approved_challenge_review" in st.session_state:
+
+        st.subheader(
+            "📋 Approved Challenge Review"
+        )
+
+        st.write(
+            f"Reviewer: {st.session_state['challenge_reviewer']}"
+        )
+
+        st.write(
+            f"Comments: {st.session_state['challenge_comments']}"
+        )
+
+        st.write(
+            st.session_state[
+                "approved_challenge_review"
+            ]
+        )
 
     if st.button("✨ Refine Requirements"):
 
@@ -351,7 +402,10 @@ if uploaded_file:
         refined_brd = (
             refinement_agent.refine_requirements(
                 brd,
+                st.session_stage.get(
+                    "approved_challenge_review",
                 challenge_review
+                )   
             )
         )
 
