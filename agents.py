@@ -177,18 +177,36 @@ class SolutionAgent:
     ):
 
         prompt = f"""
-{PROFESSIONAL_STYLE}
+        Create a simple business solution overview.
 
-Generate enterprise implementation solution.
+Format:
 
-Include:
-- technology stack
-- SQL architecture
-- AI orchestration
-- deployment architecture
-- operational workflow
-- dashboard layer
-- analytics layer
+Solution Flow
+- How the solution works
+
+Data Source
+- SQL tables used
+
+Processing
+- Business calculations performed
+
+Output
+- Dashboard or report generated
+
+Business Benefit
+- Value delivered
+
+Rules:
+
+- Maximum 10 bullets
+- Keep each bullet short
+- Business language only
+- Avoid AI terminology
+- Avoid architecture terminology
+- Avoid deployment discussions
+- Avoid cloud discussions
+- Mention Spotfire if applicable
+- Focus on business outcome
 
 Requirements:
 {requirements}
@@ -196,7 +214,6 @@ Requirements:
 HLD:
 {hld}
 """
-
         response = self.client.chat.completions.create(
 
             model="gpt-4.1-mini",
@@ -206,7 +223,7 @@ HLD:
                 {
                     "role": "system",
                     "content":
-                    "You are an enterprise AI architect."
+                    "You are an experienced business analyst designing SQL and Spotfire reporting solutions."
                 },
 
                 {
