@@ -97,51 +97,38 @@ class HLDAgent:
     def generate_hld(self, requirements):
 
         prompt = f"""
-        {PROFESSIONAL_STYLE}
+        You are a Business Analyst.
 
-You are an experienced  Business Solution Architect focused on SQL reporting and Spotfire Analytic.
+Create a simple High Level Design.
 
-Generate a concise High Level Design.
+Format:
 
-Audience:
-Business stakeholders, delivery managers and product owners.
+Data Source
+- Where data comes from
 
-Output Format:
+Tables Used
+- List tables if mentioned
 
-🏗️ High Level Design
+Processing
+- What calculations or transformations happen
 
-1. Data Source
-- Source system(s)
+Output
+- Dashboard, report or KPI output
 
-2. Tables / Data Used
-- Mention actual table names if available
-
-3. Processing Logic
-- Business calculations or KPI generation
-
-4. Output
-- Dashboard, report or analytics output
-
-5. Users
-- Business teams using the solution
-
-6. Refresh Frequency
-- Daily, weekly or real-time if mentioned
+Users
+- Who will use it
 
 Rules:
 
-- Maximum 10 bullets total
-- Keep each bullet under 1 line
-- Use business language
-- Avoid cloud architecture terms
-- Avoid microservices
-- Avoid API gateway
-- Avoid security framework discussions
-- Avoid monitoring discussions
-- Avoid enterprise architecture jargon
-- Reference SQL tables when available
-- Reference Spotfire when applicable
-- Focus on how data moves from source to dashboard
+- Maximum 5 sections
+- Maximum 1-2 bullets per section
+- Keep it simple
+- Business language only
+- No architecture jargon
+- No security discussion
+- No cloud discussion
+- No integrations unless explicitly mentioned
+- Mention Spotfire if applicable
 
 Requirements:
 
@@ -157,7 +144,7 @@ Requirements:
                 {
                     "role": "system",
                     "content":
-                    "You are an enterprise manufacturing solution architect."
+                    "You are an experienced business analyst who designs SQL and Spotfire reporting solutions."
                 },
 
                 {
