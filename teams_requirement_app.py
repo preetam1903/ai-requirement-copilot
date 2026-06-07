@@ -963,6 +963,43 @@ if uploaded_file:
         coverage_review
     )
 
+    # =========================
+# FINAL SIGN-OFF
+# =========================
+
+    st.subheader(
+        "🏆 Final Sign-Off"
+    )
+
+    all_approved = (
+        "approved_challenge_review" in st.session_state
+        and
+        "approved_requirements" in st.session_state
+        and
+        "approved_jira" in st.session_state
+        and
+        "approved_test_cases" in st.session_state
+    )
+
+    if all_approved:
+
+        if st.button(
+            "🏆 Finalize Requirement Package"
+        ):
+
+            st.session_state[
+                "final_signoff"
+            ] = True
+
+            st.success(
+                "Requirement Package Finalized"
+            )
+
+    else:
+
+        st.warning(
+            "Complete all approvals before Final Sign-Off"
+        )
     st.subheader(
         "🚀 Delivery Status"
     )
