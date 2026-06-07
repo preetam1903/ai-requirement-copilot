@@ -879,18 +879,32 @@ Review the BRD.
 
 Return in this format:
 
-Requirement Completeness Score: XX%
+Requirement Readiness Score: XX%
 
-Business Context: ✅ / ⚠️ / ❌
-Functional Scope: ✅ / ⚠️ / ❌
-Data Scope: ✅ / ⚠️ / ❌
-Timeline: ✅ / ⚠️ / ❌
-Success Metrics: ✅ / ⚠️ / ❌
-Security Requirements: ✅ / ⚠️ / ❌
+Business Objective: ✅ / ⚠️ / ❌
+Data Sources Identified: ✅ / ⚠️ / ❌
+Tables Identified: ✅ / ⚠️ / ❌
+KPIs Defined: ✅ / ⚠️ / ❌
+Dashboard Requirements: ✅ / ⚠️ / ❌
+Business Users Identified: ✅ / ⚠️ / ❌
 
-Implementation Readiness:
+Overall Status:
 Ready / Needs Clarification / Not Ready
 
+Missing Information:
+- Maximum 5 bullets
+
+Rules:
+
+- Keep output concise
+- Business language only
+- Focus on reporting and analytics requirements
+- Mention SQL tables if available
+- Mention Spotfire if applicable
+- Do not discuss security frameworks
+- Do not discuss cloud architecture
+- Do not discuss deployment architecture
+- Do not discuss governance frameworks
 BRD:
 
 {brd}
