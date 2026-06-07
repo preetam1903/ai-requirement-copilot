@@ -546,11 +546,30 @@ class ArchitectureDiagramAgent:
 
         prompt = f"""
 
-{PROFESSIONAL_STYLE}
+        You are a Business Analyst.
 
-You are a Solution Architect.
+Create a simple Mermaid data flow diagram.
 
-Generate a concise Mermaid architecture diagram.
+Show ONLY:
+
+- SQL Database
+- Source Tables or Data Sources
+- Business Calculations
+- Spotfire Dashboard
+- Business Users
+
+Rules:
+
+- Maximum 8 boxes
+- Maximum 10 arrows
+- Use simple business language
+- Avoid architecture terminology
+- Avoid security components
+- Avoid monitoring components
+- Avoid AI components
+- Avoid cloud components
+- Avoid deployment components
+- Focus only on how data flows from source to dashboard
 
 Return ONLY Mermaid syntax.
 
@@ -566,7 +585,7 @@ HLD:
             messages=[
                 {
                     "role": "system",
-                    "content": "Return only Mermaid diagram syntax."
+                    "content": "You create simple business data flow diagrams using Mermaid syntax only."
                 },
                 {
                     "role": "user",
