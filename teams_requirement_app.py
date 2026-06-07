@@ -473,7 +473,7 @@ if uploaded_file:
                 )
         final_brd = st.session_state.get(
             "approved_refined_brd",
-            refined_brd
+             brd
         )
     # =========================
 # REQUIREMENT COMPLETENESS
