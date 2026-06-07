@@ -560,6 +560,21 @@ Show ONLY:
 
 Rules:
 
+
+- Use flowchart LR
+- Create a left-to-right flow
+- Maximum 5 boxes
+- Combine all source tables into one SQL Database box
+- Use only:
+  SQL Database
+  Business Calculations
+  Spotfire Dashboard
+  Business Users
+- Avoid branching logic
+- Avoid separate KPI boxes
+- Avoid separate business rule boxes
+- Keep the diagram executive-friendly
+
 - Maximum 8 boxes
 - Maximum 10 arrows
 - Use simple business language

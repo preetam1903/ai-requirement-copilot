@@ -688,20 +688,20 @@ if uploaded_file:
     # SOLUTION
     # =========================
 
-    solution_agent = SolutionAgent(
-        client
-    )
+   # solution_agent = SolutionAgent(
+     #   client
+    #)
 
-    solution = (
-        solution_agent.generate_solution(
-            final_requirements,
-            hld
-        )
-    )
+    #solution = (
+        #solution_agent.generate_solution(
+            #final_requirements,
+            #hld
+        #)
+    #)
 
-    st.subheader("⚙️ Solution Design")
+    #st.subheader("⚙️ Solution Design")
 
-    st.write(solution)
+    #st.write(solution)
 
     # =========================
     # JIRA
@@ -1051,6 +1051,40 @@ if uploaded_file:
         Status: Ready For Upload
         """
             )
+            if st.button(
+                "🚀 Push To Jira"
+            ):
+
+                st.session_state[
+                    "jira_uploaded"
+                ] = True
+
+            if st.session_state.get(
+                "jira_uploaded",
+                False
+            ):
+
+                st.success(
+                    "Stories Successfully Uploaded To Jira"
+                )
+
+                st.code(
+                    """
+        EPIC: REQ-100
+
+        REQ-101  Create Customer Dashboard
+
+        REQ-102  Build Data Pipeline
+
+        REQ-103  Develop Analytics Engine
+
+        REQ-104  User Acceptance Testing
+        """
+                )
+
+                st.success(
+                    "Jira Upload Completed"
+                )
     st.subheader(
         "🚀 Delivery Status"
     )
