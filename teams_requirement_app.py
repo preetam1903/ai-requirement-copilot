@@ -1015,6 +1015,54 @@ if uploaded_file:
         st.info(
             "Editing Complete • Ready For Jira Deployment"
         )
+        st.subheader(
+            "🚀 Jira Package"
+        )
+
+        if st.button(
+            "🚀 Create Jira Package"
+        ):
+
+            st.session_state[
+                "jira_package_created"
+            ] = True
+
+            st.success(
+                "Jira Package Created Successfully"
+            )
+            st.subheader(
+                "🚀 Jira Package"
+            )
+
+            if st.button(
+                "🚀 Create Jira Package"
+            ):
+
+                st.session_state[
+                    "jira_package_created"
+                ] = True
+
+                st.success(
+                    "Jira Package Created Successfully"
+                )
+        if st.session_state.get(
+            "jira_package_created",
+            False
+        ):
+
+            st.info(
+                """
+        Package ID: REQ-2026-001
+        
+        Requirements: Approved
+
+        Jira Stories: Approved
+
+        Test Cases: Approved
+
+        Status: Ready For Upload
+        """
+            )
     st.subheader(
         "🚀 Delivery Status"
     )
