@@ -399,78 +399,78 @@ if uploaded_file:
             "✨ Refine Requirements"
         ):
 
-        refinement_agent = RequirementRefinementAgent(
-            client
-        )
-
-        refined_brd = (
-            refinement_agent.refine_requirements(
-                brd,
-                st.session_stage.get(
-                    "approved_challenge_review",
-                challenge_review
-                )   
-            )
-        )
-
-        st.subheader(
-            "✨ Refined BRD Review"
-        )
-
-        edited_refined_brd = st.text_area(
-            "Review and update Refined BRD",
-            value=refined_brd,
-            height=500
-        )
-
-        refined_brd_reviewer = st.text_input(
-            "Refined BRD Reviewer"
-        )
-
-        refined_brd_comments = st.text_area(
-            "Refined BRD Comments",
-            height=100
-        )
-
-        if st.button(
-            "✅ Approve Refined BRD"
-        ):
-
-            st.session_state[
-                "approved_refined_brd"
-            ] = edited_refined_brd
-
-            st.session_state[
-                "refined_brd_reviewer"
-            ] = refined_brd_reviewer
-
-            st.session_state[
-                "refined_brd_comments"
-            ] = refined_brd_comments
-
-            st.success(
-                "Refined BRD Approved"
+            refinement_agent = RequirementRefinementAgent(
+                client
             )
 
-        if "approved_refined_brd" in st.session_state:
+            refined_brd = (
+                refinement_agent.refine_requirements(
+                    brd,
+                    st.session_stage.get(
+                        "approved_challenge_review",
+                        challenge_review
+                    )   
+                )
+            )
 
             st.subheader(
-                "📋 Approved Refined BRD"
+                "✨ Refined BRD Review"
             )
 
-            st.write(
-                f"Reviewer: {st.session_state['refined_brd_reviewer']}"
+            edited_refined_brd = st.text_area(
+                "Review and update Refined BRD",
+                value=refined_brd,
+                height=500
             )
 
-            st.write(
-                f"Comments: {st.session_state['refined_brd_comments']}"
+            refined_brd_reviewer = st.text_input(
+                "Refined BRD Reviewer"
             )
 
-            st.write(
+            refined_brd_comments = st.text_area(
+                "Refined BRD Comments",
+                height=100
+            )
+
+            if st.button(
+                "✅ Approve Refined BRD"
+            ):
+
                 st.session_state[
                     "approved_refined_brd"
-                ]
-            )
+                ] = edited_refined_brd
+
+                st.session_state[
+                    "refined_brd_reviewer"
+                ] = refined_brd_reviewer
+
+                st.session_state[
+                    "refined_brd_comments"
+                ] = refined_brd_comments
+
+                st.success(
+                    "Refined BRD Approved"
+                )
+
+            if "approved_refined_brd" in st.session_state:
+
+                st.subheader(
+                    "📋 Approved Refined BRD"
+                )
+
+                st.write(
+                    f"Reviewer: {st.session_state['refined_brd_reviewer']}"
+                )   
+
+                st.write(
+                    f"Comments: {st.session_state['refined_brd_comments']}"
+                )
+
+                st.write(
+                    st.session_state[
+                        "approved_refined_brd"
+                    ]
+                )
         final_brd = st.session_state.get(
             "approved_refined_brd",
             refined_brd
