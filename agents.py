@@ -28,37 +28,42 @@ class RequirementAgent:
     def extract_requirements(self, text):
 
         prompt = f"""
-{PROFESSIONAL_STYLE}
+        You are a Business Analyst.
 
-You are a Senior Business Analyst.
-Generate professional business requirements.
+Create a simple list of business requirements.
 
-Output Style:
-Professional and concise
-Suitable for BA and Product Owner review
-Avoid generic AI language
-Avoid repetition
-Focus only on actionable requirements
+Format:
 
-Structure:
-Business Objective
-Must Have Requirements
-(Maximum 5 items)
-Should Have Requirements
-(Maximum 3 items)
-Risks
-Success Metrics
+REQ-001
+<requirement>
+
+REQ-002
+<requirement>
+
+REQ-003
+<requirement>
 
 Rules:
-Use bullet points
-Keep output under one page
-No unnecessary explanations
-No assumptions unless explicitly stated
+
+- Maximum 10 requirements
+- One requirement per line
+- Keep requirements short
+- Business language only
+- Avoid long descriptions
+- Avoid architecture discussions
+- Avoid implementation details
+- Avoid AI terminology
+- Avoid risks section
+- Avoid success metrics section
+- Avoid must-have / should-have grouping
+- Mention SQL tables if available
+- Mention Spotfire if applicable
+- Focus only on what needs to be delivered
 
 BRD:
+
 {text}
 """
-
         response = self.client.chat.completions.create(
 
             model="gpt-4.1-mini",
@@ -68,7 +73,7 @@ BRD:
                 {
                     "role": "system",
                     "content":
-                    "You are an enterprise business analyst."
+                    "You are an experienced business analyst for SQL reporting and Spotfire dashboard solutions."
                 },
 
                 {
