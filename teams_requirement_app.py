@@ -249,6 +249,29 @@ if uploaded_file:
     process_flow = process_agent.generate_process_flow(
     transcript_text
     )
+    # =========================
+# CURRENT STAGE TRACKER
+# =========================
+
+    st.subheader(
+        "📍 Current Stage Tracker"
+    )
+
+    st.info(
+        """
+        ✅ Teams Transcript Processed
+
+        ✅ Draft BRD Generated
+
+        ✅ AI Challenge Review Completed
+
+        🟡 Stakeholder Review Pending
+
+        ⚪ Approval Pending
+
+        ⚪ Jira Creation Pending
+        """
+    )
     st.subheader("🧠 Meeting Analysis")
 
     st.json(meeting_data)
