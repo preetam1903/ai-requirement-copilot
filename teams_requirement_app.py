@@ -393,7 +393,11 @@ if uploaded_file:
             ]
         )
 
-    if st.button("✨ Refine Requirements"):
+    if "approved_challenge_review" in st.session_state:
+
+        if st.button(
+            "✨ Refine Requirements"
+        ):
 
         refinement_agent = RequirementRefinementAgent(
             client
@@ -410,10 +414,65 @@ if uploaded_file:
         )
 
         st.subheader(
-            "✨ Refined BRD"
+            "✨ Refined BRD Review"
         )
 
-        st.write(
+        edited_refined_brd = st.text_area(
+            "Review and update Refined BRD",
+            value=refined_brd,
+            height=500
+        )
+
+        refined_brd_reviewer = st.text_input(
+            "Refined BRD Reviewer"
+        )
+
+        refined_brd_comments = st.text_area(
+            "Refined BRD Comments",
+            height=100
+        )
+
+        if st.button(
+            "✅ Approve Refined BRD"
+        ):
+
+            st.session_state[
+                "approved_refined_brd"
+            ] = edited_refined_brd
+
+            st.session_state[
+                "refined_brd_reviewer"
+            ] = refined_brd_reviewer
+
+            st.session_state[
+                "refined_brd_comments"
+            ] = refined_brd_comments
+
+            st.success(
+                "Refined BRD Approved"
+            )
+
+        if "approved_refined_brd" in st.session_state:
+
+            st.subheader(
+                "📋 Approved Refined BRD"
+            )
+
+            st.write(
+                f"Reviewer: {st.session_state['refined_brd_reviewer']}"
+            )
+
+            st.write(
+                f"Comments: {st.session_state['refined_brd_comments']}"
+            )
+
+            st.write(
+                st.session_state[
+                    "approved_refined_brd"
+                ]
+            )
+        final_brd = st.session_state.get(
+            "approved_refined_brd",
             refined_brd
         )
     # =========================
@@ -477,7 +536,7 @@ if uploaded_file:
 
     requirements = (
         requirement_agent.extract_requirements(
-            brd
+            final_brd
         )
     )
     with dashboard_placeholder.container():
