@@ -900,20 +900,40 @@ class RequirementRefinementAgent:
     ):
 
         prompt = f"""
-{PROFESSIONAL_STYLE}
+        You are a Business Analyst.
 
-You are a Senior Business Analyst.
+Refine the BRD using the Challenge Review.
 
-Improve the BRD using the AI Challenge Review.
+Output Format:
+
+1. Business Objective
+- What problem is being solved
+
+2. Required Data
+- Tables, reports or data needed
+
+3. Expected Output
+- Dashboard, report or KPI output
+
+4. Business Benefits
+- Expected value
+
+5. Open Questions
+- Missing information requiring clarification
 
 Rules:
 
-- Keep concise
+- Maximum 15 bullets total
+- Keep each bullet short
+- Business language only
 - Remove repetition
-- Incorporate missing information where possible
-- Improve clarity
-- Improve implementation readiness
-- Keep output professional
+- Avoid architecture terminology
+- Avoid AI terminology
+- Avoid implementation details
+- Avoid security discussions unless mentioned
+- Avoid enterprise consulting language
+- Mention SQL tables if available
+- Mention Spotfire if applicable
 
 Original BRD:
 
@@ -929,7 +949,7 @@ Challenge Review:
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a senior enterprise business analyst."
+                    "content": "You are an experienced business analyst for SQL reporting and Spotfire dashboard projects."
                 },
                 {
                     "role": "user",
