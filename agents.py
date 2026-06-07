@@ -570,7 +570,28 @@ Rules:
 - Avoid cloud components
 - Avoid deployment components
 - Focus only on how data flows from source to dashboard
+Do NOT create separate boxes for business rules.
 
+Do NOT create separate boxes for calculations.
+
+Combine all processing into a single box called:
+
+Business Rules & KPI Calculations
+Use this pattern only:
+
+Source Data
+      ↓
+Business Rules & KPI Calculations
+      ↓
+Spotfire Dashboard
+      ↓
+Business Users
+Create a maximum of:
+
+- 3 source boxes
+- 1 processing box
+- 1 dashboard box
+- 2 user boxes
 Return ONLY Mermaid syntax.
 
 Requirements:
