@@ -406,7 +406,7 @@ if uploaded_file:
             refined_brd = (
                 refinement_agent.refine_requirements(
                     brd,
-                    st.session_stage.get(
+                    st.session_state.get(
                         "approved_challenge_review",
                         challenge_review
                     )   
@@ -471,10 +471,7 @@ if uploaded_file:
                         "approved_refined_brd"
                     ]
                 )
-        final_brd = st.session_state.get(
-            "approved_refined_brd",
-             brd
-        )
+    
     # =========================
 # REQUIREMENT COMPLETENESS
 # =========================
@@ -526,6 +523,10 @@ if uploaded_file:
             "Overall",
             "78%"
         )
+    final_brd = st.session_state.get(
+        "approved_refined_brd",
+        brd
+    )
     # =========================
     # REQUIREMENTS
     # =========================
