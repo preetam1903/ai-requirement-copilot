@@ -719,19 +719,43 @@ class AIChallengeAgent:
 
 You are a Senior Business Analyst and Solution Architect.
 
-Review the BRD and identify:
+Review the BRD and identify business gaps.
 
-1. Missing Information
-2. Questions To Clarify
-3. Recommendations
+Output Format:
+
+Missing Information
+- Missing business details
+
+Questions To Clarify
+- Questions for business users
+
+Readiness Status
+- Ready
+- Needs Clarification
+- Not Ready
 
 Rules:
 
-* Maximum 5 items per section
-* Use bullet points
-* Be specific to the business context
-* Focus on missing business, data, operational and technical details
-* Avoid generic AI language
+- Maximum 5 bullets per section
+- Keep each bullet short
+- Business language only
+- Focus on missing business information
+- Focus on missing data requirements
+- Focus on missing reporting requirements
+- Focus on missing dashboard requirements
+- Mention SQL tables if relevant
+- Mention Spotfire if relevant
+
+Do NOT discuss:
+- Security frameworks
+- Cloud architecture
+- Governance frameworks
+- Monitoring frameworks
+- Microservices
+- Deployment architecture
+- AI architecture
+
+Only identify information required before development can begin.
 
 Examples:
 
@@ -752,7 +776,7 @@ BRD:
             messages=[
                 {
                     "role": "system",
-                    "content": "You are an expert BA reviewer."
+                    "content": "You are an experienced business analyst reviewing SQL and Spotfire reporting requirements."
                 },
                 {
                 "role": "user",
