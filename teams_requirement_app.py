@@ -1030,21 +1030,9 @@ if uploaded_file:
             st.success(
                 "Jira Package Created Successfully"
             )
-            st.subheader(
-                "🚀 Jira Package"
-            )
+            
 
-            if st.button(
-                "🚀 Create Jira Package"
-            ):
-
-                st.session_state[
-                    "jira_package_created"
-                ] = True
-
-                st.success(
-                    "Jira Package Created Successfully"
-                )
+                
         if st.session_state.get(
             "jira_package_created",
             False
