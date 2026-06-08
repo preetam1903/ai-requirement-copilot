@@ -622,6 +622,11 @@ if uploaded_file:
     # REQUIREMENTS
     # =========================
 
+    final_brd = st.session_state.get(
+        "approved_refined_brd",
+        brd
+    )
+
     requirement_agent = RequirementAgent(
         client
     )
