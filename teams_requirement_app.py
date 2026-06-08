@@ -612,12 +612,33 @@ if uploaded_file:
             brd
         )
     )
+    import re
+
+    score_match = re.search(
+        r"(\d+)%",
+        completeness_review
+    )
+
+    readiness_score = (
+        score_match.group(1)
+        if score_match
+        else "0"
+    )
 
     st.subheader(
         "📊 Requirement Readiness"
     )
 
-    st.success(
+    st.metric(
+        "Readiness Score",
+        f"{readiness_score}%"
+    )
+
+    with st.expander(
+        "View Detailed Assessment"
+    ):
+
+    st.write(
         completeness_review
     )
 
