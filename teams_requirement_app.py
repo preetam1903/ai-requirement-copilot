@@ -278,38 +278,8 @@ if uploaded_file:
 
         ⚪ Jira Creation Pending
         """
-    )
-    scenario_preview = (
-        scenario_agent.generate_scenarios(
-            transcript_text
-        )
-    )
 
-    st.subheader(
-        "🧪 Business Scenario Preview"
-    )
-
-    st.subheader(
-        "🧪 Business Scenario Preview"
-    )
-
-    scenarios = scenario_preview.split(
-        "Scenario"
-    )
-
-    for scenario in scenarios:
-
-        if scenario.strip():
-
-            with st.container():
-
-                st.info(
-                    "Scenario " + scenario
-                )
-    st.subheader("🧠 Meeting Analysis")
-
-    st.json(meeting_data)
- # business scenario preview
+    # business scenario preview
     st.subheader(
         "🧠 What AI Understood"
     )
@@ -327,6 +297,12 @@ if uploaded_file:
     ✅ Executive Decision Support
     """
     )
+    )
+    scenario_preview = (
+        scenario_agent.generate_scenarios(
+            transcript_text
+        )
+    )
 
     st.subheader(
         "🧪 Business Scenario Preview"
@@ -337,6 +313,22 @@ if uploaded_file:
         value=scenario_preview,
         height=300
     )
+
+    scenarios = scenario_preview.split(
+        "Scenario"
+    )
+
+    for scenario in scenarios:
+
+        if scenario.strip():
+
+            with st.container():
+
+                st.info(
+                    "Scenario " + scenario
+                )
+
+    
 
 # =========================
 # EXPECTED DASHBOARD PREVIEW
@@ -365,9 +357,17 @@ if uploaded_file:
             "Delayed Orders",
             "7"
         )
+    # =========================
+# MEETING ANALYSIS
+# =========================
 
-    st.subheader("🔄 Business Process Flow")
-    st.subheader("🔄 Business Process Flow")
+    st.subheader(
+        "🧠 Meeting Analysis"
+    )
+
+    st.json(meeting_data)
+        st.subheader("🔄 Business Process Flow")
+    
 
  # =========================
 # BUSINESS PROCESS FLOW
