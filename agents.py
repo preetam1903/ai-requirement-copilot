@@ -660,12 +660,13 @@ Generate a business process flow.
 
 Rules:
 
-- Return 5 to 8 process steps
-- One step per line
-- No bullets
-- No numbering
-- Keep each step short
-- Use business language
+- Return exactly 5 process steps
+- Maximum 4 words per step
+- Business language only
+- Focus on business outcome
+- Avoid technical terminology
+- Avoid SQL references
+- Avoid analytics jargon
 
 Example:
 
@@ -1018,24 +1019,41 @@ class TestExecutionGuidanceAgent:
         prompt = f"""
 You are a QA Lead.
 
-Generate test execution guidance.
+Generate concise Test Execution Guidance.
 
 For each test case provide:
 
 Test Case
-Source Data
-Execution Steps
+Validate
+Check In
 Expected Result
 
 Rules:
 
-- Maximum 5 lines per test case
-- Keep it concise
-- Business language only
-- Mention SQL tables if available
-- Mention Spotfire if applicable
-- Focus on practical execution steps
-- Avoid technical jargon
+* Maximum 3 lines per test case
+* Keep it concise
+* Business language only
+* Mention table names when available
+* Mention Spotfire pages when available
+* Avoid technical testing terminology
+* Avoid detailed step-by-step instructions
+* Avoid SQL query instructions
+* Avoid implementation details
+* Focus on business validation
+
+Example:
+
+TC-001 Next Production Unit
+
+Validate:
+Next unit calculation
+
+Check In:
+Production Status Table
+Spotfire Dashboard
+
+Expected Result:
+Next unit matches production route
 
 Test Cases:
 
@@ -1048,7 +1066,7 @@ Test Cases:
                 {
                     "role": "system",
                     "content":
-                    "You are an experienced QA lead for SQL and Spotfire solutions."
+                    "You are an business focused QA lead for manufacturing SQL and Spotfire solutions."
                 },
                 {
                     "role": "user",
