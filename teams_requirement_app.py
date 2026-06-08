@@ -288,7 +288,7 @@ if uploaded_file:
         """
     ✅ Blocked Coil Detection
 
-    ✅ Customer Impact Analysis
+    ✅ Next processing Galvanizing or Pickling
 
     ✅ Spotfire Dashboard Reporting
 
@@ -305,7 +305,7 @@ if uploaded_file:
     )
 
     st.subheader(
-        "🧪 Business Scenario Preview"
+        "🧪 Business Scenario Preview by AI"
     )
 
     st.text_area(
@@ -352,11 +352,7 @@ if uploaded_file:
         "🧠 Meeting Analysis"
     )
 
-    st.text_area(
-        "Meeting Analysis",
-        value=str(meeting_data),
-        height=250
-    )
+    st.json(meeting_data)
     st.subheader(
         "🔄 Business Process Flow"
     )
