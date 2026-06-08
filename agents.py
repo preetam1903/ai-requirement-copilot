@@ -108,20 +108,21 @@ Create a simple High Level Design.
 
 Format:
 
-Data Source
-- Where data comes from
+📥 Data
 
-Tables Used
-- List tables if mentioned
+⚙️ Analysis
 
-Processing
-- What calculations or transformations happen
+📊 Dashboard
 
-Output
-- Dashboard, report or KPI output
+👥 Consumers
 
-Users
-- Who will use it
+Rules:
+
+- Maximum 3 bullets per section
+- Business language only
+- No architecture terminology
+- No technical explanations
+- No implementation details
 
 Rules:
 
