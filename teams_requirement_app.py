@@ -607,15 +607,20 @@ if uploaded_file:
         client
     )
 
+    readiness_input = st.session_state.get(
+        "approved_refined_brd",
+        brd
+    )
+
     completeness_review = (
         completeness_agent.assess_completeness(
-            brd
+            readiness_input
         )
     )
     import re
 
     score_match = re.search(
-        r"(\d+)%",
+        r"(\d{1,3})\s*%",
         completeness_review
     )
 
@@ -638,9 +643,9 @@ if uploaded_file:
         "View Detailed Assessment"
     ):
 
-    st.write(
-        completeness_review
-    )
+        st.write(
+            completeness_review
+        )
 
     st.subheader(
         "🚦 Delivery Health Dashboard"
