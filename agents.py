@@ -1217,3 +1217,67 @@ Transcript:
         )
 
         return response.choices[0].message.content
+# =========================
+# DASHBOARD PREVIEW AGENT
+# =========================
+
+class DashboardPreviewAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_dashboard_preview(
+        self,
+        requirement
+    ):
+
+        prompt = f"""
+You are a Business Intelligence Architect.
+
+Review the requirement.
+
+Generate the top dashboard KPIs.
+
+Format:
+
+📊 KPI 1
+
+📊 KPI 2
+
+📊 KPI 3
+
+📊 KPI 4
+
+📊 KPI 5
+
+Rules:
+
+- Maximum 5 KPIs
+- KPI names only
+- Business language only
+- No explanations
+- Avoid technical terminology
+- Focus on business value
+
+Requirement:
+
+{requirement}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content":
+                    "You design executive dashboards."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        return response.choices[0].message.content
