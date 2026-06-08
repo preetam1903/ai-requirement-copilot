@@ -22,7 +22,8 @@ from agents import (
     TestExecutionGuidanceAgent,
     TestCaseAgent,
     BusinessScenarioAgent,
-    AIUnderstandingAgent
+    AIUnderstandingAgent,
+    DashboardPreviewAgent,
 )
 
 # =========================
@@ -173,6 +174,9 @@ if uploaded_file:
     understanding_agent = AIUnderstandingAgent(
         client
     )
+    dashboard_agent = DashboardPreviewAgent(
+        client
+    )
     dashboard_placeholder = st.empty()
     with dashboard_placeholder.container():
         st.subheader(
@@ -304,6 +308,12 @@ if uploaded_file:
         )
     )
 
+    dashboard_preview = (
+        dashboard_agent.generate_dashboard_preview(
+            transcript_text
+        )
+    )
+
     st.subheader(
         "🧪 Business Scenario Preview by AI"
     )
@@ -322,28 +332,12 @@ if uploaded_file:
 # =========================
 
     st.subheader(
-        "📊 Expected Dashboard Preview"
+        "📊 Expected Dashboard Preview by AI"
     )
 
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.metric(
-            "Blocked Coils",
-            "12"
-        )
-
-    with col2:
-        st.metric(
-            "Affected Customers",
-            "4"
-        )
-
-    with col3:
-        st.metric(
-            "Delayed Orders",
-            "7"
-        )
+    st.success(
+        dashboard_preview
+    )
     # =========================
 # MEETING ANALYSIS
 # =========================
