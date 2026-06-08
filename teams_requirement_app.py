@@ -286,7 +286,7 @@ if uploaded_file:
     # business scenario preview
     ai_understanding = (
         understanding_agent.summarize_understanding(
-            transcript_text
+            str(meeting_data)
         )
     )
 
