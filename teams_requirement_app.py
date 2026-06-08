@@ -356,6 +356,55 @@ if uploaded_file:
     st.success(
         dashboard_preview
     )
+
+     # =========================
+# REQUIREMENT COMPLETENESS
+# =========================
+
+    completeness_agent = RequirementCompletenessAgent(
+        client
+    )
+
+    readiness_input = st.session_state.get(
+        "approved_refined_brd",
+        brd
+    )
+
+    completeness_review = (
+        completeness_agent.assess_completeness(
+            readiness_input
+        )
+    )
+    import re
+
+    score_match = re.search(
+        r"(\d{1,3})\s*%",
+        completeness_review
+    )
+
+    readiness_score = (
+        score_match.group(1)
+        if score_match
+        else "0"
+    )
+
+    st.subheader(
+        "📊 Requirement Readiness"
+    )
+
+    st.metric(
+        "Readiness Score",
+        f"{readiness_score}%"
+    )
+
+    with st.expander(
+        "View Detailed Assessment"
+    ):
+
+        st.write(
+            completeness_review
+        )
+
     # =========================
 # MEETING ANALYSIS
 # =========================
@@ -569,54 +618,7 @@ if uploaded_file:
                     ]
                 )
     
-    # =========================
-# REQUIREMENT COMPLETENESS
-# =========================
-
-    completeness_agent = RequirementCompletenessAgent(
-        client
-    )
-
-    readiness_input = st.session_state.get(
-        "approved_refined_brd",
-        brd
-    )
-
-    completeness_review = (
-        completeness_agent.assess_completeness(
-            readiness_input
-        )
-    )
-    import re
-
-    score_match = re.search(
-        r"(\d{1,3})\s*%",
-        completeness_review
-    )
-
-    readiness_score = (
-        score_match.group(1)
-        if score_match
-        else "0"
-    )
-
-    st.subheader(
-        "📊 Requirement Readiness"
-    )
-
-    st.metric(
-        "Readiness Score",
-        f"{readiness_score}%"
-    )
-
-    with st.expander(
-        "View Detailed Assessment"
-    ):
-
-        st.write(
-            completeness_review
-        )
-
+   
     
     # =========================
     # REQUIREMENTS
