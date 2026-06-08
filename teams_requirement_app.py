@@ -338,11 +338,15 @@ if uploaded_file:
         "🧪 Business Scenario Preview by AI"
     )
 
-    st.text_area(
-        "Scenario Preview",
-        value=scenario_preview,
-        height=300
-    )
+    
+
+    for scenario in scenario_preview.split("Scenario"):
+
+        if scenario.strip():
+
+            st.info(
+                "Scenario" + scenario
+            )
 
     
     
