@@ -288,9 +288,16 @@ if uploaded_file:
         """
     )
     # business scenario preview
+    understanding_input = (
+        st.session_state.get(
+            "approved_refined_brd",
+            transcript_text
+        )
+    )
+
     ai_understanding = (
         understanding_agent.summarize_understanding(
-            str(meeting_data)
+            understanding_input
         )
     )
 
@@ -302,15 +309,28 @@ if uploaded_file:
         ai_understanding
     )
     
+    scenario_input = (
+        st.session_state.get(
+            "approved_refined_brd",
+            transcript_text
+        )
+    )
+
     scenario_preview = (
         scenario_agent.generate_scenarios(
+            scenario_input
+        )
+    )
+    dashboard_input = (
+        st.session_state.get(
+            "approved_refined_brd",
             transcript_text
         )
     )
 
     dashboard_preview = (
         dashboard_agent.generate_dashboard_preview(
-            transcript_text
+            dashboard_input
         )
     )
 
@@ -569,7 +589,7 @@ if uploaded_file:
         "📊 Requirement Readiness"
     )
 
-    st.write(
+    st.success(
         completeness_review
     )
 
