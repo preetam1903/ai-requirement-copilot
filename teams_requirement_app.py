@@ -278,7 +278,7 @@ if uploaded_file:
 
         ⚪ Jira Creation Pending
         """
-
+    )
     # business scenario preview
     st.subheader(
         "🧠 What AI Understood"
