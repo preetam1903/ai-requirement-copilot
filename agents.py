@@ -327,43 +327,52 @@ class InsightAgent:
         self,
         requirements,
         hld,
-        solution
+        solution=""
     ):
 
         prompt = f"""
-{PROFESSIONAL_STYLE}
+You are a Business Leader.
 
-You are a Senior Delivery Manager.
-Generate an executive summary.
-Output Style:
-Professional
-Leadership focused
-Concise
-Decision-oriented
-Structure:
-Objective
-Key Capabilities
-(Maximum 5 bullets)
-Business Impact
-Key Risks
+Generate a concise Executive Summary.
+
+Format:
+
+Business Objective
+
+* What problem is being solved
+
+Key Deliverables
+
+* Maximum 5 bullets
+
+Business Benefits
+
+* Maximum 5 bullets
+
 Expected Outcome
-Rules:
-Maximum 6 bullet points per section
-Avoid repeating requirements
-Avoid AI-generated language
-No generic recommendations
-Focus on business value and implementation readiness
 
+* Maximum 3 bullets
+
+Rules:
+
+* Maximum 1 page
+* Business language only
+* Keep bullets short
+* Avoid architecture terminology
+* Avoid implementation terminology
+* Avoid AI terminology
+* Avoid technology stack discussions
+* Avoid security discussions
+* Focus on business value
+* Mention Spotfire if applicable
 
 Requirements:
 {requirements}
 
-HLD:
+Solution Summary:
 {hld}
-
-Solution:
-{solution}
 """
+
 
         response = self.client.chat.completions.create(
 
@@ -374,7 +383,7 @@ Solution:
                 {
                     "role": "system",
                     "content":
-                    "You are an executive AI consultant."
+                    "You are a manufacturing business leader focused on operational improvement."
                 },
 
                 {
