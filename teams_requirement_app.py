@@ -20,7 +20,8 @@ from agents import (
     RequirementCompletenessAgent,
     RequirementRefinementAgent,
     TestExecutionGuidanceAgent,
-    TestCaseAgent
+    TestCaseAgent,
+    BusinessScenarioAgent
 )
 
 # =========================
@@ -165,7 +166,9 @@ if uploaded_file:
             transcript_text
         )
     )
-  
+    scenario_agent = BusinessScenarioAgent(
+        client
+    )
     dashboard_placeholder = st.empty()
     with dashboard_placeholder.container():
         st.subheader(
@@ -246,10 +249,26 @@ if uploaded_file:
             st.metric(
                 "Overall",
                 "78%"
+
             )
+    scenario_preview = (
+        scenario_agent.generate_scenarios(
+            transcript_text
+        )
+    )
+
+    st.subheader(
+        "🧪 Business Scenario Preview"
+    )
+
+    st.text_area(
+        "Scenario Preview",
+        value=scenario_preview,
+        height=300
+    )
     process_agent = BusinessProcessAgent(client)
     process_flow = process_agent.generate_process_flow(
-    transcript_text
+        transcript_text
     )
     # =========================
 # CURRENT STAGE TRACKER

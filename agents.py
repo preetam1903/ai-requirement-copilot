@@ -1088,3 +1088,67 @@ Test Cases:
         )
 
         return response.choices[0].message.content
+
+# =========================
+# BUSINESS SCENARIO AGENT
+# =========================
+
+class BusinessScenarioAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_scenarios(self, requirements):
+
+        prompt = f"""
+You are a manufacturing business analyst.
+
+Generate 3 sample business scenarios.
+
+Format:
+
+Scenario 1 - Normal Case
+
+Scenario 2 - Exception Case
+
+Scenario 3 - Business Impact Case
+
+For each scenario provide:
+
+Coil ID
+Current Stage
+Issue/Defect
+Expected Outcome
+Dashboard Behaviour
+
+Rules:
+
+- Use realistic sample values
+- Keep concise
+- Business language only
+- Maximum 5 lines per scenario
+- Focus on expected business outcome
+- Mention Spotfire if applicable
+
+Requirements:
+
+{requirements}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content":
+                    "You create realistic manufacturing business scenarios."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.3
+        )
+
+        return response.choices[0].message.content
