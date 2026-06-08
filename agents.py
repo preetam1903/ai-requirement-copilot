@@ -499,12 +499,12 @@ Acceptance Criteria
 Rules:
 
 - Maximum 5 stories
-- Business language only
-- Focus on deliverables
-- Keep acceptance criteria concise
-- Avoid technical implementation details
-- Avoid architecture terminology
-- Mention Spotfire if applicable
+- Maximum 2 acceptance criteria per story
+- Business Value maximum 4 words
+- Keep story titles short
+- Avoid long descriptions
+- Avoid paragraphs
+- Make output presentation friendly
 - Mention SQL tables if applicable
 
 Requirements:
@@ -557,14 +557,26 @@ Expected Result
 
 Rules:
 
-- Maximum 10 test cases
-- Business language only
-- Avoid technical testing terminology
-- Avoid SQL queries
-- Avoid execution steps
-- Mention tables if available
-- Mention Spotfire pages if available
-- Focus on business validation
+- Maximum 8 test cases
+- Maximum 4 lines per test case
+- Use business language only
+- Use short test names
+- Mention table names when available
+- Mention Spotfire pages when available
+- Avoid long sentences
+- Avoid QA terminology
+- Avoid execution instructions
+- Avoid detailed descriptions
+
+Format:
+
+TC-001 Test Name
+
+Validate
+
+Check In
+
+Expected
 
 Based On:
 
