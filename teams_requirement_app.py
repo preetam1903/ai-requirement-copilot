@@ -314,20 +314,7 @@ if uploaded_file:
         height=300
     )
 
-    scenarios = scenario_preview.split(
-        "Scenario"
-    )
-
-    for scenario in scenarios:
-
-        if scenario.strip():
-
-            with st.container():
-
-                st.info(
-                    "Scenario " + scenario
-                )
-
+    
     
 
 # =========================
@@ -365,8 +352,14 @@ if uploaded_file:
         "🧠 Meeting Analysis"
     )
 
-    st.json(meeting_data)
-        st.subheader("🔄 Business Process Flow")
+    st.text_area(
+        "Meeting Analysis",
+        value=str(meeting_data),
+        height=250
+    )
+    st.subheader(
+        "🔄 Business Process Flow"
+    )
     
 
  # =========================
