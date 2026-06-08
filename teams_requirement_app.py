@@ -21,7 +21,8 @@ from agents import (
     RequirementRefinementAgent,
     TestExecutionGuidanceAgent,
     TestCaseAgent,
-    BusinessScenarioAgent
+    BusinessScenarioAgent,
+    AIUnderstandingAgent
 )
 
 # =========================
@@ -169,6 +170,9 @@ if uploaded_file:
     scenario_agent = BusinessScenarioAgent(
         client
     )
+    understanding_agent = AIUnderstandingAgent(
+        client
+    )
     dashboard_placeholder = st.empty()
     with dashboard_placeholder.container():
         st.subheader(
@@ -280,22 +284,18 @@ if uploaded_file:
         """
     )
     # business scenario preview
+    ai_understanding = (
+        understanding_agent.summarize_understanding(
+            transcript_text
+        )
+    )
+
     st.subheader(
         "🧠 What AI Understood"
     )
 
     st.success(
-        """
-    ✅ Blocked Coil Detection
-
-    ✅ Next processing Galvanizing or Pickling
-
-    ✅ Spotfire Dashboard Reporting
-
-    ✅ Production Bottleneck Visibility
-
-    ✅ Executive Decision Support
-    """
+        ai_understanding
     )
     
     scenario_preview = (

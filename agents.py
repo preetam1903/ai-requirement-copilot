@@ -1152,3 +1152,68 @@ Requirements:
         )
 
         return response.choices[0].message.content
+
+# =========================
+# AI UNDERSTANDING AGENT
+# =========================
+
+class AIUnderstandingAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def summarize_understanding(
+        self,
+        transcript
+    ):
+
+        prompt = f"""
+You are a Business Analyst.
+
+Review the meeting transcript.
+
+Identify the top 5 things the AI believes the business wants.
+
+Format:
+
+✅ Item 1
+
+✅ Item 2
+
+✅ Item 3
+
+✅ Item 4
+
+✅ Item 5
+
+Rules:
+
+- Maximum 5 items
+- Maximum 5 words per item
+- Business language only
+- No technical jargon
+- No explanations
+- Focus on business outcomes
+
+Transcript:
+
+{transcript}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role":"system",
+                    "content":
+                    "You summarize business understanding."
+                },
+                {
+                    "role":"user",
+                    "content":prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        return response.choices[0].message.content
