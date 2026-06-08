@@ -662,6 +662,9 @@ Rules:
 
 - Return exactly 5 process steps
 - Maximum 4 words per step
+- One step per line
+- No bullets
+- No numbering
 - Business language only
 - Focus on business outcome
 - Avoid technical terminology
@@ -670,12 +673,11 @@ Rules:
 
 Example:
 
-Receive Data
-Validate Data
-Analyze Production
-Identify Bottlenecks
-Generate Insights
-Review Results
+Production Data
+Blocked Coil Detection
+Customer Impact Analysis
+Spotfire Dashboard
+Management Review
 
 
 Transcript:
