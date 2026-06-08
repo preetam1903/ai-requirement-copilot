@@ -251,21 +251,7 @@ if uploaded_file:
                 "78%"
 
             )
-    scenario_preview = (
-        scenario_agent.generate_scenarios(
-            transcript_text
-        )
-    )
-
-    st.subheader(
-        "🧪 Business Scenario Preview"
-    )
-
-    st.text_area(
-        "Scenario Preview",
-        value=scenario_preview,
-        height=300
-    )
+    
     process_agent = BusinessProcessAgent(client)
     process_flow = process_agent.generate_process_flow(
         transcript_text
@@ -292,6 +278,21 @@ if uploaded_file:
 
         ⚪ Jira Creation Pending
         """
+    )
+    scenario_preview = (
+        scenario_agent.generate_scenarios(
+            transcript_text
+        )
+    )
+
+    st.subheader(
+        "🧪 Business Scenario Preview"
+    )
+
+    st.text_area(
+        "Scenario Preview",
+        value=scenario_preview,
+        height=300
     )
     st.subheader("🧠 Meeting Analysis")
 
