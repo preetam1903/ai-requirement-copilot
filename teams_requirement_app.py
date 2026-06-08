@@ -685,7 +685,7 @@ if uploaded_file:
     st.subheader("🏛️ Solution Flow")
 
     st.markdown(diagram)
-    )
+    
 
 
     # =========================
