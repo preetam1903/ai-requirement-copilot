@@ -324,7 +324,11 @@ if uploaded_file:
 
     st.subheader("📄 Business Requirement Document")
 
-    st.write(brd)
+    st.text_area(
+        "BRD",
+        value=brd,
+        height=400
+    )
 
     challenge_agent = AIChallengeAgent(
     client
@@ -337,7 +341,7 @@ if uploaded_file:
     )
 
     st.subheader(
-        "🔍 AI Challenge Review"
+        "🔍 Business Clarifications"
     )
 
     edited_challenge_review = st.text_area(
@@ -489,7 +493,7 @@ if uploaded_file:
     )
 
     st.subheader(
-        "📊 Requirement Completeness"
+        "📊 Requirement Readiness"
     )
 
     st.write(
@@ -666,7 +670,7 @@ if uploaded_file:
         final_requirements
     )
 
-    st.subheader("🏗️ High Level Design")
+    st.subheader("🏗️ Solution Summary")
 
     st.write(hld)
     diagram_agent = ArchitectureDiagramAgent(
@@ -678,7 +682,7 @@ if uploaded_file:
         hld
     )
 
-    st.subheader("🏛️ Architecture Diagram")
+    st.subheader("🏛️ Solution Flow")
 
     st.code(
     diagram,
@@ -1197,11 +1201,7 @@ if uploaded_file:
         file_name="HLD.txt"
     )
 
-    st.download_button(
-        "Download Solution",
-        solution,
-        file_name="Solution.txt"
-    )
+    
 
     st.download_button(
         "Download Jira Stories",
