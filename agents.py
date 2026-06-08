@@ -477,16 +477,35 @@ class JiraAgent:
     def generate_jira(self, requirements):
 
         prompt = f"""
-{PROFESSIONAL_STYLE}
+You are a Product Owner.
 
-Generate:
+Generate a Jira Delivery Package.
 
-1. Epic
-2. Features
-3. User Stories
-4. Acceptance Criteria
-5. Story Points
-6. Priority
+Format:
+
+EPIC
+- Epic Name
+- Business Goal
+
+USER STORIES
+
+For each story provide:
+
+Story ID
+Story Title
+Business Value
+Acceptance Criteria
+
+Rules:
+
+- Maximum 5 stories
+- Business language only
+- Focus on deliverables
+- Keep acceptance criteria concise
+- Avoid technical implementation details
+- Avoid architecture terminology
+- Mention Spotfire if applicable
+- Mention SQL tables if applicable
 
 Requirements:
 
@@ -522,16 +541,32 @@ class TestCaseAgent:
     def generate_test_cases(self, jira_output):
 
         prompt = f"""
-{PROFESSIONAL_STYLE}
+You are a Business Tester.
 
-Generate:
+Generate business validation scenarios.
 
-- Functional Test Cases
-- Negative Test Cases
-- UAT Test Cases
-- Expected Results
+For each test case provide:
 
-Based on:
+Test Case ID
+
+Validate
+
+Check In
+
+Expected Result
+
+Rules:
+
+- Maximum 10 test cases
+- Business language only
+- Avoid technical testing terminology
+- Avoid SQL queries
+- Avoid execution steps
+- Mention tables if available
+- Mention Spotfire pages if available
+- Focus on business validation
+
+Based On:
 
 {jira_output}
 """
