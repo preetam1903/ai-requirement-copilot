@@ -289,14 +289,84 @@ if uploaded_file:
         "🧪 Business Scenario Preview"
     )
 
+    st.subheader(
+        "🧪 Business Scenario Preview"
+    )
+
+    scenarios = scenario_preview.split(
+        "Scenario"
+    )
+
+    for scenario in scenarios:
+
+        if scenario.strip():
+
+            with st.container():
+
+                st.info(
+                    "Scenario " + scenario
+                )
+    st.subheader("🧠 Meeting Analysis")
+
+    st.json(meeting_data)
+ # business scenario preview
+    st.subheader(
+        "🧠 What AI Understood"
+    )
+
+    st.success(
+        """
+    ✅ Blocked Coil Detection
+
+    ✅ Customer Impact Analysis
+
+    ✅ Spotfire Dashboard Reporting
+
+    ✅ Production Bottleneck Visibility
+
+    ✅ Executive Decision Support
+    """
+    )
+
+    st.subheader(
+        "🧪 Business Scenario Preview"
+    )
+
     st.text_area(
         "Scenario Preview",
         value=scenario_preview,
         height=300
     )
-    st.subheader("🧠 Meeting Analysis")
 
-    st.json(meeting_data)
+# =========================
+# EXPECTED DASHBOARD PREVIEW
+# =========================
+
+    st.subheader(
+        "📊 Expected Dashboard Preview"
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "Blocked Coils",
+            "12"
+        )
+
+    with col2:
+        st.metric(
+            "Affected Customers",
+            "4"
+        )
+
+    with col3:
+        st.metric(
+            "Delayed Orders",
+            "7"
+        )
+
+    st.subheader("🔄 Business Process Flow")
     st.subheader("🔄 Business Process Flow")
 
  # =========================
