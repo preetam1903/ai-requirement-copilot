@@ -338,15 +338,39 @@ if uploaded_file:
         "🧪 Business Scenario Preview by AI"
     )
 
-    
+    scenarios = scenario_preview.split("Scenario")
 
-    for scenario in scenario_preview.split("Scenario"):
+    for scenario in scenarios:
 
-        if scenario.strip():
+        if not scenario.strip():
+            continue
+
+        if "Normal" in scenario:
+
+            st.success(
+                "🟢 Normal Scenario\n\n" +
+                scenario
+            )
+
+        elif "Exception" in scenario:
+
+            st.error(
+                "🔴 Exception Scenario\n\n" +
+                scenario
+            )
+
+        elif "Impact" in scenario:
+
+            st.warning(
+                "🟡 Business Impact Scenario\n\n" +
+                scenario
+            )
+
+        else:
 
             st.info(
-                "Scenario" + scenario
-            )
+                scenario
+            )   
 
     
     
