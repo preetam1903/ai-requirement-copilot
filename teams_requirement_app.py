@@ -18,7 +18,9 @@ from agents import (
     AIChallengeAgent,
     TestCoverageAgent,
     RequirementCompletenessAgent,
-    RequirementRefinementAgent
+    RequirementRefinementAgent,
+    TestExecutionGuidanceAgent,
+    TestCaseAgent
 )
 
 # =========================
@@ -833,7 +835,9 @@ if uploaded_file:
     testcase_agent = TestCaseAgent(
         client
     )
-
+    execution_agent = TestExecutionGuidanceAgent(
+        client
+    )
     test_cases = (
         testcase_agent.generate_test_cases(
             final_jira
@@ -942,26 +946,46 @@ if uploaded_file:
                 "approved_test_cases"
             ]
         )
+    # =========================
+# TEST EXECUTION GUIDANCE
+# =========================
 
-    coverage_agent = TestCoverageAgent(
-    client
-    )
+    if "approved_test_cases" in st.session_state:
 
-    coverage_review = (
-        coverage_agent.review_coverage(
-            brd,
-            final_jira,
-            edited_test_cases
+        execution_guidance = (
+            execution_agent.generate_guidance(
+                st.session_state[
+                    "approved_test_cases"
+                ]
+            )
         )
+
+        st.subheader(
+            "🛠️ Test Execution Guidance"
     )
 
-    st.subheader(
-        "📊 Test Coverage Review"
-    )
+        st.write(
+            execution_guidance
+        )
+    #coverage_agent = TestCoverageAgent(
+    #client
+    #)
 
-    st.write(
-        coverage_review
-    )
+    #coverage_review = (
+        #coverage_agent.review_coverage(
+            #brd,
+            #final_jira,
+            #edited_test_cases
+        #)
+    #)
+
+    #st.subheader(
+        #"📊 Test Coverage Review"
+    #)
+
+    #st.write(
+        #coverage_review
+    #)
 
     # =========================
 # FINAL SIGN-OFF
@@ -1137,7 +1161,7 @@ if uploaded_file:
         insight_agent.generate_summary(
             requirements,
             hld,
-            solution
+            ""
         )
     )
 

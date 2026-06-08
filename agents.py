@@ -1004,4 +1004,58 @@ Challenge Review:
 
         return response.choices[0].message.content
 
+# =========================
+# TEST EXECUTION GUIDANCE AGENT
+# =========================
 
+class TestExecutionGuidanceAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_guidance(self, test_cases):
+
+        prompt = f"""
+You are a QA Lead.
+
+Generate test execution guidance.
+
+For each test case provide:
+
+Test Case
+Source Data
+Execution Steps
+Expected Result
+
+Rules:
+
+- Maximum 5 lines per test case
+- Keep it concise
+- Business language only
+- Mention SQL tables if available
+- Mention Spotfire if applicable
+- Focus on practical execution steps
+- Avoid technical jargon
+
+Test Cases:
+
+{test_cases}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content":
+                    "You are an experienced QA lead for SQL and Spotfire solutions."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        return response.choices[0].message.content
