@@ -297,7 +297,7 @@ if uploaded_file:
     ✅ Executive Decision Support
     """
     )
-    )
+    
     scenario_preview = (
         scenario_agent.generate_scenarios(
             transcript_text
