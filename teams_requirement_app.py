@@ -647,9 +647,9 @@ if uploaded_file:
         "View Impact Assessment"
     ):
 
-    st.write(
-        impact_analysis
-    )
+        st.write(
+            impact_analysis
+        )
     
     # =========================
     # REQUIREMENTS
