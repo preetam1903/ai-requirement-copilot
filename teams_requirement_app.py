@@ -24,7 +24,8 @@ from agents import (
     BusinessScenarioAgent,
     AIUnderstandingAgent,
     DashboardPreviewAgent,
-    ProjectManagerAgent
+    ProjectManagerAgent,
+    ChangeImpactAgent
 )
 
 # =========================
@@ -621,7 +622,34 @@ if uploaded_file:
                     ]
                 )
     
-   
+    # =========================
+# CHANGE IMPACT ANALYSIS
+# =========================
+
+    impact_agent = ChangeImpactAgent(
+        client
+    )
+
+    impact_analysis = (
+        impact_agent.analyze_impact(
+            brd,
+            st.session_state[
+                "approved_refined_brd"
+            ]
+        )
+    )
+
+    st.subheader(
+        "🔄 Requirement Change Impact Analysis"
+    )
+
+    with st.expander(
+        "View Impact Assessment"
+    ):
+
+    st.write(
+        impact_analysis
+    )
     
     # =========================
     # REQUIREMENTS
