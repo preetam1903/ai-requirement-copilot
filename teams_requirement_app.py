@@ -1077,7 +1077,7 @@ if uploaded_file:
 
     col3.metric(
         "Estimated Effort",
-        "13 Days"
+        "6 weeks"
     )
 
     with st.expander(
@@ -1100,13 +1100,19 @@ if uploaded_file:
             )
         )
 
+        
+
         st.subheader(
             "🛠️ Test Execution Guidance"
-    )
+        )
+
+        with st.expander(
+            "View Execution Guide"
+        ):
 
         st.write(
             execution_guidance
-        )
+            )
     #coverage_agent = TestCoverageAgent(
     #client
     #)
