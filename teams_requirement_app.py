@@ -925,45 +925,6 @@ if uploaded_file:
         jira_output
     )
 
-# =========================
-# AI PROJECT MANAGER
-# =========================
-
-    pm_agent = ProjectManagerAgent(
-        client
-    )
-
-    project_plan = (
-        pm_agent.generate_plan(
-            final_requirements,
-            final_jira
-        )
-    )
-
-    st.subheader(
-        "🤖 AI Project Manager"
-    )
-
-    col1, col2, col3 = st.columns(3)
-
-    col1.metric(
-        "Complexity",
-        "Medium"
-    )
-
-    col2.metric(
-        "Risk",
-        "Medium"
-    )
-
-    col3.metric(
-        "Estimated Effort",
-        "13 Days"
-    )
-
-    st.success(
-        project_plan
-    )
 
     # =========================
 # TEST CASES
@@ -1082,6 +1043,48 @@ if uploaded_file:
             st.session_state[
                 "approved_test_cases"
             ]
+        )
+        # =========================
+# AI PROJECT MANAGER
+# =========================
+
+    pm_agent = ProjectManagerAgent(
+        client
+    )
+
+    project_plan = (
+        pm_agent.generate_plan(
+            final_requirements,
+            final_jira
+        )
+    )
+
+    st.subheader(
+        "🤖 AI Project Manager"
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(
+        "Complexity",
+        "Medium"
+    )
+
+    col2.metric(
+        "Risk",
+        "Medium"
+    )
+
+    col3.metric(
+        "Estimated Effort",
+        "13 Days"
+    )
+
+    with st.expander(
+        "View Delivery Plan"
+    ):
+        st.write(
+            project_plan
         )
     # =========================
 # TEST EXECUTION GUIDANCE
