@@ -1409,3 +1409,80 @@ Jira Stories:
         )
 
         return response.choices[0].message.content
+
+# =========================
+# CHANGE IMPACT AGENT
+# =========================
+
+class ChangeImpactAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def analyze_impact(
+        self,
+        original_brd,
+        refined_brd
+    ):
+
+        prompt = f"""
+You are a Senior Delivery Architect.
+
+Compare:
+
+Original BRD
+
+and
+
+Refined BRD
+
+Generate:
+
+New Information Added
+
+Impacted Areas
+
+Requirements Impact
+
+Jira Impact
+
+Test Case Impact
+
+Impact Level
+(Low / Medium / High)
+
+Recommended Action
+
+Rules:
+
+- Keep concise
+- Use business language
+- Maximum one page
+- Focus on delivery impact
+
+Original BRD:
+
+{original_brd}
+
+Refined BRD:
+
+{refined_brd}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content":
+                    "You are an enterprise delivery architect."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        return response.choices[0].message.content
