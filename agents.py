@@ -1037,6 +1037,10 @@ Rules:
 - Avoid enterprise consulting language
 - Mention SQL tables if available
 - Mention Spotfire if applicable
+- Do not repeat test cases
+- Do not repeat validation statements
+- Focus on execution guidance
+- Maximum 4 lines per item
 
 Original BRD:
 
@@ -1080,12 +1084,15 @@ You are a QA Lead.
 
 Generate concise Test Execution Guidance.
 
-For each test case provide:
+For each approved test case provide:
 
-Test Case
-Validate
-Check In
-Expected Result
+Execution Method
+
+Where To Validate
+
+Pass Criteria
+
+Business Owner
 
 Rules:
 
@@ -1326,6 +1333,79 @@ Requirement:
                 }
             ],
             temperature=0.1
+        )
+
+        return response.choices[0].message.content
+
+# =========================
+# PROJECT MANAGER AGENT
+# =========================
+
+class ProjectManagerAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_plan(
+        self,
+        requirements,
+        jira_output
+    ):
+
+        prompt = f"""
+You are a Senior IT Project Manager.
+
+Review the requirements and Jira stories.
+
+Generate:
+
+Project Complexity
+
+Risk Level
+
+Estimated Effort
+
+Requirements Review
+Solution Design
+Development
+Testing
+UAT
+
+Recommended Team
+
+Dependencies
+
+Rules:
+
+- Keep concise
+- Use business language
+- Maximum one page
+- Focus on planning
+- Avoid technical implementation details
+
+Requirements:
+
+{requirements}
+
+Jira Stories:
+
+{jira_output}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content":
+                    "You are an enterprise project manager."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.2
         )
 
         return response.choices[0].message.content

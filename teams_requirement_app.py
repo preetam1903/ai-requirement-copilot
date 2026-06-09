@@ -24,6 +24,7 @@ from agents import (
     BusinessScenarioAgent,
     AIUnderstandingAgent,
     DashboardPreviewAgent,
+    ProjectManagerAgent
 )
 
 # =========================
@@ -922,6 +923,46 @@ if uploaded_file:
     final_jira = st.session_state.get(
         "approved_jira",
         jira_output
+    )
+
+# =========================
+# AI PROJECT MANAGER
+# =========================
+
+    pm_agent = ProjectManagerAgent(
+        client
+    )
+
+    project_plan = (
+        pm_agent.generate_plan(
+            final_requirements,
+            final_jira
+        )
+    )
+
+    st.subheader(
+        "🤖 AI Project Manager"
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(
+        "Complexity",
+        "Medium"
+    )
+
+    col2.metric(
+        "Risk",
+        "Medium"
+    )
+
+    col3.metric(
+        "Estimated Effort",
+        "13 Days"
+    )
+
+    st.success(
+        project_plan
     )
 
     # =========================
