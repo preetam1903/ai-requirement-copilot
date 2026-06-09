@@ -626,31 +626,32 @@ if uploaded_file:
 # CHANGE IMPACT ANALYSIS
 # =========================
 
-    impact_agent = ChangeImpactAgent(
-        client
-    )
+    if "approved_refined_brd" in st.session_state:
 
-    impact_analysis = (
-        impact_agent.analyze_impact(
-            brd,
-            st.session_state[
-                "approved_refined_brd"
-            ]
+        impact_agent = ChangeImpactAgent(
+            client
         )
-    )
 
-    st.subheader(
-        "🔄 Requirement Change Impact Analysis"
-    )
-
-    with st.expander(
-        "View Impact Assessment"
-    ):
-
-        st.write(
-            impact_analysis
+        impact_analysis = (
+            impact_agent.analyze_impact(
+                brd,
+                st.session_state.get[
+                    "approved_refined_brd"
+                ]
+            )
         )
-    
+
+        st.subheader(
+            "🔄 Requirement Change Impact Analysis"
+        )
+
+        with st.expander(
+            "View Impact Assessment"
+        ):
+
+            st.write(
+                impact_analysis
+            )
     # =========================
     # REQUIREMENTS
     # =========================
