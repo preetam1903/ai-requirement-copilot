@@ -1110,8 +1110,8 @@ if uploaded_file:
             "View Execution Guide"
         ):
 
-        st.write(
-            execution_guidance
+            st.write(
+                execution_guidance
             )
     #coverage_agent = TestCoverageAgent(
     #client
