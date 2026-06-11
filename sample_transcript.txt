@@ -1,0 +1,16 @@
+Meeting Objective:
+
+To include new customer information
+Requirements:
+
+Need new country postal code.
+
+Current SAP supports 5 digits.
+
+New country requires 6 characters.
+
+First 3 represent state.
+
+Next 2 represent region.
+
+Last character represents area.
