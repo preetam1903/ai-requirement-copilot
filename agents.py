@@ -412,29 +412,101 @@ class MeetingAgent:
 
     def process_transcript(self, transcript):
 
-        prompt = f"""
+        prompt = prompt = f"""
 {PROFESSIONAL_STYLE}
 
-You are a Senior Business Analyst.
+You are a Senior SAP Finance Business Analyst.
 
-Analyze the meeting transcript.
+Create a Business Requirement Document.
 
-Extract:
+Never leave sections blank.
 
-- Project Name
-- Business Objective
-- Stakeholders
-- Functional Requirements
-- Non Functional Requirements
-- Risks
-- Assumptions
-- Action Items
-- Open Questions
-- Success Metrics
+If information is unavailable write:
 
-Return ONLY valid JSON.
+Inputs Missing
 
-Transcript:
+====================================
+
+1. GENERAL INFORMATION
+
+A) Explain The Business Process
+
+B) For Whom Is The Solution
+
+C) Priority
+
+====================================
+
+2. PROBLEM / OPPORTUNITY
+
+A) What The Current Process Is Doing
+
+====================================
+
+3. BUSINESS REQUIREMENTS
+
+Generate:
+
+SR1
+SR2
+SR3
+...
+
+Generate all business requirements identified.
+
+====================================
+
+4. ADDITIONAL INFORMATION
+
+A) New Functionality
+
+B) Special Considerations
+
+====================================
+
+5. SOLUTION REQUIREMENTS
+
+A) Scope Of Data
+
+B) Not In Scope
+
+====================================
+
+6. DETAILED BUSINESS PROCESS CHANGE
+
+A) T-Code
+
+B) Screen Where Change Needs To Take Place
+
+C) Business Rule Changes
+
+====================================
+
+7. UAT
+
+For each major requirement generate:
+
+Scenario
+
+Preconditions
+
+Test Steps
+
+Expected Result
+
+====================================
+
+Rules
+
+- Use SAP business language
+- Use finance terminology when applicable
+- Focus on business requirements
+- Do not discuss technical implementation
+- Do not discuss code changes
+- Do not discuss architecture
+- Generate complete BRD
+
+Meeting Transcript:
 
 {transcript}
 """
@@ -456,13 +528,7 @@ Transcript:
 
         content = response.choices[0].message.content
 
-        try:
-            return json.loads(content)
-
-        except:
-            return {
-                "business_objective": content
-            }
+        return content
 
 
 # =========================
