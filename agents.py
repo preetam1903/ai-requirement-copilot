@@ -412,20 +412,34 @@ class MeetingAgent:
 
     def process_transcript(self, transcript):
 
-        prompt = prompt = f"""
-{PROFESSIONAL_STYLE}
-
+        prompt = """
 You are a Senior SAP Finance Business Analyst.
 
-Create a Business Requirement Document.
+IMPORTANT:
 
-Never leave sections blank.
+You MUST use ONLY the structure below.
+
+Do NOT create any other sections.
+
+Do NOT create:
+
+* Executive Summary
+* Business Objective
+* Scope
+* Functional Requirements
+* Non Functional Requirements
+* Data Requirements
+* Risks
+* Assumptions
+* Expected Outcomes
 
 If information is unavailable write:
 
 Inputs Missing
 
-====================================
+Generate ONLY the following structure.
+
+================================================
 
 1. GENERAL INFORMATION
 
@@ -435,34 +449,35 @@ B) For Whom Is The Solution
 
 C) Priority
 
-====================================
+================================================
 
 2. PROBLEM / OPPORTUNITY
 
 A) What The Current Process Is Doing
 
-====================================
+================================================
 
 3. BUSINESS REQUIREMENTS
 
-Generate:
+Generate requirements using this format only:
 
 SR1
+
 SR2
+
 SR3
+
+SR4
+
 ...
 
-Generate all business requirements identified.
-
-====================================
+================================================
 
 4. ADDITIONAL INFORMATION
 
 A) New Functionality
 
-B) Special Considerations
-
-====================================
+================================================
 
 5. SOLUTION REQUIREMENTS
 
@@ -470,7 +485,7 @@ A) Scope Of Data
 
 B) Not In Scope
 
-====================================
+================================================
 
 6. DETAILED BUSINESS PROCESS CHANGE
 
@@ -480,36 +495,33 @@ B) Screen Where Change Needs To Take Place
 
 C) Business Rule Changes
 
-====================================
+================================================
 
 7. UAT
 
-For each major requirement generate:
+Generate:
+
+UAT-01
 
 Scenario
 
-Preconditions
+Expected Result
 
-Test Steps
+UAT-02
+
+Scenario
 
 Expected Result
 
-====================================
+================================================
 
-Rules
-
-- Use SAP business language
-- Use finance terminology when applicable
-- Focus on business requirements
-- Do not discuss technical implementation
-- Do not discuss code changes
-- Do not discuss architecture
-- Generate complete BRD
+Return ONLY the sections above.
 
 Meeting Transcript:
 
 {transcript}
 """
+
 
         response = self.client.chat.completions.create(
             model="gpt-4.1",
@@ -1068,45 +1080,85 @@ class RequirementRefinementAgent:
         challenge_review
     ):
 
-        prompt = f"""
-        You are a Business Analyst.
+        prompt = prompt = f"""
+You are a Senior SAP Finance Business Analyst.
 
-Refine the BRD using the Challenge Review.
+Refine the BRD using the challenge review.
 
-Output Format:
+Maintain EXACTLY the same BRD structure.
 
-1. Business Objective
-- What problem is being solved
+Do NOT create new sections.
 
-2. Required Data
-- Tables, reports or data needed
+Do NOT create:
 
-3. Expected Output
-- Dashboard, report or KPI output
+- Executive Summary
+- Business Objective
+- Required Data
+- Expected Output
+- Business Benefits
+- Open Questions
 
-4. Business Benefits
-- Expected value
+Update only missing information.
 
-5. Open Questions
-- Missing information requiring clarification
+Return ONLY:
 
-Rules:
+1. GENERAL INFORMATION
 
-- Maximum 15 bullets total
-- Keep each bullet short
-- Business language only
-- Remove repetition
-- Avoid architecture terminology
-- Avoid AI terminology
-- Avoid implementation details
-- Avoid security discussions unless mentioned
-- Avoid enterprise consulting language
-- Mention SQL tables if available
-- Mention Spotfire if applicable
-- Do not repeat test cases
-- Do not repeat validation statements
-- Focus on execution guidance
-- Maximum 4 lines per item
+A) Explain The Business Process
+
+B) For Whom Is The Solution
+
+C) Priority
+
+================================================
+
+2. PROBLEM / OPPORTUNITY
+
+A) What The Current Process Is Doing
+
+================================================
+
+3. BUSINESS REQUIREMENTS
+
+SR1
+SR2
+SR3
+
+================================================
+
+4. ADDITIONAL INFORMATION
+
+A) New Functionality
+
+================================================
+
+5. SOLUTION REQUIREMENTS
+
+A) Scope Of Data
+
+B) Not In Scope
+
+================================================
+
+6. DETAILED BUSINESS PROCESS CHANGE
+
+A) T-Code
+
+B) Screen Where Change Needs To Take Place
+
+C) Business Rule Changes
+
+================================================
+
+7. UAT
+
+UAT-01
+Scenario
+Expected Result
+
+UAT-02
+Scenario
+Expected Result
 
 Original BRD:
 
@@ -1116,7 +1168,6 @@ Challenge Review:
 
 {challenge_review}
 """
-
         response = self.client.chat.completions.create(
             model="gpt-4.1-mini",
             messages=[
