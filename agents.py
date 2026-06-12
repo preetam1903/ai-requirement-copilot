@@ -436,13 +436,21 @@ Do NOT create:
 * Assumptions
 * Expected Outcomes
 
-Use information from the transcript.
+Use ONLY information explicitly stated in the transcript.
 
-Where information is partially available:
+Do NOT assume:
+- SAP module
+- T-Code
+- Table names
+- Screen names
+- Field names
+- Business users
 
-- Infer reasonable business context
-- Generate draft content
-- Use "To Be Confirmed" only when absolutely necessary
+If not explicitly mentioned, write:
+
+To Be Confirmed
+
+Do not invent SAP objects.
 
 Do not leave sections blank.
 Do not return "Inputs Missing" unless the transcript contains no useful information.
@@ -505,13 +513,21 @@ B) Not In Scope
 
 A) T-Code
 
-Identify impacted SAP transaction codes.
+Only populate if explicitly mentioned in the transcript.
+Otherwise write:
+To Be Confirmed
 
 B) Screen Name
 
-Identify the screen, tab, or section where the change is required.
+Only populate if explicitly mentioned in the transcript.
+Otherwise write:
+To Be Confirmed
 
 C) Field Name
+
+Only populate if explicitly mentioned in the transcript.
+Otherwise write:
+To Be Confirmed
 
 Identify impacted fields.
 
@@ -556,46 +572,29 @@ Expected Result
 ================================================
 
 Return ONLY the sections above.
-
 Example
 
 Current State
 
-SAP Customer Master
-
-T-Code:
-XD01
-
-Screen:
-Address Tab
-
-Field:
-Postal Code
-
-Current Behaviour:
-Maximum 5 digits allowed.
+<Current business behaviour>
 
 Future State
 
-Postal Code field shall support 6 characters.
-
-Applicable only for Country X.
+<Expected business behaviour>
 
 Business Rule Changes
 
-Validation:
-AAA99A
+<List business rules>
 
 Configuration Impact
 
-Country specific validation configuration.
+<List impacts>
 
 Testing Impact
 
-Customer Creation
-Customer Update
-Customer Search
-Customer Reports
+<List impacted processes>
+
+
 Meeting Transcript:
 
 {transcript}

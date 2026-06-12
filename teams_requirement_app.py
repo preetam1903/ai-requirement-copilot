@@ -127,7 +127,13 @@ if uploaded_file:
     # =========================
 
     meeting_agent = MeetingAgent(client)
+    st.subheader("DEBUG - Transcript Sent To AI")
 
+    st.text_area(
+        "Transcript",
+        transcript_text,
+        height=300
+    )
     meeting_data = (
         meeting_agent.process_transcript(
             transcript_text
