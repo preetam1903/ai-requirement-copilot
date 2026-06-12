@@ -1756,3 +1756,48 @@ Screenshot Name:
         )
 
         return response.choices[0].message.content
+
+class CurrentFutureStateAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_state_analysis(
+        self,
+        screen_analysis,
+        business_reason
+    ):
+
+        prompt = f"""
+You are a senior SAP Finance Business Analyst.
+
+Using the screen analysis and business requirement below, generate:
+
+1. Current State
+
+2. Future State
+
+3. Configuration Impact
+
+4. Testing Impact
+
+Screen Analysis:
+{screen_analysis}
+
+Business Requirement:
+{business_reason}
+
+Return structured output.
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
+
+        return response.choices[0].message.content

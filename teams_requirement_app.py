@@ -26,7 +26,8 @@ from agents import (
     DashboardPreviewAgent,
     ProjectManagerAgent,
     ChangeImpactAgent,
-    ScreenAnalysisAgent
+    ScreenAnalysisAgent,
+    CurrentFutureStateAgent
 )
 from image_utils import (
     extract_red_region,
@@ -174,7 +175,10 @@ if uploaded_file:
     screen_agent = ScreenAnalysisAgent(
         client
     )
-    
+
+    state_agent = CurrentFutureStateAgent(
+        client
+    )
     screen_results = []
 
     if uploaded_screens:
@@ -225,9 +229,27 @@ if uploaded_file:
             st.session_state[
                 "screen_analysis"
             ] = screen_results
-            st.session_state[
-                "screen_analysis"
-            ] = screen_results
+
+        if screen_results:
+
+                combined_analysis = "\n\n".join(
+                    [
+                        item["analysis"]
+                        for item in screen_results
+                    ]
+                )
+
+                state_analysis = (
+                    state_agent.generate_state_analysis(
+                        combined_analysis,
+                        change_reason
+                    )
+                )
+
+                st.session_state[
+                    "state_analysis"
+                ] = state_analysis    
+            
     st.subheader("DEBUG - Transcript Sent To AI")
 
     st.text_area(
@@ -497,6 +519,19 @@ if uploaded_file:
                 st.write(
                     result["analysis"]
                 )
+    if st.session_state.get(
+        "state_analysis"
+    ):
+
+        st.subheader(
+            "🎯 AI Change Analysis"
+        )
+
+        st.success(
+            st.session_state[
+                "state_analysis"
+            ]
+        )
 # =========================
 # BUILD FINAL BRD
 # =========================
@@ -577,6 +612,26 @@ if uploaded_file:
             brd += (
                 f"{item['analysis']}\n\n"
             )
+    # -------------------------
+# AI CHANGE ANALYSIS
+# -------------------------
+
+    if st.session_state.get(
+        "state_analysis"
+    ):
+
+        brd += "\n"
+        brd += "================================================\n\n"
+
+        brd += "6B. AI CHANGE ANALYSIS\n\n"
+
+        brd += (
+            st.session_state[
+                "state_analysis"
+            ]
+        )
+
+        brd += "\n\n"
 # -------------------------
 # BUSINESS JUSTIFICATION
 # -------------------------
