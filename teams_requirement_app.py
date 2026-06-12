@@ -89,6 +89,19 @@ uploaded_screens = st.file_uploader(
     accept_multiple_files=True
 )
 
+field_to_change = st.text_input(
+    "Field To Be Changed",
+    placeholder="Example: Postal Code"
+)
+change_reason = st.text_area(
+    "Business Reason For Change",
+    placeholder="Example: New country requires 6-character postal code",
+    height=80
+)
+
+st.session_state["field_to_change"] = field_to_change
+st.session_state["change_reason"] = change_reason
+
 # =========================
 # BRD GENERATOR
 # =========================
@@ -418,14 +431,18 @@ if uploaded_file:
                     unsafe_allow_html=True
                 )
 
+# =========================
+# BUILD FINAL BRD
+# =========================
 
-    # =========================
-    # BRD
-    # =========================
+    brd = meeting_data
 
-    brd =meeting_data
+# -------------------------
+# SCREEN REFERENCES
+# -------------------------
+
     if st.session_state.get(
-        "screen_references"
+    "screen_references"
     ):
 
         brd += "\n\n"
@@ -452,13 +469,92 @@ if uploaded_file:
                 "Purpose: Current screen to be modified.\n\n"
             )
 
-    st.subheader("📄 Business Requirement Document")
+# -------------------------
+# FIELD IDENTIFICATION
+# -------------------------
+
+    if st.session_state.get(
+    "field_to_change"
+    ):
+
+        brd += "\n"
+        brd += "================================================\n\n"
+
+        brd += "6B. FIELD IDENTIFICATION\n\n"
+
+        brd += (
+            f"Field Name: "
+            f"{st.session_state['field_to_change']}\n\n"
+        )
+
+# -------------------------
+# BUSINESS JUSTIFICATION
+# -------------------------
+
+    if st.session_state.get(
+        "change_reason"
+    ):
+
+        brd += (
+            f"Business Reason: "
+            f"{st.session_state['change_reason']}\n\n"
+        )
+
+# -------------------------
+# CURRENT STATE
+# -------------------------
+
+    if st.session_state.get(
+        "field_to_change"
+    ):
+
+        brd += "CURRENT STATE\n\n"
+
+        brd += (
+            f"Field '{st.session_state['field_to_change']}' "
+            "is part of the current process.\n"
+        )
+
+        brd += (
+            "Current functionality and behaviour "
+            "to be confirmed by business.\n\n"
+        )
+
+# -------------------------
+# FUTURE STATE
+# -------------------------
+
+    if st.session_state.get(
+        "field_to_change"
+    ):
+
+        brd += "FUTURE STATE\n\n"
+
+        brd += (
+            f"Field '{st.session_state['field_to_change']}' "
+            "will be modified as per business requirements.\n"
+        )
+
+        brd += (
+            "Updated validation, processing logic "
+            "and business rules shall apply.\n\n"
+        )
+
+# -------------------------
+# DISPLAY BRD
+# -------------------------
+
+    st.subheader(
+        "📄 Business Requirement Document"
+    )
 
     st.text_area(
         "BRD",
         value=brd,
-        height=400
+        height=700
     )
+
+   
          # =========================
 # REQUIREMENT COMPLETENESS
 # =========================
