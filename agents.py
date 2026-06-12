@@ -14,6 +14,9 @@ Output Style:
 * Write like a Senior Business Analyst or Architect
   """
 
+
+def process_transcript(self, transcript):
+    print(transcript)
 # =========================
 # REQUIREMENT AGENT
 # =========================
@@ -433,9 +436,16 @@ Do NOT create:
 * Assumptions
 * Expected Outcomes
 
-If information is unavailable write:
+Use information from the transcript.
 
-Inputs Missing
+Where information is partially available:
+
+- Infer reasonable business context
+- Generate draft content
+- Use "To Be Confirmed" only when absolutely necessary
+
+Do not leave sections blank.
+Do not return "Inputs Missing" unless the transcript contains no useful information.
 
 Generate ONLY the following structure.
 
@@ -443,9 +453,13 @@ Generate ONLY the following structure.
 
 1. GENERAL INFORMATION
 
-A) Explain The Business Process
+A) A) Explain The Business Process
 
-B) For Whom Is The Solution
+Summarize the business process discussed in the transcript.
+
+B) B) For Whom Is The Solution
+
+Identify likely business users from the transcript.
 
 C) Priority
 
@@ -521,8 +535,9 @@ Meeting Transcript:
 
 {transcript}
 """
-
-
+        print("========== TRANSCRIPT RECEIVED ==========")
+        print(transcript)
+        print("========================================")
         response = self.client.chat.completions.create(
             model="gpt-4.1",
             messages=[
