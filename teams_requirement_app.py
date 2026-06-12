@@ -187,8 +187,11 @@ if uploaded_file:
                 width=600
             )
 
+            image_bytes = screen.read()
+            screen.seek(0)
             analysis = (
                 screen_agent.analyze_screen(
+                    image_bytes,
                     screen.name
                 )
             )

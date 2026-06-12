@@ -1686,6 +1686,8 @@ Refined BRD:
 
         return response.choices[0].message.content
 
+import base64
+
 class ScreenAnalysisAgent:
 
     def __init__(self, client):
@@ -1693,11 +1695,28 @@ class ScreenAnalysisAgent:
 
     def analyze_screen(
         self,
+        image_bytes,
         image_name
     ):
 
-        prompt = f"""
-Analyze the uploaded application screenshot.
+        base64_image = base64.b64encode(
+            image_bytes
+        ).decode("utf-8")
+
+        response = self.client.chat.completions.create(
+
+            model="gpt-4.1",
+
+            messages=[
+
+                {
+                    "role": "user",
+                    "content": [
+
+                        {
+                            "type": "text",
+                            "text": f"""
+Analyze this SAP or enterprise application screenshot.
 
 Identify:
 
@@ -1705,30 +1724,35 @@ Identify:
 
 2. Business Function
 
-3. Fields Visible
+3. Visible Fields
 
-4. Validation Rules Visible
+4. Current Values
 
-5. Error Messages
+5. Validation Rules
 
-6. Configuration Values
+6. Error Messages
 
 7. Business Impact
 
 Return structured output.
 
-Screenshot:
+Screenshot Name:
 {image_name}
 """
+                        },
 
-        response = self.client.chat.completions.create(
-            model="gpt-4.1",
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url":
+                                f"data:image/jpeg;base64,{base64_image}"
+                            }
+                        }
+                    ]
                 }
-            ]
+            ],
+
+            temperature=0.1
         )
 
         return response.choices[0].message.content
