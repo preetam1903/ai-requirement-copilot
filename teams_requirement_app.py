@@ -28,6 +28,10 @@ from agents import (
     ChangeImpactAgent,
     ScreenAnalysisAgent
 )
+from image_utils import (
+    extract_red_region,
+    image_to_bytes
+)
 
 # =========================
 # OPENAI CLIENT
@@ -188,10 +192,26 @@ if uploaded_file:
             )
 
             image_bytes = screen.read()
+
             screen.seek(0)
+
+            cropped_image = extract_red_region(
+                image_bytes
+            )
+
+            cropped_bytes = image_to_bytes(
+                cropped_image
+            )
+
+            st.image(
+                cropped_image,
+                caption="Detected Change Area",
+                width=500
+            )
+
             analysis = (
                 screen_agent.analyze_screen(
-                    image_bytes,
+                    cropped_bytes,
                     screen.name
                 )
             )
@@ -536,27 +556,27 @@ if uploaded_file:
 # SCREEN ANALYSIS
 # -------------------------
 
-if st.session_state.get(
-    "screen_analysis"
-):
-
-    brd += "\n"
-    brd += "================================================\n\n"
-
-    brd += "6A. SCREEN ANALYSIS\n\n"
-
-    for item in st.session_state[
+    if st.session_state.get(
         "screen_analysis"
-    ]:
+    ):
 
-        brd += (
-            f"Screenshot: "
-            f"{item['name']}\n\n"
-        )
+        brd += "\n"
+        brd += "================================================\n\n"
 
-        brd += (
-            f"{item['analysis']}\n\n"
-        )
+        brd += "6A. SCREEN ANALYSIS\n\n"
+
+        for item in st.session_state[
+            "screen_analysis"
+        ]:
+
+            brd += (
+                f"Screenshot: "
+                f"{item['name']}\n\n"
+            )
+
+            brd += (
+                f"{item['analysis']}\n\n"
+            )
 # -------------------------
 # BUSINESS JUSTIFICATION
 # -------------------------
