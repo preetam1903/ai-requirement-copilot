@@ -25,7 +25,8 @@ from agents import (
     AIUnderstandingAgent,
     DashboardPreviewAgent,
     ProjectManagerAgent,
-    ChangeImpactAgent
+    ChangeImpactAgent,
+    ScreenAnalysisAgent
 )
 
 # =========================
@@ -89,6 +90,8 @@ uploaded_screens = st.file_uploader(
     accept_multiple_files=True
 )
 
+
+
 field_to_change = st.text_input(
     "Field To Be Changed",
     placeholder="Example: Postal Code"
@@ -139,19 +142,7 @@ if uploaded_file:
         )
 
     st.subheader("📝 Teams Transcript")
-    if uploaded_screens:
-
-        st.subheader(
-            "📷 Uploaded Screens"
-        )
-
-        for screen in uploaded_screens:
-
-            st.image(
-                screen,
-                caption=screen.name,
-                width=600
-            )
+    
 
     with st.expander("View Transcript"):
 
@@ -176,6 +167,38 @@ if uploaded_file:
     ] = screen_references
     
     meeting_agent = MeetingAgent(client)
+    screen_agent = ScreenAnalysisAgent(
+        client
+    )
+    
+    screen_results = []
+
+    if uploaded_screens:
+
+        st.subheader(
+            "📷 Uploaded Screens"
+        )
+
+        for screen in uploaded_screens:
+
+            st.image(
+                screen,
+                caption=screen.name,
+                width=600
+            )
+
+            analysis = (
+                screen_agent.analyze_screen(
+                    screen.name
+                )
+            )
+
+            screen_results.append(
+                {
+                    "name": screen.name,
+                    "analysis": analysis
+                }
+            )
     st.subheader("DEBUG - Transcript Sent To AI")
 
     st.text_area(
@@ -430,7 +453,21 @@ if uploaded_file:
                     "<div style='text-align:left;'>↓</div>",
                     unsafe_allow_html=True
                 )
+    if uploaded_screens:
 
+        st.subheader(
+            "🔍 AI Screen Analysis"
+        )
+
+        for result in screen_results:
+
+            with st.expander(
+                result["name"]
+            ):
+
+                st.write(
+                    result["analysis"]
+                )
 # =========================
 # BUILD FINAL BRD
 # =========================
@@ -442,7 +479,7 @@ if uploaded_file:
 # -------------------------
 
     if st.session_state.get(
-    "screen_references"
+        "screen_references"
     ):
 
         brd += "\n\n"
@@ -474,7 +511,7 @@ if uploaded_file:
 # -------------------------
 
     if st.session_state.get(
-    "field_to_change"
+        "field_to_change"
     ):
 
         brd += "\n"

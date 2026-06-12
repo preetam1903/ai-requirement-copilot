@@ -525,11 +525,14 @@ To Be Confirmed
 
 C) Field Name
 
-Only populate if explicitly mentioned in the transcript.
-Otherwise write:
-To Be Confirmed
+C) Field Name
 
-Identify impacted fields.
+Example:
+Postal Code
+Country
+Region
+
+
 
 D) Current State
 
@@ -1679,6 +1682,53 @@ Refined BRD:
                 }
             ],
             temperature=0.1
+        )
+
+        return response.choices[0].message.content
+
+class ScreenAnalysisAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def analyze_screen(
+        self,
+        image_name
+    ):
+
+        prompt = f"""
+Analyze the uploaded application screenshot.
+
+Identify:
+
+1. Screen Name
+
+2. Business Function
+
+3. Fields Visible
+
+4. Validation Rules Visible
+
+5. Error Messages
+
+6. Configuration Values
+
+7. Business Impact
+
+Return structured output.
+
+Screenshot:
+{image_name}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
         )
 
         return response.choices[0].message.content
