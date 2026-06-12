@@ -84,52 +84,15 @@ uploaded_file = st.file_uploader(
 # BRD GENERATOR
 # =========================
 
-def generate_brd(requirement_text):
+#def generate_brd(requirement_text):
+#
+ #   prompt = f"""
+#Convert the meeting information below
+#into a professional Business Requirement Document.
 
-    prompt = f"""
-Convert the meeting information below
-into a professional Business Requirement Document.
+#Include:
 
-Include:
 
-- Executive Summary
-- Business Objective
-- Scope
-- Functional Requirements
-- Non Functional Requirements
-- Operational Requirements
-- Data Requirements
-- Risks
-- Assumptions
-- Expected Outcomes
-
-Meeting Information:
-
-{requirement_text}
-"""
-
-    response = client.chat.completions.create(
-
-        model="gpt-4.1-mini",
-
-        messages=[
-
-            {
-                "role": "system",
-                "content":
-                "You are an enterprise business analyst."
-            },
-
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-
-        temperature=0.2
-    )
-
-    return response.choices[0].message.content
 
 
 # =========================
@@ -369,7 +332,11 @@ if uploaded_file:
         "🧠 Meeting Analysis"
     )
 
-    st.json(meeting_data)
+    st.text_area(
+        "Meeting Analysis",
+        value=meeting_data,
+        height=400
+    )
     st.subheader(
         "🔄 Business Process Flow"
     )
@@ -414,9 +381,7 @@ if uploaded_file:
     # BRD
     # =========================
 
-    brd = generate_brd(
-        str(meeting_data)
-    )
+    brd =meeting_data
 
     st.subheader("📄 Business Requirement Document")
 
@@ -635,9 +600,9 @@ if uploaded_file:
         impact_analysis = (
             impact_agent.analyze_impact(
                 brd,
-                st.session_state.get[
+                st.session_state.get(
                     "approved_refined_brd"
-                ]
+                )
             )
         )
 

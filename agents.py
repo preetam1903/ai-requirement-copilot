@@ -412,7 +412,7 @@ class MeetingAgent:
 
     def process_transcript(self, transcript):
 
-        prompt = """
+        prompt = f"""
 You are a Senior SAP Finance Business Analyst.
 
 IMPORTANT:
