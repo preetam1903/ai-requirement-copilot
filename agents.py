@@ -505,9 +505,35 @@ B) Not In Scope
 
 A) T-Code
 
-B) Screen Where Change Needs To Take Place
+Identify impacted SAP transaction codes.
 
-C) Business Rule Changes
+B) Screen Name
+
+Identify the screen, tab, or section where the change is required.
+
+C) Field Name
+
+Identify impacted fields.
+
+D) Current State
+
+Describe current system behaviour.
+
+E) Future State
+
+Describe expected behaviour after implementation.
+
+F) Business Rule Changes
+
+List new or modified business rules.
+
+G) Configuration Impact
+
+Identify SAP configuration or master data changes required.
+
+H) Testing Impact
+
+Identify business processes requiring regression testing.
 
 ================================================
 
@@ -531,6 +557,45 @@ Expected Result
 
 Return ONLY the sections above.
 
+Example
+
+Current State
+
+SAP Customer Master
+
+T-Code:
+XD01
+
+Screen:
+Address Tab
+
+Field:
+Postal Code
+
+Current Behaviour:
+Maximum 5 digits allowed.
+
+Future State
+
+Postal Code field shall support 6 characters.
+
+Applicable only for Country X.
+
+Business Rule Changes
+
+Validation:
+AAA99A
+
+Configuration Impact
+
+Country specific validation configuration.
+
+Testing Impact
+
+Customer Creation
+Customer Update
+Customer Search
+Customer Reports
 Meeting Transcript:
 
 {transcript}
