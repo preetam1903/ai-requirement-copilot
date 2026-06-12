@@ -205,6 +205,9 @@ if uploaded_file:
             st.session_state[
                 "screen_analysis"
             ] = screen_results
+            st.session_state[
+                "screen_analysis"
+            ] = screen_results
     st.subheader("DEBUG - Transcript Sent To AI")
 
     st.text_area(
