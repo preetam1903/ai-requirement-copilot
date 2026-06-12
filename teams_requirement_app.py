@@ -79,6 +79,15 @@ uploaded_file = st.file_uploader(
     "Upload Teams Transcript",
     type=["txt", "docx"]
 )
+# =========================
+# SCREEN UPLOAD
+# =========================
+
+uploaded_screens = st.file_uploader(
+    "Upload Screens To Be Changed",
+    type=["png", "jpg", "jpeg"],
+    accept_multiple_files=True
+)
 
 # =========================
 # BRD GENERATOR
@@ -117,6 +126,19 @@ if uploaded_file:
         )
 
     st.subheader("📝 Teams Transcript")
+    if uploaded_screens:
+
+        st.subheader(
+            "📷 Uploaded Screens"
+        )
+
+        for screen in uploaded_screens:
+
+            st.image(
+                screen,
+                caption=screen.name,
+                width=600
+            )
 
     with st.expander("View Transcript"):
 
@@ -126,6 +148,20 @@ if uploaded_file:
     # MEETING AGENT
     # =========================
 
+    screen_references = []
+
+    if uploaded_screens:
+
+        for screen in uploaded_screens:
+
+            screen_references.append(
+                screen.name
+            )
+
+    st.session_state[
+        "screen_references"
+    ] = screen_references
+    
     meeting_agent = MeetingAgent(client)
     st.subheader("DEBUG - Transcript Sent To AI")
 
@@ -388,6 +424,33 @@ if uploaded_file:
     # =========================
 
     brd =meeting_data
+    if st.session_state.get(
+        "screen_references"
+    ):
+
+        brd += "\n\n"
+        brd += "================================================\n\n"
+
+        brd += "6A. SCREEN REFERENCES\n\n"
+
+        for idx, screen_name in enumerate(
+            st.session_state[
+                "screen_references"
+            ],
+            start=1
+        ):
+
+            brd += (
+                f"Screen {idx}\n"
+            )
+
+            brd += (
+                f"File Name: {screen_name}\n"
+            )
+
+            brd += (
+                "Purpose: Current screen to be modified.\n\n"
+            )
 
     st.subheader("📄 Business Requirement Document")
 
