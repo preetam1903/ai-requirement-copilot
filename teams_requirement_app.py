@@ -649,41 +649,40 @@ if uploaded_file:
 # CURRENT STATE
 # -------------------------
 
-    if st.session_state.get(
-        "field_to_change"
-    ):
+    #if st.session_state.get(
+    #    "field_to_change"
+    #):
 
-        brd += "CURRENT STATE\n\n"
-
-        brd += (
-            f"Field '{st.session_state['field_to_change']}' "
-            "is part of the current process.\n"
-        )
-
-        brd += (
-            "Current functionality and behaviour "
-            "to be confirmed by business.\n\n"
-        )
+     #   brd += "CURRENT STATE\n\n"
+#
+ ##          f"Field '{st.session_state['field_to_change']}' "
+    #        "is part of the current process.\n"
+   #     )
+#
+ #       brd += (
+  #          "Current functionality and behaviour "
+   #         "to be confirmed by business.\n\n"
+    #    )
 
 # -------------------------
 # FUTURE STATE
 # -------------------------
 
-    if st.session_state.get(
-        "field_to_change"
-    ):
+    #if st.session_state.get(
+     #   "field_to_change"
+    #):
 
-        brd += "FUTURE STATE\n\n"
-
-        brd += (
-            f"Field '{st.session_state['field_to_change']}' "
-            "will be modified as per business requirements.\n"
-        )
-
-        brd += (
-            "Updated validation, processing logic "
-            "and business rules shall apply.\n\n"
-        )
+     #   brd += "FUTURE STATE\n\n"
+#
+ #       brd += (
+  #          f"Field '{st.session_state['field_to_change']}' "
+   #         "will be modified as per business requirements.\n"
+    #    )
+#
+ #       brd += (
+  #          "Updated validation, processing logic "
+   #         "and business rules shall apply.\n\n"
+    #    )
 
 # -------------------------
 # DISPLAY BRD
