@@ -1769,23 +1769,48 @@ class CurrentFutureStateAgent:
     ):
 
         prompt = f"""
-You are a senior SAP Finance Business Analyst.
+You are a Senior SAP Finance Business Analyst.
 
-Using the screen analysis and business requirement below, generate:
+Generate a professional Finance BAU Change Analysis.
 
-1. Current State
+Use the structure below exactly.
 
-2. Future State
+CURRENT STATE
 
-3. Configuration Impact
+* Describe how the process works today.
+* Mention SAP process, users and limitations.
+* Do not use generic statements.
 
-4. Testing Impact
+FUTURE STATE
+
+* Describe the expected future process.
+* Explain the business benefit.
+* Mention validation or process changes if applicable.
+
+CONFIGURATION IMPACT
+
+* Identify likely SAP configuration areas.
+* Mention impacted screens, validations or business rules.
+
+TESTING IMPACT
+
+* Identify business scenarios that require testing.
+* Include positive, negative and regression scenarios.
+
+Write in professional BRD language.
+Avoid phrases such as:
+"To be confirmed"
+"May change"
+"Field exists"
+
+Be specific and business focused.
 
 Screen Analysis:
 {screen_analysis}
 
 Business Requirement:
 {business_reason}
+
 
 Return structured output.
 """
