@@ -433,32 +433,9 @@ if uploaded_file:
 # BUILD FINAL BRD
 # =========================
 
-    toc = """
-================================================
 
-TABLE OF CONTENTS
 
-================================================
-
-1. GENERAL INFORMATION
-
-2. PROBLEM / OPPORTUNITY
-
-3. BUSINESS REQUIREMENTS
-
-4. ADDITIONAL INFORMATION
-ƒ
-5. SOLUTION REQUIREMENTS
-
-6. DETAILED BUSINESS PROCESS CHANGE
-
-7. UAT
-
-================================================
-
-"""
-
-    brd = toc + meeting_data
+    brd = meeting_data
 
 # -------------------------
 # SCREEN REFERENCES

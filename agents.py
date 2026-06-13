@@ -488,6 +488,7 @@ Use the extracted values.
 If configuration values, validation rules, field names or navigation paths are identified from screenshots, incorporate them into the BRD where relevant.
 
 Transcript remains the primary source.
+If transcript specifies a field length, use ONLY the stated length.Never infer or calculate alternative lengths.
 
 Do not ignore screen analysis findings.
 Generate ONLY the following structure.
