@@ -1784,15 +1784,23 @@ Focus on the complete screen.
 
 Return:
 
-SCREEN_NAME:
+SCREEN_NAME: Define Postal Code Validation
 
-NAVIGATION_PATH:
+NAVIGATION_PATH: SPRO > Financial Accounting > Customer Master > Address Validation
 
-SAP_MODULE:
+SAP_MODULE: Customer Master
 
-CONFIGURATION_AREA:
+CONFIGURATION_AREA: Postal Code Validation
 
-BUSINESS_PURPOSE:
+BUSINESS_PURPOSE: Maintain country specific postal code checks
+
+Return values on the SAME line as labels.
+
+Do not return markdown.
+
+Do not return explanations.
+
+Return ONLY the structure.
 
 ================================================
 
