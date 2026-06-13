@@ -303,13 +303,7 @@ if uploaded_file:
                     "state_analysis"
                 ] = state_analysis    
             
-    st.subheader("DEBUG - Transcript Sent To AI")
-
-    st.text_area(
-        "Transcript",
-        transcript_text,
-        height=300
-    )
+   
     
     combined_context = transcript_text
 
@@ -366,86 +360,12 @@ if uploaded_file:
     dashboard_agent = DashboardPreviewAgent(
         client
     )
-    dashboard_placeholder = st.empty()
-    with dashboard_placeholder.container():
-        st.subheader(
-            "📈 Business Impact Dashboard"
-        )
-
-        col1, col2, col3, col4 = st.columns(4)
-
-        col1.metric(
-            "Hours Saved",
-            "24"
-        )
-
-        col2.metric(
-            "Cost Saved",
-            "₹36K"
-        )
-
-        col3.metric(
-            "Risk Reduction",
-            "High"
-        )
-
-        col4.metric(
-            "Readiness",
-            "0%"
-        )
-        st.subheader(
-            "📊 Executive Dashboard"
-        )
-
-        col1, col2, col3, col4 = st.columns(4)
-
-        col1.metric(
-            "Requirements",
-            "⏳"
-        )
-
-        col2.metric(
-            "Jira Stories",
-            "⏳"
-        )
-
-        col3.metric(
-            "Test Cases",
-            "⏳"
-        )
-
-        col4.metric(
-            "Status",
-            "Processing"
-        )
-        
+            
     process_agent = BusinessProcessAgent(client)
     process_flow = process_agent.generate_process_flow(
         transcript_text
     )
-    # =========================
-# CURRENT STAGE TRACKER
-# =========================
 
-    st.subheader(
-        "📍 Current Stage Tracker"
-    )
-
-    st.info(
-        """
-        ✅ Teams Transcript Processed
-
-        ✅ Draft BRD Generated
-
-        ✅ AI Challenge Review Completed
-
-        🟡 Stakeholder Review Pending
-
-        ⚪ Approval Pending
-
-        ⚪ Jira Creation Pending
-        """
-    )
     # business scenario preview
     understanding_input = (
         st.session_state.get(
@@ -460,9 +380,7 @@ if uploaded_file:
         )
     )
 
-    st.subheader(
-        "🧠 What AI Understood"
-    )
+   
 
     st.success(
         ai_understanding
@@ -493,112 +411,8 @@ if uploaded_file:
         )
     )
 
-    st.subheader(
-        "🧪 Business Scenario Preview by AI"
-    )
-
-    scenarios = scenario_preview.split("Scenario")
-
-    for scenario in scenarios:
-
-        if not scenario.strip():
-            continue
-
-        if "Normal" in scenario:
-
-            st.success(
-                "🟢 Normal Scenario\n\n" +
-                scenario
-            )
-
-        elif "Exception" in scenario:
-
-            st.error(
-                "🔴 Exception Scenario\n\n" +
-                scenario
-            )
-
-        elif "Impact" in scenario:
-
-            st.warning(
-                "🟡 Business Impact Scenario\n\n" +
-                scenario
-            )
-
-        else:
-
-            st.info(
-                scenario
-            )   
-
     
     
-
-# =========================
-# EXPECTED DASHBOARD PREVIEW
-# =========================
-
-    st.subheader(
-        "📊 Expected Dashboard Preview by AI"
-    )
-
-    st.success(
-        dashboard_preview
-    )
-
-
-
-    # =========================
-# MEETING ANALYSIS
-# =========================
-
-    st.subheader(
-        "🧠 Meeting Analysis"
-    )
-
-    st.text_area(
-        "Meeting Analysis",
-        value=meeting_data,
-        height=400
-    )
-    st.subheader(
-        "🔄 Business Process Flow"
-    )
-    
-
- # =========================
-# BUSINESS PROCESS FLOW
-# =========================
-
-    process_agent = BusinessProcessAgent(client)
-
-    process_flow = process_agent.generate_process_flow(
-        transcript_text
-    )
-
-
-    steps = process_flow.splitlines()
-
-    steps = [
-        step.strip()
-        for step in steps
-        if step.strip()
-    ]
-
-    for i, step in enumerate(process_flow.splitlines()):
-
-        if step.strip():
-
-            st.markdown(
-                f"**📦 {step.strip()}**"
-            )
-
-            if i < len(process_flow.splitlines()) - 1:
-
-                st.markdown(
-                    "<div style='text-align:left;'>↓</div>",
-                    unsafe_allow_html=True
-                )
     if uploaded_screens:
 
         st.subheader(
@@ -614,19 +428,7 @@ if uploaded_file:
                 st.code(
                     result["analysis"]
                 )
-    if st.session_state.get(
-        "state_analysis"
-    ):
-
-        st.subheader(
-            "🎯 AI Change Analysis"
-        )
-
-        st.success(
-            st.session_state[
-                "state_analysis"
-            ]
-        )
+    
 # =========================
 # BUILD FINAL BRD
 # =========================
@@ -960,16 +762,7 @@ TABLE OF CONTENTS
 # DISPLAY BRD
 # -------------------------
 
-    st.subheader(
-        "📄 BRD Document View"
-    )
 
-    with st.expander(
-        "Open BRD Document",
-        expanded=True
-    ):
-
-        st.text(brd)
     st.subheader(
         "📄 Business Requirement Document"
     )
