@@ -541,36 +541,25 @@ TABLE OF CONTENTS
         ]:
 
             if item["screen_type"] == "FIELD_CHANGE":
-                st.code(
-                    item["analysis"]
-                )
+                
 
                 field_name = extract_value(
                     item["analysis"],
                     "FIELD_NAME"
                 )
-                st.write(
-                    "FIELD=",
-                        field_name
-                )
+                
 
                 current_value = extract_value(
                     item["analysis"],
                     "CURRENT_VALUE"
                 )
-                st.write(
-                    "VALUE=",
-                    current_value
-                )
+                
 
                 impact = extract_value(
                     item["analysis"],
                     "POTENTIAL_IMPACT"
                 )
-                st.write(
-                    "IMPACT=",
-                    impact
-                )
+                
 
                 brd += (
                     f"| {item['name']} | "
@@ -627,6 +616,19 @@ TABLE OF CONTENTS
                         item["analysis"],
                         "CONFIGURATION_AREA"
                     )
+                    st.code(
+                        item["analysis"]
+                    )
+
+                    st.write(
+                        "MODULE=",
+                        module
+                    )
+
+                    st.write(
+                        "CONFIG=",
+                        config_area
+                    )
 
                     brd += (
                         f"| {item['name']} | "
@@ -640,41 +642,6 @@ TABLE OF CONTENTS
 # SCREENSHOT SUMMARY
 # -------------------------
 
-    if st.session_state.get(
-        "screen_analysis"
-    ):
-
-        brd += "\n"
-        brd += "================================================\n\n"
-
-        brd += (
-            "6C. SCREENSHOT SUMMARY\n\n"
-        )
-
-        for idx, item in enumerate(
-            st.session_state[
-                "screen_analysis"
-            ],
-            start=1
-        ):
-
-            brd += (
-            f"Screen {idx}\n\n"
-            )
-
-            brd += (
-                f"File Name: "
-                f"{item['name']}\n\n"
-            )
-
-            brd += (
-                "AI Analysis Available "
-                "In Screen Analysis Section\n\n"
-            )
-
-            brd += (
-                "----------------------------------------\n\n"
-            )
 # -------------------------
 # SCREEN ANALYSIS
 # -------------------------
