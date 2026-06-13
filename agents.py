@@ -1773,43 +1773,80 @@ You are a Senior SAP Finance Business Analyst.
 
 Generate a professional Finance BAU Change Analysis.
 
-Use the structure below exactly.
+Use EXACTLY the structure below.
 
+================================================
 CURRENT STATE
+=============
 
 * Describe how the process works today.
-* Mention SAP process, users and limitations.
-* Do not use generic statements.
+* Mention current SAP behaviour.
+* Mention current limitations, manual activities or controls.
 
+================================================
 FUTURE STATE
+============
 
-* Describe the expected future process.
+* Describe the expected behaviour after implementation.
 * Explain the business benefit.
-* Mention validation or process changes if applicable.
+* Explain process, validation or control improvements.
 
+================================================
 CONFIGURATION IMPACT
+====================
 
-* Identify likely SAP configuration areas.
-* Mention impacted screens, validations or business rules.
+* Identify likely SAP configuration areas impacted.
+* Mention business rules, validations, master data or process controls.
+* Be practical and SAP Finance focused.
 
+================================================
 TESTING IMPACT
+==============
 
-* Identify business scenarios that require testing.
-* Include positive, negative and regression scenarios.
+* Identify business scenarios requiring testing.
+* Include positive, negative and regression testing.
+* Focus on Finance BAU scenarios.
 
-Write in professional BRD language.
-Avoid phrases such as:
-"To be confirmed"
-"May change"
-"Field exists"
+================================================
+ASSUMPTIONS
+===========
 
-Be specific and business focused.
+* Identify assumptions made due to missing information.
+* Keep assumptions business focused.
+* Maximum 5 bullets.
+
+================================================
+OPEN QUESTIONS
+==============
+
+* Generate questions a Senior Finance BA would ask.
+* Focus on:
+
+  * Scope
+  * Reporting
+  * Interfaces
+  * Controls
+  * Security
+  * Data Migration
+  * Testing
+* Maximum 5 questions.
+
+Rules:
+
+* Use professional BRD language.
+* Be specific.
+* Avoid generic statements.
+* Do not write "To Be Confirmed".
+* Do not repeat screenshot text.
+* Focus on Finance business requirements.
+* Output must be suitable for inclusion in a BRD.
 
 Screen Analysis:
 {screen_analysis}
 
 Business Requirement:
 {business_reason}
+
 
 
 Return structured output.
