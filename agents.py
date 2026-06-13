@@ -1777,22 +1777,49 @@ Use EXACTLY the structure below.
 
 ================================================
 CHANGE SUMMARY
+==============
+
+Generate a table using the format:
+
+| Area | Current State | Future State |
+| ---- | ------------- | ------------ |
+| ...  | ...           | ...          |
+
+Include 3-5 rows where possible.
+
+Areas may include:
+
+* Validation
+* User Process
+* Business Rule
+* Data Entry
+* Controls
+
 ================================================
+CONFIGURATION IMPACT
+====================
 
-Provide:
-
-Area Impacted
-
-Current State Summary
-
-Future State Summary
-
-Business Benefit
-
-Impact Level
-(Low / Medium / High)
+* Identify SAP objects/configuration likely impacted.
 
 ================================================
+TESTING IMPACT
+==============
+
+* Identify business scenarios requiring testing.
+
+================================================
+ASSUMPTIONS
+===========
+
+* Maximum 5 bullets.
+
+================================================
+OPEN QUESTIONS
+==============
+
+* Maximum 5 questions.
+
+
 CURRENT STATE
 =============
 
