@@ -230,7 +230,8 @@ if uploaded_file:
             analysis = (
                 screen_agent.analyze_screen(
                     analysis_input,
-                    screen.name
+                    screen.name,
+                    analysis_mode
                 )
             )
 
@@ -627,6 +628,10 @@ if uploaded_file:
 # SCREEN ANALYSIS SUMMARY
 # -------------------------
 
+    # -------------------------
+# SCREEN ANALYSIS SUMMARY
+# -------------------------
+
     if st.session_state.get(
         "screen_analysis"
     ):
@@ -635,33 +640,57 @@ if uploaded_file:
         brd += "I) Screen Analysis Summary\n\n"
 
         brd += (
-            "| Screen | Observation | Impact |\n"
+            "| Screen | Key Observation |\n"
         )
 
         brd += (
-            "|----------|----------|----------|\n"
+            "|----------|----------|\n"
         )
 
         for item in st.session_state[
             "screen_analysis"
         ]:
 
-            observation = (
-                "Configuration field identified"
-            )
-
-            impact = (
-                "Validation update may be required"
+            summary = (
+                item["analysis"][:150]
+                .replace("\n", " ")
             )
 
             brd += (
                 f"| {item['name']} | "
-                f"{observation} | "
-                f"{impact} |\n"
+                f"{summary} |\n"
             )
 
         brd += "\n"
+# -------------------------
+# NAVIGATION REFERENCE
+# -------------------------
 
+    if (
+        analysis_mode
+        ==
+        "Navigation / Process Flow"
+    ):
+
+        brd += "\n"
+        brd += (
+            "J) Navigation / Configuration Reference\n\n"
+        )
+
+        for item in st.session_state[
+            "screen_analysis"
+        ]:
+
+            brd += (
+                f"Screen: "
+                f"{item['name']}\n\n"
+            )
+
+            brd += (
+                item["analysis"][:600]
+            )
+
+            brd += "\n\n"
     # -------------------------
 # SCREENSHOT SUMMARY
 # -------------------------

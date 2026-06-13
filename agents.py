@@ -1696,7 +1696,8 @@ class ScreenAnalysisAgent:
     def analyze_screen(
         self,
         image_bytes,
-        image_name
+        image_name,
+        analysis_mode
     ):
 
         base64_image = base64.b64encode(
@@ -1716,28 +1717,66 @@ class ScreenAnalysisAgent:
                         {
                             "type": "text",
                             "text": f"""
-Analyze this SAP or enterprise application screenshot.
+        
 
-Identify:
-
-1. Screen Name
-
-2. Business Function
-
-3. Visible Fields
-
-4. Current Values
-
-5. Validation Rules
-
-6. Error Messages
-
-7. Business Impact
-
-Return structured output.
+Analysis Mode:
+{analysis_mode}
 
 Screenshot Name:
 {image_name}
+
+================================================
+
+IF Analysis Mode = Field Change
+
+Focus ONLY on the highlighted field.
+
+Ignore unrelated areas.
+
+Return:
+
+FIELD NAME
+
+CURRENT VALUE
+
+BUSINESS PURPOSE
+
+CURRENT CONFIGURATION
+
+POTENTIAL IMPACT
+
+BUSINESS REQUIREMENT IMPLICATION
+
+================================================
+
+IF Analysis Mode = Navigation / Process Flow
+
+Focus on the complete screen.
+
+Return:
+
+SCREEN NAME
+
+NAVIGATION PATH
+
+SAP MODULE
+
+CONFIGURATION AREA
+
+BUSINESS PURPOSE
+
+KEY OBSERVATIONS
+
+POTENTIAL IMPACT
+
+================================================
+
+Keep output concise.
+
+Do not explain AI reasoning.
+
+Return professional SAP BA language only.
+
 """
                         },
 
