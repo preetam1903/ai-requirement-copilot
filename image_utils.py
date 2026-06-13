@@ -12,7 +12,38 @@ def image_to_bytes(image):
 
     return buffer.getvalue()
 
+def extract_value(
+    text,
+    key
+):
 
+    try:
+
+        start = text.find(
+            key + ":"
+        )
+
+        if start == -1:
+
+            return ""
+
+        start += (
+            len(key) + 1
+        )
+
+        remaining = text[start:]
+
+        value = (
+            remaining
+            .split("\n")[0]
+            .strip()
+        )
+
+        return value
+
+    except:
+
+        return ""
 def extract_red_region(image_bytes):
 
     image = Image.open(

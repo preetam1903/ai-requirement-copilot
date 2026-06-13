@@ -729,11 +729,11 @@ TABLE OF CONTENTS
         brd += "I) Fields Impacted\n\n"
 
         brd += (
-            "| Screen | Field Analysis |\n"
+            "| Screen | Field | Current Value | Impact |\n"
         )
 
         brd += (
-            "|----------|----------|\n"
+            "|----------|----------|----------|----------|\n"
         )
 
         for item in st.session_state[
@@ -742,14 +742,26 @@ TABLE OF CONTENTS
 
             if item["screen_type"] == "FIELD_CHANGE":
 
-                summary = (
-                    item["analysis"][:200]
-                    .replace("\n", " ")
+                field_name = extract_value(
+                    item["analysis"],
+                    "FIELD_NAME"
+                )
+
+                current_value = extract_value(
+                    item["analysis"],
+                    "CURRENT_VALUE"
+                )
+
+                impact = extract_value(
+                    item["analysis"],
+                    "POTENTIAL_IMPACT"
                 )
 
                 brd += (
                     f"| {item['name']} | "
-                    f"{summary} |\n"
+                    f"{field_name} | "
+                    f"{current_value} | "
+                    f"{impact} |\n"
                 )
 
         brd += "\n"
@@ -778,7 +790,7 @@ TABLE OF CONTENTS
                 "J) Navigation / Configuration Reference\n\n"
             )
             brd += (
-                "| Screen | Navigation Details |\n"
+                "| Screen | Module | Configuration Area |\n"
             )
 
             brd += (
@@ -791,14 +803,20 @@ TABLE OF CONTENTS
 
                 if item["screen_type"] == "NAVIGATION":
 
-                    navigation_summary = (
-                        item["analysis"][:250]
-                        .replace("\n", " ")
+                    module = extract_value(
+                        item["analysis"],
+                        "SAP_MODULE"
+                    )
+
+                    config_area = extract_value(
+                        item["analysis"],
+                        "CONFIGURATION_AREA"
                     )
 
                     brd += (
                         f"| {item['name']} | "
-                        f"{navigation_summary} |\n"
+                        f"{module} | "
+                        f"{config_area} |\n"
                     )
 
                     brd += "\n\n"
