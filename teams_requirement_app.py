@@ -276,18 +276,7 @@ if uploaded_file:
 
             combined_context += "\n\n"
 
-    if st.session_state.get(
-        "state_analysis"
-    ):
-
-        combined_context += "\n\nCHANGE ANALYSIS\n\n"
-
-        combined_context += (
-            st.session_state[
-                "state_analysis"
-            ]
-        )
-
+    
     meeting_data = (
         meeting_agent.process_transcript(
             combined_context
