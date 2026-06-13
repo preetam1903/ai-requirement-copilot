@@ -2,6 +2,8 @@ from PIL import Image
 import numpy as np
 import io
 
+import re
+
 def extract_value(
     text,
     key
@@ -9,23 +11,22 @@ def extract_value(
 
     try:
 
-        lines = text.split("\n")
+        pattern = (
+            rf"{key}:\s*(.*?)(?=\s+[A-Z_]+:|$)"
+        )
 
-        for line in lines:
+        match = re.search(
+            pattern,
+            text,
+            re.DOTALL
+        )
 
-            line = line.strip()
+        if match:
 
-            if line.startswith(
-                key + ":"
-            ):
-
-                return (
-                    line.replace(
-                        key + ":",
-                        ""
-                    )
-                    .strip()
-                )
+            return (
+                match.group(1)
+                .strip()
+            )
 
         return ""
 
