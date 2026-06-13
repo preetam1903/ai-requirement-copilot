@@ -979,7 +979,6 @@ TABLE OF CONTENTS
         height=700
     )
 
-    if False:
    
          # =========================
 # REQUIREMENT COMPLETENESS
