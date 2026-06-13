@@ -54,27 +54,23 @@ st.set_page_config(
 
 st.title("📋 AI Meeting Requirement Copilot")
 
-st.write(
-    """
-Upload a Teams Transcript and generate:
+st.write("""
+Upload a Teams Transcript and SAP Screens to generate:
 
-✅ Meeting Analysis
+✅ Business Requirement Document (BRD)
 
-✅ BRD
+✅ AI Screen Analysis
 
-✅ Requirements
+✅ Business Clarifications
 
-✅ HLD
+Supports:
 
-✅ Solution Design
+• Highlighted field change screenshots
 
-✅ Jira Stories
+• SAP navigation/configuration screenshots
 
-✅ Test Cases
-
-✅ Executive Summary
-"""
-)
+• Finance BAU requirements
+""")
 
 st.divider()
 
@@ -983,6 +979,7 @@ TABLE OF CONTENTS
         height=700
     )
 
+    if False:
    
          # =========================
 # REQUIREMENT COMPLETENESS
@@ -1925,31 +1922,31 @@ TABLE OF CONTENTS
         file_name="Requirements.txt"
     )
 
-    st.download_button(
-        "Download HLD",
-        hld,
-        file_name="HLD.txt"
-    )
+ #   st.download_button(
+  #      "Download HLD",
+   #     hld,
+    #    file_name="HLD.txt"
+    #)
 
     
 
-    st.download_button(
-        "Download Jira Stories",
-        jira_output,
-        file_name="Jira_Stories.txt"
-    )
+#    st.download_button(
+ #       "Download Jira Stories",
+  #      jira_output,
+  #      file_name="Jira_Stories.txt"
+  #  )
 
-    st.download_button(
-        "Download Test Cases",
-        test_cases,
-        file_name="Test_Cases.txt"
-    )
-
-    st.download_button(
-        "Download Executive Summary",
-        executive_summary,
-        file_name="Executive_Summary.txt"
-    )
+  #  st.download_button(
+   #     "Download Test Cases",
+   #     test_cases,
+    #    file_name="Test_Cases.txt"
+  #  )
+#
+ #   st.download_button(
+  #      "Download Executive Summary",
+   #     executive_summary,
+    #    file_name="Executive_Summary.txt"
+   # )
 
 # =========================
 # FOOTER
