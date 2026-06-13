@@ -1776,6 +1776,23 @@ Generate a professional Finance BAU Change Analysis.
 Use EXACTLY the structure below.
 
 ================================================
+CHANGE SUMMARY
+================================================
+
+Provide:
+
+Area Impacted
+
+Current State Summary
+
+Future State Summary
+
+Business Benefit
+
+Impact Level
+(Low / Medium / High)
+
+================================================
 CURRENT STATE
 =============
 
@@ -1808,6 +1825,7 @@ TESTING IMPACT
 * Focus on Finance BAU scenarios.
 
 ================================================
+
 ASSUMPTIONS
 ===========
 

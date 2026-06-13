@@ -587,6 +587,46 @@ if uploaded_file:
             f"Field Name: "
             f"{st.session_state['field_to_change']}\n\n"
         )
+
+    # -------------------------
+# SCREENSHOT SUMMARY
+# -------------------------
+
+    if st.session_state.get(
+        "screen_analysis"
+    ):
+
+        brd += "\n"
+        brd += "================================================\n\n"
+
+        brd += (
+            "6C. SCREENSHOT SUMMARY\n\n"
+        )
+
+        for idx, item in enumerate(
+            st.session_state[
+                "screen_analysis"
+            ],
+            start=1
+        ):
+
+            brd += (
+            f"Screen {idx}\n\n"
+            )
+
+            brd += (
+                f"File Name: "
+                f"{item['name']}\n\n"
+            )
+
+            brd += (
+                "AI Analysis Available "
+                "In Screen Analysis Section\n\n"
+            )
+
+            brd += (
+                "----------------------------------------\n\n"
+            )
 # -------------------------
 # SCREEN ANALYSIS
 # -------------------------
@@ -598,7 +638,7 @@ if uploaded_file:
         brd += "\n"
         brd += "================================================\n\n"
 
-        brd += "6A. SCREEN ANALYSIS\n\n"
+        brd += "6D. SCREEN ANALYSIS\n\n"
 
         for item in st.session_state[
             "screen_analysis"
@@ -623,13 +663,51 @@ if uploaded_file:
         brd += "\n"
         brd += "================================================\n\n"
 
-        brd += "6B. AI CHANGE ANALYSIS\n\n"
+        brd += "6E. AI CHANGE ANALYSIS\n\n"
 
         brd += (
             st.session_state[
                 "state_analysis"
             ]
         )
+
+        brd += "\n\n"
+    # -------------------------
+# FINANCE BA REVIEW
+# -------------------------
+
+    if st.session_state.get(
+        "state_analysis"
+    ):
+
+        state_text = st.session_state[
+            "state_analysis"
+        ]
+
+        review_text = ""
+
+        if "ASSUMPTIONS" in state_text:
+
+            assumptions_part = (
+                state_text.split(
+                    "ASSUMPTIONS"
+                )[-1]
+            )
+
+            review_text += (
+                "ASSUMPTIONS\n\n"
+            )
+
+            review_text += assumptions_part
+
+        brd += "\n"
+        brd += "================================================\n\n"
+
+        brd += (
+            "6F. FINANCE BA REVIEW\n\n"
+        )
+
+        brd += review_text
 
         brd += "\n\n"
 # -------------------------
@@ -688,6 +766,16 @@ if uploaded_file:
 # DISPLAY BRD
 # -------------------------
 
+    st.subheader(
+        "📄 BRD Document View"
+    )
+
+    with st.expander(
+        "Open BRD Document",
+        expanded=True
+    ):
+
+        st.text(brd)
     st.subheader(
         "📄 Business Requirement Document"
     )
