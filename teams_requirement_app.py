@@ -613,7 +613,32 @@ if uploaded_file:
 # BUILD FINAL BRD
 # =========================
 
-    brd = meeting_data
+    toc = """
+================================================
+
+TABLE OF CONTENTS
+
+================================================
+
+1. GENERAL INFORMATION
+
+2. PROBLEM / OPPORTUNITY
+
+3. BUSINESS REQUIREMENTS
+
+4. ADDITIONAL INFORMATION
+ƒ
+5. SOLUTION REQUIREMENTS
+
+6. DETAILED BUSINESS PROCESS CHANGE
+
+7. UAT
+
+================================================
+
+"""
+
+    brd = toc + meeting_data
 
 # -------------------------
 # SCREEN REFERENCES
@@ -684,7 +709,7 @@ if uploaded_file:
         brd += "I) Fields Impacted\n\n"
 
         brd += (
-            "| Screen | Observation |\n"
+            "| Screen | Field Analysis |\n"
         )
 
         brd += (
@@ -698,7 +723,7 @@ if uploaded_file:
             if item["screen_type"] == "FIELD_CHANGE":
 
                 summary = (
-                    item["analysis"][:120]
+                    item["analysis"][:200]
                     .replace("\n", " ")
                 )
 
@@ -732,6 +757,13 @@ if uploaded_file:
             brd += (
                 "J) Navigation / Configuration Reference\n\n"
             )
+            brd += (
+                "| Screen | Navigation Details |\n"
+            )
+
+            brd += (
+                "|----------|----------|\n"
+            )
 
             for item in st.session_state[
                 "screen_analysis"
@@ -739,13 +771,14 @@ if uploaded_file:
 
                 if item["screen_type"] == "NAVIGATION":
 
-                    brd += (
-                        f"Screen: "
-                        f"{item['name']}\n\n"
+                    navigation_summary = (
+                        item["analysis"][:250]
+                        .replace("\n", " ")
                     )
 
                     brd += (
-                        item["analysis"][:500]
+                        f"| {item['name']} | "
+                        f"{navigation_summary} |\n"
                     )
 
                     brd += "\n\n"
