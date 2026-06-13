@@ -5,7 +5,7 @@ PROFESSIONAL_STYLE = """
 Output Style:
 
 * Professional and concise
-* Suitable for enterprise stakeholders
+ƒ* Suitable for enterprise stakeholders
 * Avoid generic AI language
 * Avoid repetition
 * Use bullet points where appropriate
@@ -464,6 +464,26 @@ Use screen findings to enrich:
 - Future State
 - Configuration Impact
 - Testing Impact
+
+When screen findings identify:
+
+- field names
+- current values
+- validation rules
+- configuration areas
+- SAP modules
+- navigation paths
+
+these details MUST be referenced explicitly in:
+
+D) Current State
+
+E) Future State
+
+G) Configuration Impact
+
+Do not simply mention that a screen exists.
+Use the extracted values.
 
 If configuration values, validation rules, field names or navigation paths are identified from screenshots, incorporate them into the BRD where relevant.
 
