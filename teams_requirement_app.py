@@ -257,11 +257,52 @@ if uploaded_file:
         transcript_text,
         height=300
     )
+    
+    combined_context = transcript
+
+    if st.session_state.get(
+        "screen_analysis"
+    ):
+
+        combined_context += "\n\n"
+
+        combined_context += (
+            "SCREEN ANALYSIS:\n"
+        )
+
+        for item in st.session_state[
+            "screen_analysis"
+        ]:
+
+            combined_context += (
+                item["analysis"]
+            )
+
+            combined_context += "\n\n"
+
+    if st.session_state.get(
+        "state_analysis"
+    ):
+
+        combined_context += "\n\n"
+
+        combined_context += (
+            "CHANGE ANALYSIS:\n"
+        )
+
+        combined_context += (
+            st.session_state[
+                "state_analysis"
+            ]
+        )
+
     meeting_data = (
         meeting_agent.process_transcript(
-            transcript_text
+            combined_context
         )
     )
+
+    
     scenario_agent = BusinessScenarioAgent(
         client
     )
