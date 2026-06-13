@@ -51,27 +51,28 @@ st.set_page_config(
     page_title="AI Meeting Requirement Copilot",
     layout="wide"
 )
-
+DEMO_MODE = True
 st.title("📋 AI Meeting Requirement Copilot")
 
-st.write("""
-Upload a Teams Transcript and SAP Screens to generate:
+st.write(
+    """
+Generate a Finance BAU BRD using:
 
-✅ Business Requirement Document (BRD)
+✅ Teams Transcript
 
-✅ AI Screen Analysis
+✅ Highlighted SAP Change Screens
 
-✅ Business Clarifications
+✅ SAP Navigation / Configuration Screens
 
-Supports:
+Outputs:
 
-• Highlighted field change screenshots
+📄 Business Requirement Document (BRD)
 
-• SAP navigation/configuration screenshots
+🔍 AI Screen Analysis
 
-• Finance BAU requirements
-""")
-
+❓ Business Clarifications
+"""
+)
 st.divider()
 
 # =========================
@@ -1097,7 +1098,23 @@ TABLE OF CONTENTS
                 "approved_challenge_review"
             ]
         )
+    if DEMO_MODE:
 
+        st.divider()
+
+        st.download_button(
+            "📄 Download BRD",
+            brd,
+            file_name="BRD.txt"
+        )
+
+        st.download_button(
+            "❓ Download Business Clarifications",
+            challenge_review,
+            file_name="Business_Clarifications.txt"
+        )
+
+        st.stop()
     if "approved_challenge_review" in st.session_state:
 
         if st.button(
