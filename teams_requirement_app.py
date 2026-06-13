@@ -95,7 +95,13 @@ uploaded_screens = st.file_uploader(
     accept_multiple_files=True
 )
 
-
+analysis_mode = st.radio(
+    "Screenshot Analysis Type",
+    [
+        "Field Change",
+        "Navigation / Process Flow"
+    ]
+)
 
 field_to_change = st.text_input(
     "Field To Be Changed",
@@ -199,23 +205,31 @@ if uploaded_file:
 
             screen.seek(0)
 
-            cropped_image = extract_red_region(
-                image_bytes
-            )
+            if analysis_mode == "Field Change":
 
-            cropped_bytes = image_to_bytes(
-                cropped_image
-            )
+                cropped_image = extract_red_region(
+                    image_bytes
+                )
 
-            st.image(
-                cropped_image,
-                caption="Detected Change Area",
-                width=500
-            )
+                cropped_bytes = image_to_bytes(
+                    cropped_image
+                )
+
+                st.image(
+                    cropped_image,
+                    caption="Detected Change Area",
+                    width=500
+                )
+
+                analysis_input = cropped_bytes
+
+            else:
+
+                analysis_input = image_bytes
 
             analysis = (
                 screen_agent.analyze_screen(
-                    cropped_bytes,
+                    analysis_input,
                     screen.name
                 )
             )
@@ -609,6 +623,44 @@ if uploaded_file:
             f"Field Name: "
             f"{st.session_state['field_to_change']}\n\n"
         )
+    # -------------------------
+# SCREEN ANALYSIS SUMMARY
+# -------------------------
+
+    if st.session_state.get(
+        "screen_analysis"
+    ):
+
+        brd += "\n"
+        brd += "I) Screen Analysis Summary\n\n"
+
+        brd += (
+            "| Screen | Observation | Impact |\n"
+        )
+
+        brd += (
+            "|----------|----------|----------|\n"
+        )
+
+        for item in st.session_state[
+            "screen_analysis"
+        ]:
+
+            observation = (
+                "Configuration field identified"
+            )
+
+            impact = (
+                "Validation update may be required"
+            )
+
+            brd += (
+                f"| {item['name']} | "
+                f"{observation} | "
+                f"{impact} |\n"
+            )
+
+        brd += "\n"
 
     # -------------------------
 # SCREENSHOT SUMMARY
@@ -653,85 +705,48 @@ if uploaded_file:
 # SCREEN ANALYSIS
 # -------------------------
 
-    if st.session_state.get(
+    #if st.session_state.get(
         "screen_analysis"
-    ):
+  #  ):
+#
+ #       brd += "\n"
+  #      brd += "================================================\n\n"
+#
+ #       brd += "6D. SCREEN ANALYSIS\n\n"
+#
+ #       for item in st.session_state[
+  #          "screen_analysis"
+   #     ]:
+#
+ ##              f"Screenshot: "
+  #              f"{item['name']}\n\n"
+      #      )
 
-        brd += "\n"
-        brd += "================================================\n\n"
-
-        brd += "6D. SCREEN ANALYSIS\n\n"
-
-        for item in st.session_state[
-            "screen_analysis"
-        ]:
-
-            brd += (
-                f"Screenshot: "
-                f"{item['name']}\n\n"
-            )
-
-            brd += (
-                f"{item['analysis']}\n\n"
-            )
+   #         brd += (
+    #            f"{item['analysis']}\n\n"
+     #       )
     # -------------------------
 # AI CHANGE ANALYSIS
 # -------------------------
 
-    if st.session_state.get(
-        "state_analysis"
-    ):
-
-        brd += "\n"
-        brd += "================================================\n\n"
-
-        brd += "6E. AI CHANGE ANALYSIS\n\n"
-
-        brd += (
-            st.session_state[
-                "state_analysis"
-            ]
-        )
-
-        brd += "\n\n"
+ #   if st.session_state.get(
+  #      "state_analysis"
+   # ):
+#
+ #       brd += "\n"
+  #      brd += "================================================\n\n"
+#
+ #       brd += "6E. AI CHANGE ANALYSIS\n\n"
+#
+   #     brd += (
+  #          st.session_state[
+    #            "state_analysis"
+      #      ]
+     #   )
+#
+ #       brd += "\n\n"
     # -------------------------
-# FINANCE BA REVIEW
-# -------------------------
 
-    if st.session_state.get(
-        "state_analysis"
-    ):
-
-        state_text = st.session_state[
-            "state_analysis"
-        ]
-
-        review_text = ""
-
-        if "ASSUMPTIONS" in state_text:
-
-            assumptions_part = (
-                state_text.split(
-                    "ASSUMPTIONS"
-                )[-1]
-            )
-
-            review_text += (
-                "ASSUMPTIONS\n\n"
-            )
-
-            review_text += assumptions_part
-
-        brd += "\n"
-        brd += "================================================\n\n"
-
-        brd += (
-            "6F. FINANCE BA REVIEW\n\n"
-        )
-
-        brd += review_text
-
-        brd += "\n\n"
 # -------------------------
 # BUSINESS JUSTIFICATION
 # -------------------------
