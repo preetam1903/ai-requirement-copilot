@@ -319,11 +319,31 @@ if uploaded_file:
         "screen_analysis"
     ):
 
-        combined_context += "\n\nSCREEN ANALYSIS\n\n"
+        combined_context += (
+            "\n\nSCREEN ANALYSIS FINDINGS\n\n"
+        )
 
         for item in st.session_state[
             "screen_analysis"
         ]:
+
+            if (
+                item["screen_type"]
+                ==
+                "FIELD_CHANGE"
+            ):
+
+                combined_context += (
+                    f"\nField Screen: "
+                    f"{item['name']}\n"
+            )
+
+            else:
+
+                combined_context += (
+                    f"\nNavigation Screen: "
+                    f"{item['name']}\n"
+                )
 
             combined_context += (
                 item["analysis"]

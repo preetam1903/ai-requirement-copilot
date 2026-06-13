@@ -454,7 +454,22 @@ Do not invent SAP objects.
 
 Do not leave sections blank.
 Do not return "Inputs Missing" unless the transcript contains no useful information.
+SCREEN ANALYSIS FINDINGS may be included in the transcript.
 
+Treat SCREEN ANALYSIS FINDINGS as supporting evidence.
+
+Use screen findings to enrich:
+
+- Current State
+- Future State
+- Configuration Impact
+- Testing Impact
+
+If configuration values, validation rules, field names or navigation paths are identified from screenshots, incorporate them into the BRD where relevant.
+
+Transcript remains the primary source.
+
+Do not ignore screen analysis findings.
 Generate ONLY the following structure.
 
 ================================================
@@ -511,12 +526,6 @@ B) Not In Scope
 
 6. DETAILED BUSINESS PROCESS CHANGE
 
-A) T-Code
-
-Only populate if explicitly mentioned in the transcript.
-Otherwise write:
-To Be Confirmed
-
 B) Screen Name
 
 Only populate if explicitly mentioned in the transcript.
@@ -525,22 +534,30 @@ To Be Confirmed
 
 C) Field Name
 
-C) Field Name
-
 Example:
 Postal Code
 Country
 Region
 
-
-
 D) Current State
 
 Describe current system behaviour.
 
+Where screen analysis findings are available:
+
+- Include actual configuration values identified from screenshots.
+- Include observed validation rules.
+- Include current field behaviour.
+
 E) Future State
 
 Describe expected behaviour after implementation.
+
+Where screen analysis findings are available:
+
+- Reference the required configuration change.
+- Reference impacted fields.
+- Reference impacted business controls.
 
 F) Business Rule Changes
 
@@ -550,9 +567,22 @@ G) Configuration Impact
 
 Identify SAP configuration or master data changes required.
 
+Where screen analysis findings are available:
+
+- Reference impacted configuration areas.
+- Reference navigation paths if identified.
+
 H) Testing Impact
 
 Identify business processes requiring regression testing.
+
+Where screen analysis findings are available:
+
+- Include field validation testing.
+- Include configuration testing.
+- Include regression impacts.
+
+
 
 ================================================
 
