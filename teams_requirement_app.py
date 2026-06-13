@@ -258,17 +258,13 @@ if uploaded_file:
         height=300
     )
     
-    combined_context = transcript
+    combined_context = transcript_text
 
     if st.session_state.get(
         "screen_analysis"
     ):
 
-        combined_context += "\n\n"
-
-        combined_context += (
-            "SCREEN ANALYSIS:\n"
-        )
+        combined_context += "\n\nSCREEN ANALYSIS\n\n"
 
         for item in st.session_state[
             "screen_analysis"
@@ -284,11 +280,7 @@ if uploaded_file:
         "state_analysis"
     ):
 
-        combined_context += "\n\n"
-
-        combined_context += (
-            "CHANGE ANALYSIS:\n"
-        )
+        combined_context += "\n\nCHANGE ANALYSIS\n\n"
 
         combined_context += (
             st.session_state[
