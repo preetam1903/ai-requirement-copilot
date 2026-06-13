@@ -89,19 +89,46 @@ uploaded_file = st.file_uploader(
 # SCREEN UPLOAD
 # =========================
 
-uploaded_screens = st.file_uploader(
-    "Upload Screens To Be Changed",
+field_change_screens = st.file_uploader(
+    "📍 Upload Highlighted Change Screens",
     type=["png", "jpg", "jpeg"],
-    accept_multiple_files=True
+    accept_multiple_files=True,
+    key="field_screens"
 )
 
-analysis_mode = st.radio(
-    "Screenshot Analysis Type",
-    [
-        "Field Change",
-        "Navigation / Process Flow"
-    ]
+navigation_screens = st.file_uploader(
+    "🗺️ Upload Navigation / Configuration Screens",
+    type=["png", "jpg", "jpeg"],
+    accept_multiple_files=True,
+    key="nav_screens"
 )
+
+uploaded_screens = []
+
+if field_change_screens:
+
+    uploaded_screens.extend(
+        [
+            {
+                "file": screen,
+                "type": "FIELD_CHANGE"
+            }
+            for screen in field_change_screens
+        ]
+    )
+
+if navigation_screens:
+
+    uploaded_screens.extend(
+        [
+            {
+                "file": screen,
+                "type": "NAVIGATION"
+            }
+            for screen in navigation_screens
+        ]
+    )
+
 
 field_to_change = st.text_input(
     "Field To Be Changed",
@@ -167,10 +194,12 @@ if uploaded_file:
 
     if uploaded_screens:
 
-        for screen in uploaded_screens:
+        for screen_info in uploaded_screens:
+            screen=screen_info["file"]
+            screen_type=screen_info["type"]
 
             screen_references.append(
-                screen.name
+                screen_info["file"].name
             )
 
     st.session_state[
@@ -193,7 +222,11 @@ if uploaded_file:
             "📷 Uploaded Screens"
         )
 
-        for screen in uploaded_screens:
+        for screen_info in uploaded_screens:
+
+            screen = screen_info["file"]
+
+            screen_type = screen_info["type"]
 
             st.image(
                 screen,
@@ -205,7 +238,7 @@ if uploaded_file:
 
             screen.seek(0)
 
-            if analysis_mode == "Field Change":
+            if screen_type == "FIELD_CHANGE":
 
                 cropped_image = extract_red_region(
                     image_bytes
@@ -223,9 +256,15 @@ if uploaded_file:
 
                 analysis_input = cropped_bytes
 
+                analysis_mode = "Field Change"
+
             else:
 
                 analysis_input = image_bytes
+
+                analysis_mode = (
+                    "Navigation / Process Flow"
+                )
 
             analysis = (
                 screen_agent.analyze_screen(
@@ -238,7 +277,8 @@ if uploaded_file:
             screen_results.append(
                 {
                     "name": screen.name,
-                    "analysis": analysis
+                    "analysis": analysis,
+                    "screen_type":screen_type
                 }
             )
             st.session_state[
@@ -632,15 +672,19 @@ if uploaded_file:
 # SCREEN ANALYSIS SUMMARY
 # -------------------------
 
+    # -------------------------
+# FIELDS IMPACTED
+# -------------------------
+
     if st.session_state.get(
         "screen_analysis"
     ):
 
         brd += "\n"
-        brd += "I) Screen Analysis Summary\n\n"
+        brd += "I) Fields Impacted\n\n"
 
         brd += (
-            "| Screen | Key Observation |\n"
+            "| Screen | Observation |\n"
         )
 
         brd += (
@@ -651,46 +695,61 @@ if uploaded_file:
             "screen_analysis"
         ]:
 
-            summary = (
-                item["analysis"][:150]
-                .replace("\n", " ")
-            )
+            if item["screen_type"] == "FIELD_CHANGE":
 
-            brd += (
-                f"| {item['name']} | "
-                f"{summary} |\n"
-            )
+                summary = (
+                    item["analysis"][:120]
+                    .replace("\n", " ")
+                )
+
+                brd += (
+                    f"| {item['name']} | "
+                    f"{summary} |\n"
+                )
 
         brd += "\n"
+
 # -------------------------
 # NAVIGATION REFERENCE
 # -------------------------
 
-    if (
-        analysis_mode
-        ==
-        "Navigation / Process Flow"
+    if st.session_state.get(
+        "screen_analysis"
     ):
 
-        brd += "\n"
-        brd += (
-            "J) Navigation / Configuration Reference\n\n"
-        )
+        navigation_found = False
 
         for item in st.session_state[
             "screen_analysis"
         ]:
 
-            brd += (
-                f"Screen: "
-                f"{item['name']}\n\n"
-            )
+            if item["screen_type"] == "NAVIGATION":
+
+                navigation_found = True
+
+        if navigation_found:
 
             brd += (
-                item["analysis"][:600]
+                "J) Navigation / Configuration Reference\n\n"
             )
 
-            brd += "\n\n"
+            for item in st.session_state[
+                "screen_analysis"
+            ]:
+
+                if item["screen_type"] == "NAVIGATION":
+
+                    brd += (
+                        f"Screen: "
+                        f"{item['name']}\n\n"
+                    )
+
+                    brd += (
+                        item["analysis"][:500]
+                    )
+
+                    brd += "\n\n"
+
     # -------------------------
 # SCREENSHOT SUMMARY
 # -------------------------
