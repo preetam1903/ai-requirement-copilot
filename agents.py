@@ -1763,16 +1763,18 @@ Focus ONLY on the highlighted field.
 
 Ignore unrelated areas.
 
-Return:
-FIELD_NAME:
 
-CURRENT_VALUE:
+Return ONLY in this format.
 
-CURRENT_CONFIGURATION:
+FIELD_NAME: Postal Code
 
-BUSINESS_PURPOSE:
+CURRENT_VALUE: 9
 
-POTENTIAL_IMPACT:
+CURRENT_CONFIGURATION: Maximum Length Validation
+
+BUSINESS_PURPOSE: Address Validation
+
+POTENTIAL_IMPACT: Validation Rule Update
 
 ================================================
 

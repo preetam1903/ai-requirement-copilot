@@ -541,6 +541,9 @@ TABLE OF CONTENTS
         ]:
 
             if item["screen_type"] == "FIELD_CHANGE":
+                st.code(
+                    item["analysis"]
+                )
 
                 field_name = extract_value(
                     item["analysis"],
