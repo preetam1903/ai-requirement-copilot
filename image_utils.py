@@ -7,33 +7,32 @@ def extract_value(
     key
 ):
 
-    try:
+    lines = text.split("\n")
 
-        start = text.find(
-            key + ":"
-        )
+    for i, line in enumerate(lines):
 
-        if start == -1:
+        if key.upper() in line.upper():
 
-            return ""
+            if ":" in line:
 
-        start += (
-            len(key) + 1
-        )
+                value = (
+                    line.split(
+                        ":",
+                        1
+                    )[1]
+                    .strip()
+                )
 
-        remaining = text[start:]
+                if value:
+                    return value
 
-        value = (
-            remaining
-            .split("\n")[0]
-            .strip()
-        )
+                if i + 1 < len(lines):
 
-        return value
+                    return lines[
+                        i + 1
+                    ].strip()
 
-    except:
-
-        return ""
+    return ""
 
 
 def image_to_bytes(image):
@@ -47,7 +46,7 @@ def image_to_bytes(image):
 
     return buffer.getvalue()
 
-ef extract_red_region(image_bytes):
+def extract_red_region(image_bytes):
 
     image = Image.open(
         io.BytesIO(image_bytes)

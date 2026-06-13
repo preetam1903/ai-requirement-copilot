@@ -614,7 +614,7 @@ if uploaded_file:
                 result["name"]
             ):
 
-                st.write(
+                st.code(
                     result["analysis"]
                 )
     if st.session_state.get(
@@ -795,7 +795,7 @@ TABLE OF CONTENTS
             )
 
             brd += (
-                "|----------|----------|\n"
+                "|----------|----------|----------|\n"
             )
 
             for item in st.session_state[
