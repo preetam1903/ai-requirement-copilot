@@ -7,32 +7,31 @@ def extract_value(
     key
 ):
 
-    lines = text.split("\n")
+    try:
 
-    for i, line in enumerate(lines):
+        lines = text.split("\n")
 
-        if key.upper() in line.upper():
+        for line in lines:
 
-            if ":" in line:
+            line = line.strip()
 
-                value = (
-                    line.split(
-                        ":",
-                        1
-                    )[1]
+            if line.startswith(
+                key + ":"
+            ):
+
+                return (
+                    line.replace(
+                        key + ":",
+                        ""
+                    )
                     .strip()
                 )
 
-                if value:
-                    return value
+        return ""
 
-                if i + 1 < len(lines):
+    except Exception:
 
-                    return lines[
-                        i + 1
-                    ].strip()
-
-    return ""
+        return ""
 
 
 def image_to_bytes(image):

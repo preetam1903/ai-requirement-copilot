@@ -549,15 +549,27 @@ TABLE OF CONTENTS
                     item["analysis"],
                     "FIELD_NAME"
                 )
+                st.write(
+                    "FIELD=",
+                        field_name
+                )
 
                 current_value = extract_value(
                     item["analysis"],
                     "CURRENT_VALUE"
                 )
+                st.write(
+                    "VALUE=",
+                    current_value
+                )
 
                 impact = extract_value(
                     item["analysis"],
                     "POTENTIAL_IMPACT"
+                )
+                st.write(
+                    "IMPACT=",
+                    impact
                 )
 
                 brd += (
