@@ -1,16 +1,6 @@
 from PIL import Image
 import numpy as np
 import io
-def image_to_bytes(image):
-
-    buffer = io.BytesIO()
-
-    image.save(
-        buffer,
-        format="PNG"
-    )
-
-    return buffer.getvalue()
 
 def extract_value(
     text,
@@ -44,7 +34,20 @@ def extract_value(
     except:
 
         return ""
-def extract_red_region(image_bytes):
+
+
+def image_to_bytes(image):
+
+    buffer = io.BytesIO()
+
+    image.save(
+        buffer,
+        format="PNG"
+    )
+
+    return buffer.getvalue()
+
+ef extract_red_region(image_bytes):
 
     image = Image.open(
         io.BytesIO(image_bytes)

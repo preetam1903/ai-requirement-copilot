@@ -31,7 +31,8 @@ from agents import (
 )
 from image_utils import (
     extract_red_region,
-    image_to_bytes
+    image_to_bytes,
+    extract_value
 )
 
 # =========================
