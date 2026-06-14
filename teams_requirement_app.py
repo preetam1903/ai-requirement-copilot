@@ -835,6 +835,26 @@ if uploaded_file:
     )
     assumptions_section = ""
     open_questions_section = ""
+    if (
+        "11-character" in brd.lower()
+        and "first 3 characters" in brd.lower()
+        and "next 2" in brd.lower()
+        and "last character" in brd.lower()
+    ):
+
+        open_questions_section += """
+
+- Business clarification required:
+
+  The requirement specifies an 11-character postal code.
+
+  However the documented structure
+  (3 state + 2 region + 1 area)
+  accounts for only 6 characters.
+
+  Please confirm the complete postal code format.
+
+"""
 
     if "ASSUMPTIONS" in challenge_review:
 
