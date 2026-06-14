@@ -533,11 +533,21 @@ if uploaded_file:
 
                 if matches:
 
-                    numeric_matches = [
-                        int(x)
-                        for x in matches
-                        if int(x) != int(current_value)
-                    ]
+                    numeric_matches = []
+
+                    for x in matches:
+
+                        try:
+
+                            if str(x) != str(current_value):
+
+                                numeric_matches.append(
+                                    int(x)
+                                )
+
+                        except:
+
+                            pass
 
                     if numeric_matches:
                         proposed_value = str(max(numeric_matches))
