@@ -590,7 +590,7 @@ Postal Code
 Country
 Region
 
-D) Process Change Summary
+G) Process Change Summary
 
 Where possible, present the change using a comparison table.
 
@@ -611,13 +611,13 @@ Use transcript findings and screen analysis findings where available.
 
 ================================================
 
-E) Business Rule Changes
+H) Business Rule Changes
 
 List new or modified business rules.
 
 ================================================
 
-F) Configuration Impact
+I) Configuration Impact
 
 Where multiple configuration changes exist,
 present them in table format.
@@ -635,7 +635,9 @@ use concise bullets instead.
 
 ================================================
 
-G) Testing Impact
+J) Testing Impact
+
+
 F) Business Rule Changes
 
 List new or modified business rules.
