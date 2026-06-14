@@ -1,6 +1,7 @@
 
 from openai import OpenAI
 
+
 PROFESSIONAL_STYLE = """
 Output Style:
 
@@ -14,6 +15,54 @@ Output Style:
 * Write like a Senior Business Analyst or Architect
   """
 
+GENERIC_BA_RULES = """
+You are a Senior SAP Finance Business Analyst.
+
+The solution must support any SAP Finance BAU change.
+
+Examples include but are not limited to:
+
+- Customer Master
+- Vendor Master
+- GL Master
+- Cost Center
+- Profit Center
+- Tax Configuration
+- Payment Terms
+- Credit Management
+- Workflow Approval
+- Reporting
+- Interfaces
+- Master Data
+- Configuration Changes
+
+Use only information available from:
+
+- Meeting Transcript
+- Screen Analysis
+- Configuration Findings
+
+Do not optimise the output for any specific example.
+
+Do not assume:
+
+- Postal Code
+- Customer Master
+- Validation Rules
+- Country Configuration
+
+unless explicitly stated.
+
+Generate reusable business documentation suitable for any SAP Finance BAU requirement.
+
+If information is missing:
+- Raise Open Questions.
+- Do not invent values.
+
+If contradictions exist:
+- Flag them.
+- Do not resolve them automatically.
+"""
 
 def process_transcript(self, transcript):
     print(transcript)
@@ -417,6 +466,13 @@ class MeetingAgent:
 
         prompt = f"""
 You are a Senior SAP Finance Business Analyst.
+
+{PROFESSIONAL_STYLE}
+
+{GENERIC_BA_RULES}
+
+Create a Business Requirement Document
+
 
 IMPORTANT:
 
@@ -1096,6 +1152,9 @@ class AIChallengeAgent:
         prompt = f"""
 
 {PROFESSIONAL_STYLE}
+
+{GENERIC_BA_RULES}
+
 Act as a Senior SAP Finance Business Analyst.
 Review the BRD for:
 
@@ -1933,8 +1992,41 @@ Analysis Mode:
 
 Screenshot Name:
 {image_name}
+================================================
+
+You are a Senior SAP Finance Business Analyst.
+
+The analysis must support ANY SAP Finance BAU change.
+
+Examples include:
+
+- Customer Master
+- Vendor Master
+- Payment Terms
+- Tax Configuration
+- Workflow Approval
+- Cost Center
+- Profit Center
+- GL Master
+- Reporting
+- Interfaces
+
+Do NOT assume:
+
+- Postal Code
+- Customer Master
+- Address Validation
+
+unless explicitly visible in the screenshot.
+
+Extract ONLY what is visible.
+
+Do not invent SAP objects.
+
+Do not infer values not shown on screen.
 
 ================================================
+
 
 IF Analysis Mode = Field Change
 
@@ -1945,15 +2037,15 @@ Ignore unrelated areas.
 
 Return ONLY in this format.
 
-FIELD_NAME: Postal Code
+FIELD_NAME: <Field Name>
 
-CURRENT_VALUE: 9
+CURRENT_VALUE: <Current Value>
 
-CURRENT_CONFIGURATION: Maximum Length Validation
+CURRENT_CONFIGURATION: <Configuration or Validation>
 
-BUSINESS_PURPOSE: Address Validation
+BUSINESS_PURPOSE: <Business Purpose>
 
-POTENTIAL_IMPACT: Validation Rule Update
+POTENTIAL_IMPACT: <Likely Change Impact>
 
 ================================================
 
