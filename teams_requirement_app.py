@@ -726,25 +726,25 @@ if uploaded_file:
 # DISPLAY BRD
 # -------------------------
 
-brd += "\n\n"
-brd += "================================================\n\n"
-brd += "8. ASSUMPTIONS\n\n"
-brd += assumptions_section
+    brd += "\n\n"
+    brd += "================================================\n\n"
+    brd += "8. ASSUMPTIONS\n\n"
+    brd += assumptions_section
 
-brd += "\n\n"
-brd += "================================================\n\n"
-brd += "9. OPEN QUESTIONS\n\n"
-brd += open_questions_section
+    brd += "\n\n"
+    brd += "================================================\n\n"
+    brd += "9. OPEN QUESTIONS\n\n"
+    brd += open_questions_section
 
-st.subheader(
-    "📄 Business Requirement Document"
-)
+    st.subheader(
+        "📄 Business Requirement Document"
+    )
 
-st.text_area(
-    "BRD",
-    value=brd,
-    height=700
-)
+    st.text_area(
+        "BRD",
+        value=brd,
+        height=700
+    )
 
    
          # =========================
