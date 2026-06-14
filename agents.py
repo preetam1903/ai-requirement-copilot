@@ -2066,6 +2066,29 @@ BUSINESS_PURPOSE: <Business Purpose>
 
 POTENTIAL_IMPACT: <Likely Change Impact>
 
+If a field label and a field property are both visible:
+
+Use the BUSINESS FIELD name.
+
+Examples:
+
+Correct:
+FIELD_NAME: Postal Code
+
+Incorrect:
+FIELD_NAME: Length
+
+Correct:
+FIELD_NAME: Payment Terms
+
+Incorrect:
+FIELD_NAME: Days
+
+Correct:
+FIELD_NAME: Tax Code
+
+Incorrect:
+FIELD_NAME: Value
 ================================================
 
 IF Analysis Mode = Navigation / Process Flow

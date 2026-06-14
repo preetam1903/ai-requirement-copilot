@@ -524,13 +524,22 @@ if uploaded_file:
 
                 proposed_value = "To Be Confirmed"
 
-                import re
-
-                length_match = re.search(
+                matches = re.findall(
                     r'(\d+)[-\s]?character',
-                    meeting_data,
+                    brd,
                     re.IGNORECASE
                 )
+
+                if matches:
+
+                    numeric_matches = [
+                        int(x)
+                        for x in matches
+                        if int(x) != int(current_value)
+                    ]
+
+                    if numeric_matches:
+                        proposed_value = str(max(numeric_matches))
 
                 if length_match:
                     proposed_value = length_match.group(1)
