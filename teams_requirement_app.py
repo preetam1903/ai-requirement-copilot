@@ -4,6 +4,7 @@ import streamlit as st
 from openai import OpenAI
 
 from docx import Document
+import re
 
 from agents import (
     RequirementAgent,
