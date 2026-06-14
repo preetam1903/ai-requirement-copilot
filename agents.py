@@ -554,13 +554,9 @@ A) What The Current Process Is Doing
 Generate requirements using this format only:
 
 SR1
-
 SR2
-
 SR3
-
 SR4
-
 ...
 
 ================================================
@@ -680,7 +676,7 @@ Scenario
 Expected Result
 
 ================================================
-================================================
+
 
 8. OPEN QUESTIONS
 
@@ -697,6 +693,41 @@ If none exist write:
 
 None
 Return ONLY the sections above.
+================================================
+9. ASSUMPTIONS
+
+List assumptions made based on available information.
+
+Examples:
+
+- Change applies only to the specified country.
+- Existing customer records remain unchanged.
+- Existing countries are unaffected.
+- Customer Master remains the system of record.
+
+If no assumptions exist, write:
+None.
+CONTRADICTION HANDLING
+
+If requirements contain conflicting values:
+
+- Do not choose one value.
+- Do not create requirements using unconfirmed values.
+- Move the inconsistency to Open Questions.
+- Mark the requirement as:
+
+"Business clarification required."
+
+Example:
+
+Length = 11
+
+Structure = 3 + 2 + 1
+
+Output:
+
+Business clarification required regarding final postal code format.
+
 Example
 
 D) PROCESS CHANGE SUMMARY

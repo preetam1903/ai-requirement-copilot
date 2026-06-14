@@ -487,14 +487,14 @@ if uploaded_file:
     ):
 
         brd += "\n"
-        brd += "K) Fields Impacted\n\n"
+        brd += "J) Fields Impacted\n\n"
 
         brd += (
-            "| Screen | Field | Current Value | Impact |\n"
+            "| Screen | Field | Current Value | Proposed Value | Impact |\n"
         )
 
         brd += (
-            "|----------|----------|----------|----------|\n"
+            "|----------|----------|----------|----------|-----------|\n"
         )
 
         for item in st.session_state[
@@ -522,10 +522,16 @@ if uploaded_file:
                 )
                 
 
+                proposed_value = "To Be Confirmed"
+
+                if current_value.isdigit():
+                    proposed_value = "Updated Value"
+
                 brd += (
                     f"| {item['name']} | "
                     f"{field_name} | "
                     f"{current_value} | "
+                    f"{proposed_value} | "
                     f"{impact} |\n"
                 )
 
@@ -552,14 +558,14 @@ if uploaded_file:
         if navigation_found:
 
             brd += (
-                "L) Navigation / Configuration Reference\n\n"
+                "K) Navigation / Configuration Reference\n\n"
             )
             brd += (
-                "| Screen | Module | Configuration Area |\n"
+                "| Screen | Module | Configuration Area |Navigation Path| \n"
             )
 
             brd += (
-                "|----------|----------|----------|\n"
+                "|----------|----------|----------|------------|\n"
             )
 
             for item in st.session_state[
@@ -579,10 +585,16 @@ if uploaded_file:
                     )
                 
 
+                    nav_path = extract_value(
+                        item["analysis"],
+                        "NAVIGATION_PATH"
+                    )
+
                     brd += (
                         f"| {item['name']} | "
                         f"{module} | "
-                        f"{config_area} |\n"
+                        f"{config_area} | "
+                        f"{nav_path} |\n"
                     )
 
                     brd += "\n\n"
