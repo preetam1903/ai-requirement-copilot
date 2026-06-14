@@ -525,19 +525,32 @@ if uploaded_file:
 
                 proposed_value = "To Be Confirmed"
 
-                matches = re.findall(
-                    r'(\d+)[-\s]?character',
-                    brd,
-                    re.IGNORECASE
-                )
+                field_lower = field_name.lower()
+                current_lower = current_value.lower()
 
-                if matches:
+                # checkbox style fields
+                if (
+                    "entry" in field_lower
+                    or current_lower in ["checked", "unchecked"]
+                ):
+                    proposed_value = "Checked"
 
-                    proposed_value = str(
-                        max(
-                            [int(x) for x in matches]
-                        )
+                # length/value fields
+                else:
+
+                    matches = re.findall(
+                        r'(\d+)[-\s]?character',
+                        brd,
+                        re.IGNORECASE
                     )
+
+                    if matches:
+
+                        proposed_value = str(
+                            max(
+                                [int(x) for x in matches]
+                            )
+                        )
 
                 brd += (
                     f"| {item['name']} | "
