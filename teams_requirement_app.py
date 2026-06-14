@@ -437,7 +437,25 @@ if uploaded_file:
 
 
     brd = meeting_data
+    screen_name = "To Be Confirmed"
 
+    if st.session_state.get("screen_analysis"):
+
+        for item in st.session_state["screen_analysis"]:
+
+            extracted_screen_name = extract_value(
+                item["analysis"],
+                "SCREEN_NAME"
+            )
+
+            if extracted_screen_name:
+
+                screen_name = extracted_screen_name
+                break
+    brd = brd.replace(
+        "B) Screen Name\n\nTo Be Confirmed",
+        f"B) Screen Name\n\n{screen_name}"
+    )
 # -------------------------
 # SCREEN REFERENCES
 # -------------------------
