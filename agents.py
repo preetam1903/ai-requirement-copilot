@@ -451,6 +451,20 @@ If not explicitly mentioned, write:
 To Be Confirmed
 
 Do not invent SAP objects.
+Business Validation Rules
+
+Before generating requirements:
+
+- Check for contradictions in the transcript.
+- Check for inconsistent field lengths.
+- Check for mismatches between field structure and total length.
+- Check for conflicting business rules.
+
+If inconsistencies are detected:
+
+- Do not invent a solution.
+- Highlight the inconsistency in Open Questions.
+- Generate requirements using only confirmed information.
 
 Do not leave sections blank.
 Do not return "Inputs Missing" unless the transcript contains no useful information.
@@ -506,6 +520,26 @@ B) B) For Whom Is The Solution
 Identify likely business users from the transcript.
 
 C) Priority
+
+If business impact involves:
+
+- Billing
+- Invoicing
+- Customer communications
+- Regulatory compliance
+- Master data controls
+
+Suggest:
+
+High
+
+and add:
+
+"Business to confirm final priority."
+
+Otherwise:
+
+To Be Confirmed
 
 ================================================
 
@@ -646,7 +680,22 @@ Scenario
 Expected Result
 
 ================================================
+================================================
 
+8. OPEN QUESTIONS
+
+List unresolved business questions.
+
+Include:
+
+- Contradictions
+- Missing values
+- Missing country information
+- Missing business decisions
+
+If none exist write:
+
+None
 Return ONLY the sections above.
 Example
 
@@ -1015,7 +1064,18 @@ class AIChallengeAgent:
 
 {PROFESSIONAL_STYLE}
 Act as a Senior SAP Finance Business Analyst.
+Review the BRD for:
 
+- Contradictory values
+- Inconsistent lengths
+- Missing countries
+- Missing business owners
+- Missing priorities
+- Missing scope boundaries
+- Missing data migration requirements
+- Missing interface impacts
+
+Raise these as OPEN QUESTIONS.
 Review the BRD and produce ONLY the following sections.
 
 ================================================
@@ -1084,6 +1144,22 @@ Examples:
 * Product category not specified
 * User volume not specified
 * Success criteria not defined
+Example:
+
+If requirement states:
+
+Length = 11
+
+and
+
+Structure = 3+2+1
+
+Raise:
+
+OPEN QUESTION
+
+The defined structure totals 6 characters while the requirement specifies 11 characters.
+Please confirm the expected postal code format.
 
 BRD:
 
