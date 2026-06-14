@@ -533,27 +533,11 @@ if uploaded_file:
 
                 if matches:
 
-                    numeric_matches = []
-
-                    for x in matches:
-
-                        try:
-
-                            if str(x) != str(current_value):
-
-                                numeric_matches.append(
-                                    int(x)
-                                )
-
-                        except:
-
-                            pass
-
-                    if numeric_matches:
-                        proposed_value = str(max(numeric_matches))
-
-                if length_match:
-                    proposed_value = length_match.group(1)
+                    proposed_value = str(
+                        max(
+                            [int(x) for x in matches]
+                        )
+                    )
 
                 brd += (
                     f"| {item['name']} | "
