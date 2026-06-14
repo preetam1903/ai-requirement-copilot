@@ -442,44 +442,41 @@ if uploaded_file:
 # SCREEN REFERENCES
 # -------------------------
 
-    if st.session_state.get(
-        "screen_references"
+    if st.session_state.get("screen_analysis"):
+
+    brd += "\n\n"
+    brd += "================================================\n\n"
+
+    brd += "10. SCREEN ANALYSIS EVIDENCE\n\n"
+
+    for idx, item in enumerate(
+        st.session_state["screen_analysis"],
+        start=1
     ):
 
-        brd += "\n\n"
-        brd += "================================================\n\n"
+        purpose = extract_value(
+            item["analysis"],
+            "BUSINESS_PURPOSE"
+        )
 
-        brd += "10. SCREEN ANALYSIS EVIDENCE\n\n"
+        config_area = extract_value(
+            item["analysis"],
+            "CONFIGURATION_AREA"
+        )
 
-        for idx, screen_name in enumerate(
-            st.session_state[
-                "screen_references"
-            ],
-            start=1
-        ):
+        if config_area:
+            purpose = config_area
 
-            purpose = extract_value(
-                item["analysis"],
-                "BUSINESS_PURPOSE"
-            )
+        if not purpose:
+            purpose = "Current screen to be modified"
 
-            config_area = extract_value(
-                item["analysis"],
-                "CONFIGURATION_AREA"
-            )
+        brd += (
+            f"Screen {idx}\n"
+            f"File Name: {item['name']}\n"
+            f"Purpose: {purpose}\n\n"
+        )
 
-            if config_area:
-                purpose = config_area
-
-            if not purpose:
-                purpose = "Current screen to be modified"
-
-            brd += (
-                f"Screen {idx}\n"
-                f"File Name: {item['name']}\n"
-                f"Purpose: {purpose}\n\n"
-            )
-
+            
 
     # -------------------------
 # SCREEN ANALYSIS SUMMARY
@@ -501,11 +498,11 @@ if uploaded_file:
         brd += "11. Fields Impacted\n\n"
 
         brd += (
-            "| Screen | Field | Current Value | Proposed Value | Impact |\n"
+            "| Screen | Field | Current Value | Proposed Value | Configuration | Impact |\n"
         )
 
         brd += (
-            "|----------|----------|----------|----------|-----------|\n"
+            "|----------|----------|----------|----------|-----------|----------|\n"
         )
 
         for item in st.session_state[
@@ -525,6 +522,11 @@ if uploaded_file:
                     item["analysis"],
                     "CURRENT_VALUE"
                 )
+                configuration = extract_value(
+                    item["analysis"],
+                    "CURRENT_CONFIGURATION"
+                )
+
                 
 
                 impact = extract_value(
@@ -567,6 +569,7 @@ if uploaded_file:
                     f"{field_name} | "
                     f"{current_value} | "
                     f"{proposed_value} | "
+                    f"{configuration} | "
                     f"{impact} |\n"
                 )
                 
