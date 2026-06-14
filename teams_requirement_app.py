@@ -593,19 +593,7 @@ if uploaded_file:
                         item["analysis"],
                         "CONFIGURATION_AREA"
                     )
-                    st.code(
-                        item["analysis"]
-                    )
-
-                    st.write(
-                        "MODULE=",
-                        module
-                    )
-
-                    st.write(
-                        "CONFIG=",
-                        config_area
-                    )
+                
 
                     brd += (
                         f"| {item['name']} | "
@@ -726,19 +714,6 @@ if uploaded_file:
 # DISPLAY BRD
 # -------------------------
 
-    brd += "\n\n"
-    brd += "================================================\n\n"
-    brd += "8. ASSUMPTIONS\n\n"
-    brd += assumptions_section
-
-    brd += "\n\n"
-    brd += "================================================\n\n"
-    brd += "9. OPEN QUESTIONS\n\n"
-    brd += open_questions_section
-
-    st.subheader(
-        "📄 Business Requirement Document"
-    )
 
     st.text_area(
         "BRD",
