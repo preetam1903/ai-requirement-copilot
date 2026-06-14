@@ -560,33 +560,24 @@ Postal Code
 Country
 Region
 
-D) PROCESS CHANGE SUMMARY
+D) Process Change Summary
 
-Generate a table using EXACTLY this format:
+Where possible, present the change using a comparison table.
+
+Example:
 
 | Area | Current State | Future State |
-|------|---------------|--------------|
-| ... | ... | ... |
+|------|--------------|--------------|
+| Validation | Existing behaviour | New behaviour |
+| Process | Existing process | Updated process |
 
-Populate the table using:
+Use areas that are relevant to the requirement.
 
-- Transcript findings
-- Screen analysis findings
-- Configuration findings
+Do not force specific rows.
 
-Include rows where available:
+If a table is not appropriate, use concise bullet points instead.
 
-- Field Length
-- Validation Rule
-- Configuration Area
-- Business Process Impact
-- User Behaviour
-
-Rules:
-
-- Use actual extracted values
-- Do not invent values
-- If unavailable write "To Be Confirmed"
+Use transcript findings and screen analysis findings where available.
 
 ================================================
 
@@ -598,20 +589,19 @@ List new or modified business rules.
 
 F) Configuration Impact
 
-Generate a table using EXACTLY this format:
+Where multiple configuration changes exist,
+present them in table format.
 
-| Configuration Area | Current Configuration | Required Change |
-|-------------------|----------------------|-----------------|
-| ... | ... | ... |
+Example:
 
-Use screen analysis findings whenever available.
+| Area | Current Configuration | Required Change |
+|------|----------------------|-----------------|
+| Customer Master | Existing setup | Updated setup |
 
-Reference:
+Use actual configuration areas identified from screenshots where available.
 
-- SAP Module
-- Configuration Area
-- Navigation Path
-- Validation Rules
+If only one configuration change exists,
+use concise bullets instead.
 
 ================================================
 
