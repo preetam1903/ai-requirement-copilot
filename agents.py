@@ -987,15 +987,9 @@ class AIChallengeAgent:
         prompt = f"""
 
 {PROFESSIONAL_STYLE}
+Act as a Senior SAP Finance Business Analyst.
 
-You are a Senior Business Analyst and Solution Architect.
-
-Review the BRD and identify business gaps.
-
-Output Format:
-
-Missing Information
-- Missing business details
+Review the BRD and produce ONLY the following sections.
 
 ================================================
 
@@ -1003,11 +997,7 @@ OPEN QUESTIONS
 
 ================================================
 
-1.
-2.
-3.
-4.
-5.
+List business questions that must be answered before implementation.
 
 ================================================
 
@@ -1015,10 +1005,7 @@ ASSUMPTIONS
 
 ================================================
 
-1.
-2.
-3.
-4.
+List assumptions currently being made.
 
 ================================================
 
@@ -1026,10 +1013,15 @@ DEPENDENCIES
 
 ================================================
 
-1.
-2.
-3.
-4.
+List systems, teams, approvals, interfaces or data dependencies.
+
+================================================
+
+RISKS
+
+================================================
+
+List implementation or business risks.
 
 ================================================
 
@@ -1037,10 +1029,16 @@ BUSINESS DECISIONS REQUIRED
 
 ================================================
 
-1.
-2.
-3.
-4.
+List decisions that business stakeholders must make.
+
+Rules:
+
+- Do not rewrite BRD
+- Do not repeat requirements
+- Be concise
+- Maximum 5 items per section
+- Finance BAU implementation focus
+"""
 
 
 

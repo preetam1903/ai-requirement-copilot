@@ -448,7 +448,7 @@ if uploaded_file:
         brd += "\n\n"
         brd += "================================================\n\n"
 
-        brd += "6A. SCREEN REFERENCES\n\n"
+        brd += "I) SCREEN REFERENCES\n\n"
 
         for idx, screen_name in enumerate(
             st.session_state[
@@ -469,23 +469,7 @@ if uploaded_file:
                 "Purpose: Current screen to be modified.\n\n"
             )
 
-# -------------------------
-# FIELD IDENTIFICATION
-# -------------------------
 
-    if st.session_state.get(
-        "field_to_change"
-    ):
-
-        brd += "\n"
-        brd += "================================================\n\n"
-
-        brd += "6B. FIELD IDENTIFICATION\n\n"
-
-        brd += (
-            f"Field Name: "
-            f"{st.session_state['field_to_change']}\n\n"
-        )
     # -------------------------
 # SCREEN ANALYSIS SUMMARY
 # -------------------------
@@ -503,7 +487,7 @@ if uploaded_file:
     ):
 
         brd += "\n"
-        brd += "I) Fields Impacted\n\n"
+        brd += "K) Fields Impacted\n\n"
 
         brd += (
             "| Screen | Field | Current Value | Impact |\n"
@@ -568,7 +552,7 @@ if uploaded_file:
         if navigation_found:
 
             brd += (
-                "J) Navigation / Configuration Reference\n\n"
+                "L) Navigation / Configuration Reference\n\n"
             )
             brd += (
                 "| Screen | Module | Configuration Area |\n"
