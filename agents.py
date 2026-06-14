@@ -64,8 +64,6 @@ If contradictions exist:
 - Do not resolve them automatically.
 """
 
-def process_transcript(self, transcript):
-    print(transcript)
 # =========================
 # REQUIREMENT AGENT
 # =========================
@@ -642,9 +640,17 @@ To Be Confirmed
 C) Field Name
 
 Example:
-Postal Code
-Country
-Region
+Examples:
+
+Field Name
+Validation Rule
+Payment Term
+Tax Code
+Vendor Group
+Customer Group
+Approval Level
+Cost Center
+Profit Center
 
 G) Process Change Summary
 
@@ -652,10 +658,13 @@ Where possible, present the change using a comparison table.
 
 Example:
 
+Example:
+
 | Area | Current State | Future State |
 |------|--------------|--------------|
-| Validation | Existing behaviour | New behaviour |
-| Process | Existing process | Updated process |
+| Process | Existing Process | Updated Process |
+| Business Rule | Existing Rule | Updated Rule |
+| Configuration | Existing Setup | Updated Setup |
 
 Use areas that are relevant to the requirement.
 
@@ -680,9 +689,11 @@ present them in table format.
 
 Example:
 
+Example:
+
 | Area | Current Configuration | Required Change |
 |------|----------------------|-----------------|
-| Customer Master | Existing setup | Updated setup |
+| Configuration Area | Existing Setup | Updated Setup |
 
 Use actual configuration areas identified from screenshots where available.
 
@@ -778,28 +789,33 @@ If requirements contain conflicting values:
 
 Example:
 
-Length = 11
+Example:
 
-Structure = 3 + 2 + 1
+Requirement contains conflicting values.
+
+Output:
+
+Business clarification required.
+
+Please confirm the correct business rule before implementation.
 
 Output:
 
 Business clarification required regarding final postal code format.
 
 Example
-
 D) PROCESS CHANGE SUMMARY
 
 | Area | Current State | Future State |
 |------|---------------|--------------|
-| Postal Code Length | 9 | 11 |
-| Validation Rule | Maximum Length Validation | Country Specific Validation |
+| Process | Existing Process | Updated Process |
+| Business Rule | Existing Rule | Updated Rule |
 
-F) Configuration Impact
+I) Configuration Impact
 
-| Configuration Area | Current Configuration | Required Change |
-|-------------------|----------------------|-----------------|
-| Postal Code Validation | Length 9 | Length 11 |
+| Area | Current Configuration | Required Change |
+|------|----------------------|-----------------|
+| Configuration Area | Existing Setup | Updated Setup |
 
 Business Rule Changes
 
@@ -1238,20 +1254,23 @@ Examples:
 * Success criteria not defined
 Example:
 
-If requirement states:
-
-Length = 11
-
-and
-
-Structure = 3+2+1
+If a requirement contains contradictory information:
 
 Raise:
 
 OPEN QUESTION
 
-The defined structure totals 6 characters while the requirement specifies 11 characters.
-Please confirm the expected postal code format.
+The requirement contains conflicting business rules.
+
+Please confirm the expected behaviour.
+
+Raise:
+
+OPEN QUESTION
+
+The requirement contains conflicting business rules.
+
+Please confirm the expected behaviour.
 
 BRD:
 
@@ -2055,15 +2074,15 @@ Focus on the complete screen.
 
 Return:
 
-SCREEN_NAME: Define Postal Code Validation
+SCREEN_NAME: <Screen Name>
 
-NAVIGATION_PATH: SPRO > Financial Accounting > Customer Master > Address Validation
+NAVIGATION_PATH: <Navigation Path>
 
-SAP_MODULE: Customer Master
+SAP_MODULE: <SAP Module>
 
-CONFIGURATION_AREA: Postal Code Validation
+CONFIGURATION_AREA: <Configuration Area>
 
-BUSINESS_PURPOSE: Maintain country specific postal code checks
+BUSINESS_PURPOSE: <Business Purpose>
 
 Return values on the SAME line as labels.
 
@@ -2113,6 +2132,7 @@ class CurrentFutureStateAgent:
 
         prompt = f"""
 You are a Senior SAP Finance Business Analyst.
+{GENERIC_BA_RULES}
 
 Generate a professional Finance BAU Change Analysis.
 
@@ -2132,10 +2152,13 @@ Include 3-5 rows where possible.
 
 Areas may include:
 
-* Validation
-* User Process
+* Process
 * Business Rule
-* Data Entry
+* Configuration
+* Data Element
+* Validation
+* Approval Logic
+* Reporting
 * Controls
 
 ================================================
