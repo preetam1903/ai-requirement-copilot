@@ -458,16 +458,26 @@ if uploaded_file:
             start=1
         ):
 
+            purpose = extract_value(
+                item["analysis"],
+                "BUSINESS_PURPOSE"
+            )
+
+            config_area = extract_value(
+                item["analysis"],
+                "CONFIGURATION_AREA"
+            )
+
+            if config_area:
+                purpose = config_area
+
+            if not purpose:
+                purpose = "Current screen to be modified"
+
             brd += (
                 f"Screen {idx}\n"
-            )
-
-            brd += (
-                f"File Name: {screen_name}\n"
-            )
-
-            brd += (
-                "Purpose: Current screen to be modified.\n\n"
+                f"File Name: {item['name']}\n"
+                f"Purpose: {purpose}\n\n"
             )
 
 
