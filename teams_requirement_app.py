@@ -524,8 +524,16 @@ if uploaded_file:
 
                 proposed_value = "To Be Confirmed"
 
-                if current_value.isdigit():
-                    proposed_value = "Updated Value"
+                import re
+
+                length_match = re.search(
+                    r'(\d+)[-\s]?character',
+                    meeting_data,
+                    re.IGNORECASE
+                )
+
+                if length_match:
+                    proposed_value = length_match.group(1)
 
                 brd += (
                     f"| {item['name']} | "
@@ -534,6 +542,7 @@ if uploaded_file:
                     f"{proposed_value} | "
                     f"{impact} |\n"
                 )
+                
 
         brd += "\n"
 
