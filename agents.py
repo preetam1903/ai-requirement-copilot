@@ -560,26 +560,62 @@ Postal Code
 Country
 Region
 
-D) Current State
+D) PROCESS CHANGE SUMMARY
 
-Describe current system behaviour.
+Generate a table using EXACTLY this format:
 
-Where screen analysis findings are available:
+| Area | Current State | Future State |
+|------|---------------|--------------|
+| ... | ... | ... |
 
-- Include actual configuration values identified from screenshots.
-- Include observed validation rules.
-- Include current field behaviour.
+Populate the table using:
 
-E) Future State
+- Transcript findings
+- Screen analysis findings
+- Configuration findings
 
-Describe expected behaviour after implementation.
+Include rows where available:
 
-Where screen analysis findings are available:
+- Field Length
+- Validation Rule
+- Configuration Area
+- Business Process Impact
+- User Behaviour
 
-- Reference the required configuration change.
-- Reference impacted fields.
-- Reference impacted business controls.
+Rules:
 
+- Use actual extracted values
+- Do not invent values
+- If unavailable write "To Be Confirmed"
+
+================================================
+
+E) Business Rule Changes
+
+List new or modified business rules.
+
+================================================
+
+F) Configuration Impact
+
+Generate a table using EXACTLY this format:
+
+| Configuration Area | Current Configuration | Required Change |
+|-------------------|----------------------|-----------------|
+| ... | ... | ... |
+
+Use screen analysis findings whenever available.
+
+Reference:
+
+- SAP Module
+- Configuration Area
+- Navigation Path
+- Validation Rules
+
+================================================
+
+G) Testing Impact
 F) Business Rule Changes
 
 List new or modified business rules.
@@ -612,15 +648,11 @@ Where screen analysis findings are available:
 Generate:
 
 UAT-01
-
 Scenario
-
 Expected Result
 
 UAT-02
-
 Scenario
-
 Expected Result
 
 ================================================
@@ -628,13 +660,18 @@ Expected Result
 Return ONLY the sections above.
 Example
 
-Current State
+D) PROCESS CHANGE SUMMARY
 
-<Current business behaviour>
+| Area | Current State | Future State |
+|------|---------------|--------------|
+| Postal Code Length | 9 | 11 |
+| Validation Rule | Maximum Length Validation | Country Specific Validation |
 
-Future State
+F) Configuration Impact
 
-<Expected business behaviour>
+| Configuration Area | Current Configuration | Required Change |
+|-------------------|----------------------|-----------------|
+| Postal Code Validation | Length 9 | Length 11 |
 
 Business Rule Changes
 
