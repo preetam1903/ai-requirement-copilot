@@ -721,16 +721,30 @@ if uploaded_file:
 # DISPLAY BRD
 # -------------------------
 
+    
+    # -------------------------
+# DISPLAY BRD
+# -------------------------
 
-    st.subheader(
-        "📄 Business Requirement Document"
-    )
+brd += "\n\n"
+brd += "================================================\n\n"
+brd += "8. ASSUMPTIONS\n\n"
+brd += assumptions_section
 
-    st.text_area(
-        "BRD",
-        value=brd,
-        height=700
-    )
+brd += "\n\n"
+brd += "================================================\n\n"
+brd += "9. OPEN QUESTIONS\n\n"
+brd += open_questions_section
+
+st.subheader(
+    "📄 Business Requirement Document"
+)
+
+st.text_area(
+    "BRD",
+    value=brd,
+    height=700
+)
 
    
          # =========================
@@ -787,10 +801,36 @@ if uploaded_file:
     )
 
     challenge_review = (
-    challenge_agent.challenge_requirements(
-    brd
+        challenge_agent.challenge_requirements(
+            brd
+        )
     )
-    )
+    assumptions_section = ""
+    open_questions_section = ""
+
+    if "ASSUMPTIONS" in challenge_review:
+
+        assumptions_section = (
+            challenge_review.split(
+                "ASSUMPTIONS"
+            )[1]
+            .split(
+                "DEPENDENCIES"
+            )[0]
+            .strip()
+        )
+
+    if "OPEN QUESTIONS" in challenge_review:
+
+        open_questions_section = (
+            challenge_review.split(
+                "OPEN QUESTIONS"
+            )[1]
+            .split(
+                "ASSUMPTIONS"
+            )[0]
+            .strip()
+        )
 
     st.subheader(
         "🔍 Business Clarifications"

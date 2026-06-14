@@ -997,25 +997,226 @@ Output Format:
 Missing Information
 - Missing business details
 
-Questions To Clarify
-- Questions for business users
+================================================
 
-Readiness Status
-- Ready
-- Needs Clarification
-- Not Ready
+OPEN QUESTIONS
+
+================================================
+
+1.
+2.
+3.
+4.
+5.
+
+================================================
+
+ASSUMPTIONS
+
+================================================
+
+1.
+2.
+3.
+4.
+
+================================================
+
+DEPENDENCIES
+
+================================================
+
+1.
+2.
+3.
+4.
+
+================================================
+
+BUSINESS DECISIONS REQUIRED
+
+================================================
+
+1.
+2.
+3.
+4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Rules:
 
-- Maximum 5 bullets per section
-- Keep each bullet short
-- Business language only
-- Focus on missing business information
-- Focus on missing data requirements
-- Focus on missing reporting requirements
-- Focus on missing dashboard requirements
-- Mention SQL tables if relevant
-- Mention Spotfire if relevant
+- Finance BAU focus
+- Do not rewrite BRD
+- Be concise
+- Maximum 5 items per section
 
 Do NOT discuss:
 - Security frameworks
