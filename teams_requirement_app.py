@@ -448,7 +448,7 @@ if uploaded_file:
         brd += "\n\n"
         brd += "================================================\n\n"
 
-        brd += "I) SCREEN REFERENCES\n\n"
+        brd += "10. SCREEN ANALYSIS EVIDENCE\n\n"
 
         for idx, screen_name in enumerate(
             st.session_state[
@@ -487,7 +487,7 @@ if uploaded_file:
     ):
 
         brd += "\n"
-        brd += "J) Fields Impacted\n\n"
+        brd += "11. Fields Impacted\n\n"
 
         brd += (
             "| Screen | Field | Current Value | Proposed Value | Impact |\n"
@@ -558,7 +558,7 @@ if uploaded_file:
         if navigation_found:
 
             brd += (
-                "K) Navigation / Configuration Reference\n\n"
+                "12. Navigation / Configuration Reference\n\n"
             )
             brd += (
                 "| Screen | Module | Configuration Area |Navigation Path| \n"
