@@ -471,18 +471,47 @@ You are a Senior SAP Finance Business Analyst.
 
 Create a Business Requirement Document
 If SAP MODULE information is provided:
+If SAP MODULE information is provided:
 
-Use it as business context.
+Treat the SAP Module as primary business context.
 
-The SAP Module should influence:
+If MODULE KNOWLEDGE is provided:
 
-- Business Process Description
-- Business Requirements
-- Solution Scope
+Use it to enrich the BRD.
+
+Do not simply repeat transcript content.
+
+Use module knowledge to infer:
+
+- Typical business processes
+- Common business users
+- Scope of data
+- Potential upstream impacts
+- Potential downstream impacts
+- Configuration impacts
+- Testing impacts
+- UAT scenarios
+
+The generated BRD should combine:
+
+1. Transcript Information
+2. Screen Analysis Findings
+3. Module Knowledge
+
+Use module knowledge to improve:
+
+- Explain The Business Process
+- For Whom Is The Solution
+- Scope Of Data
+- Not In Scope
 - Configuration Impact
 - Testing Impact
+- UAT Scenarios
 - Open Questions
-- Assumptions
+
+Do not invent facts.
+
+Only infer logical business impacts and testing considerations that are normally associated with the selected SAP Module.
 
 Use the SAP Module even if it is not explicitly discussed in the transcript.
 
