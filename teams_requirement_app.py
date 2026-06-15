@@ -84,6 +84,26 @@ uploaded_file = st.file_uploader(
     "Upload Teams Transcript",
     type=["txt", "docx"]
 )
+st.subheader("Requirement Context")
+
+sap_module = st.selectbox(
+    "SAP Module",
+    [
+        "Customer Master",
+        "Vendor Master",
+        "Business Partner",
+        "Payment Terms",
+        "Tax Code",
+        "Credit Management",
+        "Cost Center",
+        "Profit Center",
+        "GL Master",
+        "Workflow Approval",
+        "Reporting",
+        "Interfaces",
+        "Other"
+    ]
+)
 # =========================
 # SCREEN UPLOAD
 # =========================
@@ -306,7 +326,13 @@ if uploaded_file:
             
    
     
-    combined_context = transcript_text
+    combined_context = f"""
+    SAP MODULE:
+    {sap_module}
+
+    TRANSCRIPT:
+    {transcript_text}
+    """
 
     if st.session_state.get(
         "screen_analysis"
@@ -437,6 +463,15 @@ if uploaded_file:
 
 
     brd = meeting_data
+    if sap_module:
+
+        brd = brd.replace(
+            "1. GENERAL INFORMATION",
+            f"""1. GENERAL INFORMATION
+
+    SAP Module: {sap_module}
+    """
+        )
     screen_name = "To Be Confirmed"
 
     if st.session_state.get("screen_analysis"):
