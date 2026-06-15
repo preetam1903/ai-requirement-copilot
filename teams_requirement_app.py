@@ -35,7 +35,7 @@ from image_utils import (
     image_to_bytes,
     extract_value
 )
-
+from module_context import MODULE_CONTEXT
 # =========================
 # OPENAI CLIENT
 # =========================
@@ -326,9 +326,17 @@ if uploaded_file:
             
    
     
+    module_knowledge = MODULE_CONTEXT.get(
+        sap_module,
+        ""
+    )
+
     combined_context = f"""
     SAP MODULE:
     {sap_module}
+
+    MODULE KNOWLEDGE:
+    {module_knowledge}
 
     TRANSCRIPT:
     {transcript_text}
