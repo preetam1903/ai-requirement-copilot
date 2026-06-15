@@ -44,14 +44,7 @@ Use only information available from:
 
 Do not optimise the output for any specific example.
 
-Do not assume:
-
-- Postal Code
-- Customer Master
-- Validation Rules
-- Country Configuration
-
-unless explicitly stated.
+Do not invent business users unless they can be reasonably inferred from SAP Module context.
 
 Generate reusable business documentation suitable for any SAP Finance BAU requirement.
 
