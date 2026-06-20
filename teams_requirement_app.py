@@ -863,19 +863,35 @@ if uploaded_file:
                 "🔍 Consistency Review"
             )
 
-        st.warning(
-            st.session_state[
-                "presentation_review"
-            ]
+            st.warning(
+                st.session_state[
+                    "presentation_review"
+                ]
+            )
+
+        st.subheader(
+            "🎞️ Presentation Preview"
         )
 
-        st.text_area(
-            "Presentation Script",
+        slides = (
             st.session_state[
                 "presentation_output"
-            ],
-            height=800
+            ].split(
+                "================================================"
+            )
         )
+
+        for slide in slides:
+
+            if slide.strip():
+
+                with st.expander(
+                    f"📽️ {slide[:50]}"
+                ):
+
+                    st.markdown(
+                        slide
+                    )
 
    
          # =========================
