@@ -2346,8 +2346,8 @@ class SolutionPresentationAgent:
     def generate_presentation(
         self,
         brd,
-        requirements,
-        test_cases,
+        requirements="",
+        test_cases="",
         challenge_review=""
     ):
 
