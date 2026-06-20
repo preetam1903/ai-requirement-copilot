@@ -2412,6 +2412,7 @@ class SolutionPresentationAgent:
     def generate_presentation(
         self,
         brd,
+        review="",
         requirements="",
         test_cases="",
         challenge_review=""
@@ -2427,7 +2428,18 @@ IMPORTANT RULES:
   2. Approved Requirements
   3. Approved Test Cases
   4. Challenge Review
+Use consistency review findings where available.
 
+If review findings exist:
+
+Create a dedicated slide called:
+
+Requirement Consistency Review
+
+Summarize:
+- Contradictions
+- Missing Information
+- Clarifications Required
 - Do NOT assume information
 - Do NOT recommend solutions
 - Do NOT invent benefits
@@ -2548,6 +2560,9 @@ TEST CASES:
 
 CHALLENGE REVIEW:
 {challenge_review}
+
+CONSISTENCY REVIEW:
+{review}
 """
 
         response = self.client.chat.completions.create(
