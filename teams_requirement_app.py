@@ -28,7 +28,8 @@ from agents import (
     ProjectManagerAgent,
     ChangeImpactAgent,
     ScreenAnalysisAgent,
-    CurrentFutureStateAgent
+    CurrentFutureStateAgent,
+    SolutionPresentationAgent
 )
 from image_utils import (
     extract_red_region,
@@ -1778,7 +1779,50 @@ if uploaded_file:
             "Ready For Jira Deployment"
         )
 
+# =========================
+# AI SOLUTION PRESENTATION
+# =========================
 
+    if all_approved:
+
+        st.subheader("🎥 AI Solution Presentation")
+
+        presentation_agent = SolutionPresentationAgent(
+            client
+        )
+
+        if st.button(
+            "Generate Presentation"
+        ):
+
+            presentation_output = (
+                presentation_agent.generate_presentation(
+                    final_brd,
+                    final_requirements,
+                    st.session_state.get(
+                        "approved_test_cases",
+                        test_cases
+                    ),
+                    st.session_state.get(
+                        "approved_challenge_review",
+                        ""
+                    )
+                )
+            )
+
+            st.session_state[
+                "presentation_output"
+            ] = presentation_output
+
+        if "presentation_output" in st.session_state:
+
+            st.text_area(
+                "Presentation Script",
+                st.session_state[
+                    "presentation_output"
+                ],
+                height=800
+            )
     # =========================
     # EXECUTIVE SUMMARY
     # =========================

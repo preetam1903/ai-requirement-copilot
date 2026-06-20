@@ -2333,3 +2333,170 @@ Return structured output.
         )
 
         return response.choices[0].message.content
+
+# =========================
+# SOLUTION PRESENTATION AGENT
+# =========================
+
+class SolutionPresentationAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_presentation(
+        self,
+        brd,
+        requirements,
+        test_cases,
+        challenge_review=""
+    ):
+
+        prompt = f"""
+You are a Requirement Review Presenter.
+
+IMPORTANT RULES:
+
+- Use ONLY information available in:
+  1. Approved BRD
+  2. Approved Requirements
+  3. Approved Test Cases
+  4. Challenge Review
+
+- Do NOT assume information
+- Do NOT recommend solutions
+- Do NOT invent benefits
+- Do NOT estimate effort
+- Do NOT create new requirements
+
+Generate the presentation using EXACTLY this structure.
+
+================================================
+
+SLIDE 1
+TITLE: Project Overview
+
+NARRATION:
+Summarize the approved requirement package.
+
+VISUAL:
+Project Information
+
+================================================
+
+SLIDE 2
+TITLE: Business Objective
+
+NARRATION:
+Summarize business objectives from BRD.
+
+VISUAL:
+Objectives
+
+================================================
+
+SLIDE 3
+TITLE: Business Process
+
+NARRATION:
+Summarize approved business process.
+
+VISUAL:
+Process Flow
+
+================================================
+
+SLIDE 4
+TITLE: Functional Requirements
+
+NARRATION:
+Summarize approved requirements.
+
+VISUAL:
+Requirements List
+
+================================================
+
+SLIDE 5
+TITLE: Business Rules
+
+NARRATION:
+Summarize documented business rules.
+
+VISUAL:
+Business Rules
+
+================================================
+
+SLIDE 6
+TITLE: Solution Overview
+
+NARRATION:
+Summarize approved solution scope.
+
+VISUAL:
+Architecture Summary
+
+================================================
+
+SLIDE 7
+TITLE: Test Coverage
+
+NARRATION:
+Summarize approved test coverage.
+
+VISUAL:
+Test Cases
+
+================================================
+
+SLIDE 8
+TITLE: Open Questions
+
+NARRATION:
+Summarize unresolved items.
+
+VISUAL:
+Open Questions
+
+================================================
+
+SLIDE 9
+TITLE: Executive Summary
+
+NARRATION:
+Provide final summary.
+
+VISUAL:
+Summary
+
+================================================
+
+BRD:
+{brd}
+
+REQUIREMENTS:
+{requirements}
+
+TEST CASES:
+{test_cases}
+
+CHALLENGE REVIEW:
+{challenge_review}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a Senior Business Analyst presenting approved requirements."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        return response.choices[0].message.content
