@@ -962,27 +962,36 @@ if uploaded_file:
                         st.info(
                             "Test cases will be displayed after Test Case generation."
                         )
-                   if st.button(
-                        "📊 Generate PowerPoint"
-                    ):
+        st.divider()
 
-                        ppt_file = create_presentation(
-                            st.session_state[
-                                "presentation_output"
-                            ]
-                        )
+        if "presentation_output" in st.session_state:
 
-                        with open(
-                            ppt_file,
-                            "rb"
-                        ) as file:
+            st.subheader(
+                "📊 PowerPoint Export"
+            )
 
-                            st.download_button(
-                                "⬇️ Download PowerPoint",
-                                file,
-                                file_name=ppt_file,
-                                mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
-                            )
+            if st.button(
+                "Generate PowerPoint"
+            ):
+
+                ppt_file = create_presentation(
+                    st.session_state[
+                        "presentation_output"
+                    ]
+                )
+
+                with open(
+                    ppt_file,
+                    "rb"
+                ) as file:
+
+                    st.download_button(
+                        "⬇️ Download PowerPoint",
+                        data=file,
+                        file_name=ppt_file,
+                        mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                    )
+
          # =========================
 # REQUIREMENT COMPLETENESS
 # =========================
