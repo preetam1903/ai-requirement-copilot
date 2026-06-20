@@ -2333,7 +2333,73 @@ Return structured output.
         )
 
         return response.choices[0].message.content
+# =========================
+# PRESENTATION REVIEW AGENT
+# =========================
 
+class PresentationReviewAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def review_brd(
+        self,
+        brd
+    ):
+
+        prompt = f"""
+You are a Senior Business Analyst.
+
+Review the BRD and identify:
+
+1. Requirement inconsistencies
+2. Missing information
+3. Contradictions
+4. Business clarifications required
+5. Data gaps
+
+IMPORTANT:
+
+Do NOT invent requirements.
+
+Do NOT recommend solutions.
+
+Use only information present in the BRD.
+
+Format:
+
+CONSISTENCY REVIEW
+
+INCONSISTENCIES
+- item
+
+MISSING INFORMATION
+- item
+
+OPEN QUESTIONS
+- item
+
+BRD:
+
+{brd}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a Senior Business Analyst."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.1
+        )
+
+        return response.choices[0].message.content
 # =========================
 # SOLUTION PRESENTATION AGENT
 # =========================

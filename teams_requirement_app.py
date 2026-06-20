@@ -29,7 +29,8 @@ from agents import (
     ChangeImpactAgent,
     ScreenAnalysisAgent,
     CurrentFutureStateAgent,
-    SolutionPresentationAgent
+    SolutionPresentationAgent,
+    PresentationReviewAgent
 )
 from image_utils import (
     extract_red_region,
@@ -829,9 +830,29 @@ if uploaded_file:
         "🎥 Generate AI Presentation"
     ):
 
+        review_agent = PresentationReviewAgent(
+            client
+        )
+
+        review_output = (
+            review_agent.review_brd(
+                brd
+            )
+        )
+
+        st.session_state[
+            "presentation_review"
+        ] = review_output
+
         presentation_output = (
             presentation_agent.generate_presentation(
-                brd,
+                brd
+            )
+        )
+
+        st.session_state[
+            "presentation_output"
+        ] = presentation_output
                 
             )
         )
@@ -842,8 +863,16 @@ if uploaded_file:
 
     if "presentation_output" in st.session_state:
 
-        st.subheader(
-            "🎥 AI Requirement Review"
+        if "presentation_review" in st.session_state:
+
+            st.subheader(
+            "🔍 Consistency Review"
+        )
+
+        st.warning(
+            st.session_state[
+                "presentation_review"
+            ]
         )
 
         st.text_area(
