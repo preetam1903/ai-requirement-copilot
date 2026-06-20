@@ -1133,7 +1133,7 @@ if uploaded_file:
 
             video_file = (
                 generate_training_video(
-                    "assets/female_trainer.png",
+                    "female_trainer.png",
                     st.session_state[
                         "mp3_file"
                     ]
