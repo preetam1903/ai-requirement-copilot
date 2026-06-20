@@ -4,3 +4,4 @@ python-docx
 streamlit-mic-recorder
 pandas
 python-pptx
+pydub

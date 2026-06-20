@@ -32,7 +32,8 @@ from agents import (
     SolutionPresentationAgent,
     PresentationReviewAgent,
     TrainingStoryboardAgent,
-    VideoNarrationAgent
+    VideoNarrationAgent,
+    VoiceAgent
     
 )
 from image_utils import (
@@ -838,6 +839,10 @@ if uploaded_file:
     narration_agent = VideoNarrationAgent(
         client
     )
+
+    voice_agent = VoiceAgent(
+        client
+    )
     if st.button(
         "🎥 Generate AI Presentation"
     ):
@@ -1066,6 +1071,53 @@ if uploaded_file:
                 ],
                 height=500
             )
+        st.divider()
+
+        st.subheader(
+            "🎵 Training Voice"
+        )
+
+        if (
+            "narration_output"
+            in st.session_state
+        ):
+
+            if st.button(
+                "Generate MP3"
+            ):
+
+                mp3_file = (
+                    voice_agent.generate_mp3(
+                        st.session_state[
+                            "narration_output"
+                        ]
+                    )
+                )
+
+                st.session_state[
+                    "mp3_file"
+                ] = mp3_file
+        if "mp3_file" in st.session_state:
+
+            audio_file = st.session_state[
+                "mp3_file"
+            ]
+
+            st.audio(
+                audio_file
+            )
+
+            with open(
+                audio_file,
+                "rb"
+            ) as file:
+
+                st.download_button(
+                    "⬇️ Download MP3",
+                    data=file,
+                    file_name="training_narration.mp3",
+                    mime="audio/mpeg"
+                )
          # =========================
 # REQUIREMENT COMPLETENESS
 # =========================

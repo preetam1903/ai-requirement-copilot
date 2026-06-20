@@ -2706,3 +2706,30 @@ Storyboard:
         )
 
         return response.choices[0].message.content
+
+# =========================
+# VOICE AGENT
+# =========================
+
+class VoiceAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_mp3(
+        self,
+        narration_text,
+        output_file="training_narration.mp3"
+    ):
+
+        response = self.client.audio.speech.create(
+            model="gpt-4o-mini-tts",
+            voice="alloy",
+            input=narration_text
+        )
+
+        response.stream_to_file(
+            output_file
+        )
+
+        return output_file
