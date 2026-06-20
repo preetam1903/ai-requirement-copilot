@@ -2656,3 +2656,53 @@ TEST CASES:
         )
 
         return response.choices[0].message.content
+
+# =========================
+# VIDEO NARRATION AGENT
+# =========================
+
+class VideoNarrationAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_narration(
+        self,
+        storyboard
+    ):
+
+        prompt = f"""
+You are a professional corporate trainer.
+
+Convert the storyboard into a natural training narration.
+
+Rules:
+
+- Use only storyboard content.
+- Professional tone.
+- Simple English.
+- Create narration scene by scene.
+- Do not add new requirements.
+- Do not invent information.
+
+Storyboard:
+
+{storyboard}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a training narrator."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.2
+        )
+
+        return response.choices[0].message.content

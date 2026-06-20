@@ -31,7 +31,8 @@ from agents import (
     CurrentFutureStateAgent,
     SolutionPresentationAgent,
     PresentationReviewAgent,
-    TrainingStoryboardAgent
+    TrainingStoryboardAgent,
+    VideoNarrationAgent
     
 )
 from image_utils import (
@@ -1028,7 +1029,41 @@ if uploaded_file:
                 ],
                 height=700
             )
+        st.divider()
 
+        st.subheader(
+            "🎙️ Training Narration"
+        )
+
+        if (
+            "storyboard_output"
+            in st.session_state
+        ):
+
+            if st.button(
+                "Generate Narration"
+            ):
+
+                narration = (
+                    narration_agent.generate_narration(
+                        st.session_state[
+                            "storyboard_output"
+                        ]
+                    )
+                )
+
+                st.session_state[
+                    "narration_output"
+                ] = narration
+        if "narration_output" in st.session_state:
+
+            st.text_area(
+                "Narration Script",
+                st.session_state[
+                    "narration_output"
+                ],
+                height=500
+            )
          # =========================
 # REQUIREMENT COMPLETENESS
 # =========================
@@ -2003,6 +2038,9 @@ if uploaded_file:
         storyboard_agent = TrainingStoryboardAgent(
             client
             
+        )
+        narration_agent = VideoNarrationAgent(
+            client
         )
         if st.button(
             "Generate Presentation"
