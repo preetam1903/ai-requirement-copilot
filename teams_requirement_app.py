@@ -885,13 +885,47 @@ if uploaded_file:
 
             if slide.strip():
 
+                title_match = ""
+
+                if "TITLE:" in slide:
+
+                    try:
+
+                        title_match = (
+                            slide.split(
+                                "TITLE:"
+                            )[1]
+                            .split(
+                            "\n"
+                            )[0]
+                            .strip()
+                        )
+
+                    except:
+
+                        title_match = "Presentation Slide"
+
                 with st.expander(
-                    f"📽️ {slide[:50]}"
+                    f"📽️ {title_match}"
                 ):
 
                     st.markdown(
                         slide
                     )
+
+    # =========================
+    # PROCESS FLOW VISUAL
+    # =========================
+
+                    if title_match == "Business Process":
+
+                        st.markdown(
+                            "### 🔄 Process Flow"
+                        )
+
+                        st.success(
+                            process_flow
+                        )
 
    
          # =========================
