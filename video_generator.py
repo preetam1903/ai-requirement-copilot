@@ -9,15 +9,6 @@ def generate_training_video(
     narration_mp3,
     output_file="training_video.mp4"
 ):
-    """
-    Create simple training video.
-
-    Avatar Image
-    +
-    Narration MP3
-    =
-    MP4
-    """
 
     audio = AudioFileClip(
         narration_mp3
@@ -32,13 +23,18 @@ def generate_training_video(
         .with_duration(
             duration
         )
-        .with_audio(
+    )
+
+    final_video = (
+        video.with_audio(
             audio
         )
     )
 
-    video.write_videofile(
+    final_video.write_videofile(
         output_file,
+        codec="libx264",
+        audio_codec="aac",
         fps=24
     )
 
