@@ -936,9 +936,8 @@ if uploaded_file:
                         "### 🏛️ Architecture Diagram"
                     )
 
-                    st.code(
-                        diagram,
-                        language="text"
+                    st.info(
+                        "Architecture Diagram will be available after HLD generation."
                     )
                 if title_match == "Business Process":
 
@@ -956,7 +955,7 @@ if uploaded_file:
                     )
 
                     st.info(
-                        test_cases
+                        "Test cases will be displayed after Test Case generation."
                     )
    
          # =========================
