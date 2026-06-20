@@ -835,7 +835,9 @@ if uploaded_file:
     storyboard_agent = TrainingStoryboardAgent(
         client
     )
-
+    narration_agent = VideoNarrationAgent(
+        client
+    )
     if st.button(
         "🎥 Generate AI Presentation"
     ):
