@@ -918,7 +918,7 @@ if uploaded_file:
     # =========================
 
                     if title_match == "Business Process":
-
+                        
                         st.markdown(
                             "### 🔄 Process Flow"
                         )
@@ -926,7 +926,38 @@ if uploaded_file:
                         st.success(
                             process_flow
                         )
+                        # =========================
+    # ARCHITECTURE VISUAL
+    # =========================
 
+                if title_match == "Solution Overview":
+
+                    st.markdown(
+                        "### 🏛️ Architecture Diagram"
+                    )
+
+                    st.code(
+                        diagram,
+                        language="text"
+                    )
+                if title_match == "Business Process":
+
+                    st.markdown(
+                        "### 🔄 Process Flow"
+                    )
+
+ 
+
+
+                if title_match == "Test Coverage":
+
+                    st.markdown(
+                        "### 🧪 Test Scenarios"
+                    )
+
+                    st.info(
+                        test_cases
+                    )
    
          # =========================
 # REQUIREMENT COMPLETENESS
