@@ -853,21 +853,14 @@ if uploaded_file:
         st.session_state[
             "presentation_output"
         ] = presentation_output
-                
-            )
-        )
-
-        st.session_state[
-            "presentation_output"
-        ] = presentation_output
 
     if "presentation_output" in st.session_state:
 
         if "presentation_review" in st.session_state:
 
             st.subheader(
-            "🔍 Consistency Review"
-        )
+                "🔍 Consistency Review"
+            )
 
         st.warning(
             st.session_state[
