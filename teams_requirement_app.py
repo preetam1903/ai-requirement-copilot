@@ -31,6 +31,7 @@ from agents import (
     CurrentFutureStateAgent,
     SolutionPresentationAgent,
     PresentationReviewAgent
+    
 )
 from image_utils import (
     extract_red_region,
@@ -38,6 +39,10 @@ from image_utils import (
     extract_value
 )
 from module_context import MODULE_CONTEXT
+
+from ppt_generator import (
+    create_presentation
+)
 # =========================
 # OPENAI CLIENT
 # =========================
@@ -930,34 +935,54 @@ if uploaded_file:
     # ARCHITECTURE VISUAL
     # =========================
 
-                if title_match == "Solution Overview":
+                    if title_match == "Solution Overview":
 
-                    st.markdown(
-                        "### 🏛️ Architecture Diagram"
-                    )
+                        st.markdown(
+                            "### 🏛️ Architecture Diagram"
+                        )
 
-                    st.info(
-                        "Architecture Diagram will be available after HLD generation."
-                    )
-                if title_match == "Business Process":
+                        st.info(
+                            "Architecture Diagram will be available after HLD generation."
+                        )
+                    if title_match == "Business Process":
 
-                    st.markdown(
-                        "### 🔄 Process Flow"
-                    )
+                        st.markdown(
+                            "### 🔄 Process Flow"
+                        )
 
  
 
 
-                if title_match == "Test Coverage":
+                    if title_match == "Test Coverage":
 
-                    st.markdown(
-                        "### 🧪 Test Scenarios"
-                    )
+                        st.markdown(
+                            "### 🧪 Test Scenarios"
+                        )
 
-                    st.info(
-                        "Test cases will be displayed after Test Case generation."
-                    )
-   
+                        st.info(
+                            "Test cases will be displayed after Test Case generation."
+                        )
+                   if st.button(
+                        "📊 Generate PowerPoint"
+                    ):
+
+                        ppt_file = create_presentation(
+                            st.session_state[
+                                "presentation_output"
+                            ]
+                        )
+
+                        with open(
+                            ppt_file,
+                            "rb"
+                        ) as file:
+
+                            st.download_button(
+                                "⬇️ Download PowerPoint",
+                                file,
+                                file_name=ppt_file,
+                                mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                            )
          # =========================
 # REQUIREMENT COMPLETENESS
 # =========================
