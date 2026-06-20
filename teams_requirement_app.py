@@ -831,6 +831,9 @@ if uploaded_file:
     presentation_agent = SolutionPresentationAgent(
         client
     )
+    storyboard_agent = TrainingStoryboardAgent(
+        client
+    )
 
     if st.button(
         "🎥 Generate AI Presentation"
@@ -1005,9 +1008,10 @@ if uploaded_file:
             storyboard_output = (
                 storyboard_agent.generate_storyboard(
                     brd,
-                    t.session_state.get(
-                        "approved_test_cases"
+                    st.session_state.get(
+                        "approved_test_cases",
                         ""
+                    )
                 )
             )
 
