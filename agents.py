@@ -2581,3 +2581,78 @@ CONSISTENCY REVIEW:
         )
 
         return response.choices[0].message.content
+
+
+# =========================
+# TRAINING STORYBOARD AGENT
+# =========================
+
+class TrainingStoryboardAgent:
+
+    def __init__(self, client):
+        self.client = client
+
+    def generate_storyboard(
+        self,
+        brd,
+        test_cases=""
+    ):
+
+        prompt = f"""
+You are an Instructional Designer.
+
+Create a training video storyboard.
+
+Use ONLY information available in the BRD and test cases.
+
+Do not invent requirements.
+
+Create 5-8 scenes.
+
+Format:
+
+================================================
+
+SCENE 1
+TITLE:
+
+AVATAR:
+
+VISUAL:
+
+================================================
+
+SCENE 2
+TITLE:
+
+AVATAR:
+
+VISUAL:
+
+================================================
+
+BRD:
+
+{brd}
+
+TEST CASES:
+
+{test_cases}
+"""
+
+        response = self.client.chat.completions.create(
+            model="gpt-4.1-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are an expert training designer."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.2
+        )
+
+        return response.choices[0].message.content

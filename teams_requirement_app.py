@@ -30,7 +30,8 @@ from agents import (
     ScreenAnalysisAgent,
     CurrentFutureStateAgent,
     SolutionPresentationAgent,
-    PresentationReviewAgent
+    PresentationReviewAgent,
+    TrainingStoryboardAgent
     
 )
 from image_utils import (
@@ -990,7 +991,39 @@ if uploaded_file:
                         data=file,
                         file_name=ppt_file,
                         mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
-                    )
+                            )
+        st.divider()
+
+        st.subheader(
+            "🎬 Training Video Storyboard"
+        )
+
+        if st.button(
+            "Generate Storyboard"
+        ):
+
+            storyboard_output = (
+                storyboard_agent.generate_storyboard(
+                    brd,
+                    t.session_state.get(
+                        "approved_test_cases"
+                        ""
+                )
+            )
+
+            st.session_state[
+                "storyboard_output"
+            ] = storyboard_output
+
+        if "storyboard_output" in st.session_state:
+
+            st.text_area(
+                "Training Storyboard",
+                st.session_state[
+                    "storyboard_output"
+                ],
+                height=700
+            )
 
          # =========================
 # REQUIREMENT COMPLETENESS
@@ -1963,7 +1996,10 @@ if uploaded_file:
         presentation_agent = SolutionPresentationAgent(
             client
         )
-
+        storyboard_agent = TrainingStoryboardAgent(
+            client
+            
+        )
         if st.button(
             "Generate Presentation"
         ):
