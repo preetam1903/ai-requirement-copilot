@@ -817,6 +817,41 @@ if uploaded_file:
         value=brd,
         height=700
     )
+    # =========================
+# AI PRESENTATION
+# =========================
+
+    presentation_agent = SolutionPresentationAgent(
+        client
+    )
+
+    if st.button(
+        "🎥 Generate AI Presentation"
+    ):
+
+        presentation_output = (
+            presentation_agent.generate_presentation(
+                brd
+            )
+        )
+
+        st.session_state[
+            "presentation_output"
+        ] = presentation_output
+
+    if "presentation_output" in st.session_state:
+
+        st.subheader(
+            "🎥 AI Requirement Review"
+        )
+
+        st.text_area(
+            "Presentation Script",
+            st.session_state[
+                "presentation_output"
+            ],
+            height=800
+        )
 
    
          # =========================
