@@ -46,6 +46,9 @@ from module_context import MODULE_CONTEXT
 from ppt_generator import (
     create_presentation
 )
+from video_generator import (
+    generate_training_video
+)
 # =========================
 # OPENAI CLIENT
 # =========================
@@ -1117,6 +1120,51 @@ if uploaded_file:
                     data=file,
                     file_name="training_narration.mp3",
                     mime="audio/mpeg"
+                )
+        st.divider()
+
+        st.subheader(
+            "🎥 Training Video"
+        )
+
+        if st.button(
+            "Generate Video"
+        ):
+
+            video_file = (
+                generate_training_video(
+                    "assets/female_trainer.png",
+                    st.session_state[
+                        "mp3_file"
+                    ]
+                )
+            )
+
+            st.session_state[
+                "video_file"
+            ] = video_file
+        if "video_file" in st.session_state:
+
+            video_file = (
+                st.session_state[
+                    "video_file"
+                ]
+            )
+
+            st.video(
+                video_file
+            )
+
+            with open(
+                video_file,
+                "rb"
+            ) as file:
+
+                st.download_button(
+                    "⬇️ Download Video",
+                    data=file,
+                    file_name="training_video.mp4",
+                    mime="video/mp4"
                 )
          # =========================
 # REQUIREMENT COMPLETENESS
