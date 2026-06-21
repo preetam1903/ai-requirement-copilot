@@ -65,6 +65,12 @@ st.set_page_config(
     page_title="AI Meeting Requirement Copilot",
     layout="wide"
 )
+from trace_store import TraceStore
+
+if "trace_store" not in st.session_state:
+    st.session_state.trace_store = TraceStore()
+
+    
 DEMO_MODE = True
 st.title("📋 AI Meeting Requirement Copilot")
 
@@ -391,14 +397,29 @@ if uploaded_file:
 
             combined_context += "\n\n"
 
-    
+    st.session_state.trace_store.clear()
     meeting_data = (
         meeting_agent.process_transcript(
             combined_context
         )
     )
 
-    
+    from trace import AgentTrace
+
+    meeting_trace = AgentTrace(
+        name="Meeting Agent",
+        purpose="Generate BRD from transcript",
+        why_called="Transcript uploaded",
+        input_data=combined_context[:1000],
+        prompt="Meeting Agent BRD Prompt",
+        output_data=meeting_data[:2000],
+        next_step="AI Understanding Agent",
+        execution_time=0
+    )
+
+    st.session_state.trace_store.add_trace(
+        meeting_trace
+    )
     scenario_agent = BusinessScenarioAgent(
         client
     )
@@ -428,7 +449,19 @@ if uploaded_file:
         )
     )
 
-   
+    understanding_trace = AgentTrace(
+        name="AI Understanding Agent",
+        purpose="Understand business intent",
+        why_called="BRD generated",
+        input_data=understanding_input[:1000],
+        prompt="Summarize business understanding",
+        output_data=ai_understanding,
+        next_step="Requirement Agent"
+    )
+
+    st.session_state.trace_store.add_trace(
+        understanding_trace
+    )
 
     st.success(
         ai_understanding
@@ -829,6 +862,18 @@ if uploaded_file:
         value=brd,
         height=700
     )
+
+    st.divider()
+
+    st.header("🔍 AI X-Ray")
+
+    from xray_renderer import (
+        render_xray
+    )
+
+    render_xray(
+        st.session_state.trace_store
+    )
     # =========================
 # AI PRESENTATION
 # =========================
@@ -1224,6 +1269,19 @@ if uploaded_file:
             brd
         )
     )
+    challenge_trace = AgentTrace(
+        name="AI Challenge Agent",
+        purpose="Identify gaps and risks",
+        why_called="BRD completed",
+        input_data=brd[:1500],
+        prompt="Challenge BRD",
+        output_data=challenge_review[:2000],
+        next_step="Requirement Agent"
+    )
+
+    st.session_state.trace_store.add_trace(
+        challenge_trace
+    )
     assumptions_section = ""
     open_questions_section = ""
     if (
@@ -1472,6 +1530,20 @@ if uploaded_file:
         requirement_agent.extract_requirements(
             final_brd
         )
+    )
+
+    requirement_trace = AgentTrace(
+        name="Requirement Agent",
+        purpose="Generate requirements",
+        why_called="BRD available",
+        input_data=final_brd[:1500],
+        prompt="Requirement Extraction Prompt",
+        output_data=requirements[:2000],
+        next_step="HLD Agent"
+    )
+
+    st.session_state.trace_store.add_trace(
+        requirement_trace
     )
     with dashboard_placeholder.container():
         st.subheader(
