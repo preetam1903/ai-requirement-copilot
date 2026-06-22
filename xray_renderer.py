@@ -336,9 +336,12 @@ def render_xray(trace_store):
                     st.warning(
                         "Not enough output available."
                     )
-                st.write("### 🧠 Neural Network X-Ray")
 
-                st.code("""
+                with st.expander(
+                    "🧠 Neural Network X-Ray"
+                ):
+
+                    st.code("""
                 Business Transcript
                         ↓
                 Tokenization
@@ -354,35 +357,35 @@ def render_xray(trace_store):
                 Generated Response
                 """)
 
-                st.info("""
+                    st.info("""
                 The LLM does not understand words directly.
 
                 Each word is converted into numbers called embeddings.
 
                 These embeddings are processed through multiple neural network layers to identify patterns and relationships.
                 """)
-                sample_words = trace.input_data.split()[:5]
 
-                st.write("### Example Embeddings")
+                    sample_words = trace.input_data.split()[:5]
 
-                for word in sample_words:
+                    st.write("### Example Embeddings")
 
-                    st.code(
-                        f"{word} → [0.24, -0.91, 0.67, 0.11, ...]"
-                    )
-                st.write("### Attention Mechanism")
+                    for word in sample_words:
 
-                st.code("""
-                Postal Code
-                        ↕
-                Customer Address
-                        ↕
-                Invoice Processing
-                        ↕
-                Communication
+                        st.code(
+                            f"{word} → [0.24, -0.91, 0.67, 0.11, ...]"
+                        )
+
+                    st.write("### Attention Heatmap")
+
+                    st.code("""
+                Customer      ██████████
+                Postal Code   ████████
+                Address       ███████
+                Invoice       █████
+                Country       ███
                 """)
 
-                st.info("""
+                    st.info("""
                 The attention mechanism helps the model determine which words and concepts are most relevant when generating the response.
                 """)
 
