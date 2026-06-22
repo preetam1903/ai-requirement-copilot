@@ -36,6 +36,25 @@ def render_xray(trace_store):
                 trace.output_data,
                 height=250
             )
+            with st.expander(
+                "🧠 Behind The Scenes"
+            ):
+
+                st.markdown("""
+            ### What Happened?
+
+            1. Input converted into tokens
+
+            2. Prompt combined with context
+
+            3. LLM analyzed instructions
+
+            4. Next words predicted
+
+            5. Response generated
+
+            6. Output returned to agent
+            """)
 
             st.write("### Next Step")
             st.success(trace.next_step)
