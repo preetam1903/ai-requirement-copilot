@@ -195,7 +195,32 @@ def render_xray(trace_store):
                     "Characters",
                     len(trace.prompt)
                 )
+                st.write("### Prompt Statistics")
 
+                prompt_chars = len(trace.prompt)
+
+                prompt_words = len(
+                    trace.prompt.split()
+                )
+
+                approx_tokens = int(
+                    prompt_words * 1.3
+                )
+
+                st.metric(
+                    "Prompt Characters",
+                    prompt_chars
+                )
+
+                st.metric(
+                    "Prompt Words",
+                    prompt_words
+                )
+
+                st.metric(
+                    "Approx Tokens",
+                    approx_tokens
+                )
                 st.write("### Generated Output Size")
 
                 st.metric(
@@ -206,6 +231,76 @@ def render_xray(trace_store):
                 st.info(
                     "The LLM converts the input into tokens, combines it with instructions and predicts the next words to generate the response."
                 )
+                st.write("### Prompt Construction X-Ray")
+
+                st.code(
+                """
+                
+                System Instructions
+                        +
+                Business Context
+                        +
+                Meeting Transcript
+                        +
+                Screen Analysis
+                        =
+                Final Prompt Sent To LLM
+                """
+                )
+                
+
+
+# Then Add Dynamic Prompt Preview
+
+
+                
+                st.write("### Final Prompt Preview")
+
+                st.text_area(
+                    "Prompt Preview",
+                    trace.prompt[:2500],
+                    height=300
+                )
+                st.write("### 🧠 How GPT Predicts The Next Word")
+
+                words = trace.output_data.split()
+
+                if len(words) > 5:
+
+                    current_text = " ".join(words[:3])
+
+                    predicted_word = words[3]
+
+                    st.write("### Current Context")
+
+                    st.code(current_text)
+
+                    st.write("### Possible Next Token Predictions")
+
+                    st.code(
+                        f"""
+                {predicted_word}      82%
+                alternative_1   10%
+                alternative_2    5%
+                alternative_3    3%
+                """
+                    )
+
+                    st.write("### Selected Token")
+
+                    st.success(predicted_word)
+
+                    st.write("### Generated Sequence")
+
+                    st.info(
+                        f"{current_text} {predicted_word}"
+                    )
+
+                else:
+
+                    st.warning(
+                        "Not enough output available."
+                    )
             st.write("### Next Step")
             st.success(trace.next_step)
 
