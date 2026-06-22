@@ -314,60 +314,63 @@ def render_xray(trace_store):
                     st.info(
                         f"{current_text} {predicted_word}"
                     )
-                    st.write("### 🧠 Neural Network X-Ray")
-
-                    st.code("""
-                    Business Transcript
-                            ↓
-                    Tokenization
-                            ↓
-                    Embeddings
-                            ↓
-                    Neural Network Layers
-                            ↓
-                    Attention Mechanism
-                            ↓
-                    Token Prediction
-                            ↓
-                    Generated Response
-                    """)
-
-                    st.info("""
-                    The LLM does not understand words directly.
-
-                    Each word is converted into numbers called embeddings.
-
-                    These embeddings are processed through multiple neural network layers to identify patterns and relationships.
-                    """)
-                    sample_words = trace.input_data.split()[:5]
-
-                    st.write("### Example Embeddings")
-
-                    for word in sample_words:
-
-                        st.code(
-                            f"{word} → [0.24, -0.91, 0.67, 0.11, ...]"
-                        )
-                    st.write("### Attention Mechanism")
-
-                    st.code("""
-                    Postal Code
-                          ↕
-                    Customer Address
-                          ↕
-                    Invoice Processing
-                          ↕
-                    Communication
-                    """)
-
-                    st.info("""
-                    The attention mechanism helps the model determine which words and concepts are most relevant when generating the response.
-                    """)
+                    
                 else:
 
                     st.warning(
                         "Not enough output available."
                     )
+                st.write("### 🧠 Neural Network X-Ray")
+
+                st.code("""
+                Business Transcript
+                        ↓
+                Tokenization
+                        ↓
+                Embeddings
+                        ↓
+                Neural Network Layers
+                        ↓
+                Attention Mechanism
+                        ↓
+                Token Prediction
+                        ↓
+                Generated Response
+                """)
+
+                st.info("""
+                The LLM does not understand words directly.
+
+                Each word is converted into numbers called embeddings.
+
+                These embeddings are processed through multiple neural network layers to identify patterns and relationships.
+                """)
+                sample_words = trace.input_data.split()[:5]
+
+                st.write("### Example Embeddings")
+
+                for word in sample_words:
+
+                    st.code(
+                        f"{word} → [0.24, -0.91, 0.67, 0.11, ...]"
+                    )
+                st.write("### Attention Mechanism")
+
+                st.code("""
+                Postal Code
+                        ↕
+                Customer Address
+                        ↕
+                Invoice Processing
+                        ↕
+                Communication
+                """)
+
+                st.info("""
+                The attention mechanism helps the model determine which words and concepts are most relevant when generating the response.
+                """)
+
+                
             st.write("### Next Step")
             st.success(trace.next_step)
 
