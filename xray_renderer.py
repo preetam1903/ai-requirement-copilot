@@ -337,57 +337,57 @@ def render_xray(trace_store):
                         "Not enough output available."
                     )
 
-                with st.expander(
-                    "🧠 Neural Network X-Ray"
-                ):
+            with st.expander(
+                "🧠 Neural Network X-Ray"
+            ):
 
-                    st.code("""
-                Business Transcript
-                        ↓
-                Tokenization
-                        ↓
-                Embeddings
-                        ↓
-                Neural Network Layers
-                        ↓
-                Attention Mechanism
-                        ↓
-                Token Prediction
-                        ↓
-                Generated Response
-                """)
+                st.code("""
+            Business Transcript
+                    ↓
+            Tokenization
+                    ↓
+            Embeddings
+                    ↓
+            Neural Network Layers
+                    ↓
+            Attention Mechanism
+                    ↓
+            Token Prediction
+                    ↓
+            Generated Response
+            """)
 
-                    st.info("""
-                The LLM does not understand words directly.
+                st.info("""
+            The LLM does not understand words directly.
 
-                Each word is converted into numbers called embeddings.
+            Each word is converted into numbers called embeddings.
 
-                These embeddings are processed through multiple neural network layers to identify patterns and relationships.
-                """)
+            These embeddings are processed through multiple neural network layers to identify patterns and relationships.
+            """)
 
-                    sample_words = trace.input_data.split()[:5]
+                sample_words = trace.input_data.split()[:5]
 
-                    st.write("### Example Embeddings")
+                st.write("### Example Embeddings")
 
-                    for word in sample_words:
+                for word in sample_words:
 
-                        st.code(
-                            f"{word} → [0.24, -0.91, 0.67, 0.11, ...]"
-                        )
+                    st.code(
+                        f"{word} → [0.24, -0.91, 0.67, 0.11, ...]"
+                    )
 
-                    st.write("### Attention Heatmap")
+                st.write("### Attention Heatmap")
 
-                    st.code("""
-                Customer      ██████████
-                Postal Code   ████████
-                Address       ███████
-                Invoice       █████
-                Country       ███
-                """)
+                st.code("""
+            Customer      ██████████
+            Postal Code   ████████
+            Address       ███████
+            Invoice       █████
+            Country       ███
+            """)
 
-                    st.info("""
-                The attention mechanism helps the model determine which words and concepts are most relevant when generating the response.
-                """)
+                st.info("""
+            The attention mechanism helps the model determine which words and concepts are most relevant when generating the response.
+            """)
 
                 
             st.write("### Next Step")
