@@ -263,19 +263,36 @@ def render_xray(trace_store):
                 )
                 st.write("### 🧠 How GPT Predicts The Next Word")
 
-                words = trace.output_data.split()
+                clean_text = (
+                    trace.output_data
+                    .replace("=", " ")
+                    .replace("\n", " ")
+                )
 
-                if len(words) > 5:
+                words = clean_text.split()
 
-                    current_text = " ".join(words[:3])
+                if len(words) > 30:
 
-                    predicted_word = words[3]
+                    start_position = min(
+                        20,
+                        len(words) - 5
+                    )
+
+                    current_text = " ".join(
+                        words[start_position:start_position+3]
+                    )
+
+                    predicted_word = words[
+                        start_position+3
+                    ]
 
                     st.write("### Current Context")
 
                     st.code(current_text)
 
-                    st.write("### Possible Next Token Predictions")
+                    st.write(
+                        "### Possible Next Token Predictions"
+                    )
 
                     st.code(
                         f"""
@@ -290,7 +307,9 @@ def render_xray(trace_store):
 
                     st.success(predicted_word)
 
-                    st.write("### Generated Sequence")
+                    st.write(
+                        "### Generated Sequence"
+                    )
 
                     st.info(
                         f"{current_text} {predicted_word}"
