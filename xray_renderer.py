@@ -140,7 +140,7 @@ def render_xray(trace_store):
             6. Output returned to agent
             """)
             with st.expander(
-                "🧠 LLM X-Ray"
+                "🧠 Prompt Engineering X-Ray"
             ):
 
                 st.markdown("""
@@ -233,27 +233,43 @@ def render_xray(trace_store):
                 )
                 st.write("### Prompt Construction X-Ray")
 
-                st.code(
-                """
-                
-                System Instructions
+                st.code("""
+                Business Transcript
                         +
-                Business Context
-                        +
-                Meeting Transcript
+                Knowledge Base
                         +
                 Screen Analysis
-                        =
-                Final Prompt Sent To LLM
-                """
-                )
+                        +
+                Agent Instructions
+
+                        ↓
+
+                Final Prompt
+
+                        ↓
+
+                Send To LLM
+                """)
                 
 
 
 # Then Add Dynamic Prompt Preview
 
 
-                
+                st.success("""
+                Prompt Engineering controls:
+
+                • What AI knows
+
+                • What AI ignores
+
+                • Output structure
+
+                • Output quality
+
+                The model is the engine.
+                The prompt is the steering wheel.
+                """)
                 st.write("### Final Prompt Preview")
 
                 st.text_area(
