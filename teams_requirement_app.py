@@ -878,6 +878,13 @@ if uploaded_file:
     render_xray(
         st.session_state.trace_store
     )
+    if DEMO_MODE:
+
+        st.success(
+            "Demo Mode Active - Stopping after AI X-Ray"
+        )
+
+        st.stop()
     # =========================
 # AI PRESENTATION
 # =========================
@@ -1391,23 +1398,7 @@ if uploaded_file:
                 "approved_challenge_review"
             ]
         )
-    if DEMO_MODE:
-
-        st.divider()
-
-        st.download_button(
-            "📄 Download BRD",
-            brd,
-            file_name="BRD.txt"
-        )
-
-        st.download_button(
-            "❓ Download Business Clarifications",
-            challenge_review,
-            file_name="Business_Clarifications.txt"
-        )
-
-        st.stop()
+    
     if "approved_challenge_review" in st.session_state:
 
         if st.button(
