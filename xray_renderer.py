@@ -31,7 +31,7 @@ def render_xray(trace_store):
             )
 
             st.write("### Output")
-            sst.text_area(
+            st.text_area(
                 "Output",
                 trace.output_data,
                 height=250
