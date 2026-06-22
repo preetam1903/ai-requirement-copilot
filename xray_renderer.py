@@ -36,6 +36,90 @@ def render_xray(trace_store):
                 trace.output_data,
                 height=250
             )
+
+            with st.expander(
+                "🧠 Behind The Scenes - LLM Processing"
+            ):
+
+                st.markdown("""
+            ### Step 1 - Input Received
+
+            The agent receives business context, transcript and supporting information.
+
+            ⬇️
+
+            ### Step 2 - Tokenization
+
+            The LLM breaks the text into smaller pieces called tokens.
+
+            Example:
+
+            Current SAP supports 9 digits
+
+            ↓
+
+            Current | SAP | supports | 9 | digits
+
+            ⬇️
+
+            ### Step 3 - Prompt Assembly
+
+            The system combines:
+
+            • System Instructions
+
+            • Agent Prompt
+
+            • Meeting Context
+
+            • Screen Analysis
+
+            into one final prompt.
+
+            ⬇️
+
+            ### Step 4 - LLM Processing
+
+            The model analyzes:
+
+            • Business intent
+
+            • Requirements
+
+            • SAP context
+
+            • Change request
+
+            ⬇️
+
+            ### Step 5 - Token Prediction
+
+            The model predicts the most likely next words.
+
+            Example:
+
+            "The system"
+
+            ↓
+
+            shall (91%)
+
+            must (5%)
+
+            will (3%)
+
+            ⬇️
+
+            ### Step 6 - Response Generation
+
+            The predicted tokens are combined into a BRD or Requirements document.
+
+            ⬇️
+
+            ### Step 7 - Agent Output
+
+            The result is returned to the next agent.
+            """)
             with st.expander(
                 "🧠 Behind The Scenes"
             ):
