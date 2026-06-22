@@ -139,7 +139,73 @@ def render_xray(trace_store):
 
             6. Output returned to agent
             """)
+            with st.expander(
+                "🧠 LLM X-Ray"
+            ):
 
+                st.markdown("""
+            ### AI Processing Flow
+
+            Transcript
+            ⬇️
+            Tokenization
+            ⬇️
+            Prompt Assembly
+            ⬇️
+            LLM Processing
+            ⬇️
+            Response Generation
+            ⬇️
+            Agent Output
+            """)
+
+                st.write("### Sample Input")
+
+                sample_text = trace.input_data[:120]
+
+                st.info(sample_text)
+
+                st.write("### Sample Tokens")
+
+                tokens = sample_text.split()[:15]
+
+                st.write("### Approximate Token Count")
+
+                approx_tokens = len(sample_text.split())
+
+                st.metric(
+                    "Tokens",
+                    approx_tokens
+                )
+                estimated_cost = round(
+                    approx_tokens * 0.00002,
+                    4
+                )
+
+                st.metric(
+                    "Estimated Cost ($)",
+                    estimated_cost
+                )
+
+                st.success(" | ".join(tokens))
+
+                st.write("### Prompt Size")
+
+                st.metric(
+                    "Characters",
+                    len(trace.prompt)
+                )
+
+                st.write("### Generated Output Size")
+
+                st.metric(
+                    "Characters",
+                    len(trace.output_data)
+                )
+
+                st.info(
+                    "The LLM converts the input into tokens, combines it with instructions and predicts the next words to generate the response."
+                )
             st.write("### Next Step")
             st.success(trace.next_step)
 
