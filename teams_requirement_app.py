@@ -411,7 +411,11 @@ if uploaded_file:
         purpose="Generate BRD from transcript",
         why_called="Transcript uploaded",
         input_data=combined_context[:1000],
-        prompt="Meeting Agent BRD Prompt",
+        prompt=getattr(
+            meeting_agent,
+            "last_prompt",
+            "Prompt Not Available"
+        ),
         output_data=meeting_data[:2000],
         next_step="AI Understanding Agent",
         execution_time=0

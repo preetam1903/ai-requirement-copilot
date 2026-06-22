@@ -873,6 +873,7 @@ Meeting Transcript:
         print("========== TRANSCRIPT RECEIVED ==========")
         print(transcript)
         print("========================================")
+        self.last_prompt = prompt
         response = self.client.chat.completions.create(
             model="gpt-4.1",
             messages=[

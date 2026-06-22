@@ -17,13 +17,25 @@ def render_xray(trace_store):
             st.write(trace.why_called)
 
             st.write("### Input")
-            st.text(trace.input_data)
+            st.text_area(
+                "Input",
+                trace.input_data,
+                height=200
+            )
 
             st.write("### Prompt")
-            st.code(trace.prompt)
+            st.text_area(
+                "Prompt",
+                trace.prompt,
+                height=300
+            )
 
             st.write("### Output")
-            st.text(trace.output_data)
+            sst.text_area(
+                "Output",
+                trace.output_data,
+                height=250
+            )
 
             st.write("### Next Step")
             st.success(trace.next_step)
