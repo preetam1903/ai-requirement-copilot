@@ -21,33 +21,59 @@ def render_xray(trace_store):
             st.write("### Why was I Invoked")
             st.write(trace.why_called)
 
-            st.write("### Input")
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.metric(
+                    "Input Tokens",
+                    trace.input_tokens
+                )
+
+            with col2:
+                st.metric(
+                    "Output Tokens",
+                    trace.output_tokens
+                )
+
+            with col3:
+                st.metric(
+                    "Cost",
+                    f"₹{trace.estimated_cost}"
+                )
+
+            st.write("### 📥 Inputs Received")
             st.text_area(
                 "Input",
                 trace.input_data,
                 height=200
             )
 
-            st.write("### Prompt")
-            st.text_area(
-                "Prompt",
-                trace.prompt,
-                height=300
-            )
+            with st.expander(
+                "📜 View Prompt Used"
+            ):
 
-            st.write("### Output")
-            st.text_area(
-                "Output",
-                trace.output_data,
-                height=250
-            )
+                st.text_area(
+                    "Prompt",
+                    trace.prompt,
+                    height=300
+                )
+
+            with st.expander(
+                "📤 View Generated Output"
+            ):
+
+                st.text_area(
+                    "Output",
+                    trace.output_data,
+                    height=250
+                )
 
 
             
 
         
             with st.expander(
-                "🧠 Prompt Engineering X-Ray"
+                "📨 WHAT - Prompt Construction"
             ):
 
                 st.markdown("""
@@ -66,19 +92,9 @@ def render_xray(trace_store):
             Agent Output
             """)
 
-                st.write("### Sample Input")
+                
 
-                sample_text = trace.input_data[:120]
-
-                st.info(sample_text)
-
-                st.write("### Sample Tokens")
-
-                tokens = sample_text.split()[:15]
-
-                st.write("### Approximate Token Count")
-
-                approx_tokens = len(sample_text.split())
+            
 
                 st.metric(
                     "Tokens",
