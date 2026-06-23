@@ -378,20 +378,22 @@ def render_xray(trace_store):
             ):
 
                 st.code("""
-            Business Transcript
+                Business Transcript
                     ↓
-            Tokenization
+                Tokenization
                     ↓
-            Embeddings
+                Embeddings
                     ↓
-            Neural Network Layers
+                Meaning Extraction
                     ↓
-            Attention Mechanism
+                Concept Discovery
                     ↓
-            Token Prediction
+                Relationship Discovery
                     ↓
-            Generated Response
-            """)
+                Risk Analysis
+                    ↓
+                Requirement Generation
+                """)
 
                 st.info("""
             The LLM does not understand words directly.
@@ -442,19 +444,95 @@ def render_xray(trace_store):
                 Customer Communication
                 """)
 
-                st.write("### Attention Heatmap")
+                st.write("### AI Reasoning Layers")
 
                 st.code("""
-            Customer      ██████████
-            Postal Code   ████████
-            Address       ███████
-            Invoice       █████
-            Country       ███
-            """)
+                Layer 1
+
+                Important Terms Detected
+
+                ✓ Postal Code
+
+                ✓ Customer
+
+                ✓ Invoice
+
+                ✓ Country
+
+                    ↓
+
+                Layer 2
+
+                Business Concepts Detected
+
+                ✓ Address Validation
+
+                ✓ Customer Master
+
+                ✓ Invoice Processing
+
+                        ↓
+
+                Layer 3
+
+                Relationships Identified
+
+                Postal Code
+                      ↓
+                Customer Address
+                      ↓
+                Invoice Delivery
+
+                    ↓
+
+                Layer 4
+
+                Business Risk Identified
+
+                Incorrect Postal Code
+                      ↓
+                Invoice Delivery Failure
+
+                    ↓
+
+                Layer 5
+
+                Requirement Generated
+
+                Enable support for
+                11-character postal code
+                """)
+                st.write("### Final AI Decision")
+
+                st.success("""
+                Business Problem
+
+                Incorrect postal code may cause invoice delivery failure
+
+                ↓
+
+                Recommended Requirement
+
+                Enable support for 11-character postal code validation
+                """)
+
+                st.write("### AI Focus Areas")
+
+                st.code("""
+                Postal Code          ██████████
+
+                Invoice Address      ████████
+
+                Customer Master      ███████
+
+                Country Validation   █████
+
+                Communication Risk   ███
+                """)
 
                 st.info("""
-            The attention mechanism helps the model determine which words and concepts are most relevant when generating the response.
-            """)
+                The attention mechanism helps the model focus on the concepts that are most important to solving the business problem.
+                """)
 
             with st.expander(
                 "🏭 Production X-Ray"
