@@ -9,11 +9,16 @@ def render_xray(trace_store):
         with st.expander(
             f"🔍 {trace.name}"
         ):
+            st.subheader(
+                "👤 WHO - Agent Execution"
+            )
+            st.write("### Mission")
 
-            st.write("### Purpose")
-            st.write(trace.purpose)
+            st.info(
+                trace.purpose
+            )
 
-            st.write("### Why Called")
+            st.write("### Why was I Invoked")
             st.write(trace.why_called)
 
             st.write("### Input")
