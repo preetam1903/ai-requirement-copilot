@@ -267,19 +267,30 @@ def render_xray(trace_store):
                 )
                 st.write("### What AI Added")
 
-                st.success("""
-                ✓ Business Domain Knowledge
+                added_items = []
 
-                ✓ SAP Module Context
+                prompt_text = trace.prompt.lower()
 
-                ✓ Structured BRD Instructions
+                if "customer" in prompt_text:
+                    added_items.append("✓ Customer Master Knowledge")
 
-                ✓ Requirement Extraction Rules
+                if "invoice" in prompt_text:
+                    added_items.append("✓ Invoice Processing Context")
 
-                ✓ Risk Identification Guidance
+                if "postal" in prompt_text:
+                    added_items.append("✓ Postal Code Validation Rules")
 
-                ✓ Output Formatting Instructions
-                """)
+                if "country" in prompt_text:
+                    added_items.append("✓ Country-Specific Business Rules")
+
+                if not added_items:
+                    added_items = [
+                        "✓ Business Domain Knowledge",
+                        "✓ Requirement Engineering Guidance",
+                        "✓ Structured Output Instructions"
+                    ]
+
+                st.success("\n\n".join(added_items))
                 st.write("### Why The Prompt Grew")
 
                 st.info("""
@@ -392,13 +403,44 @@ def render_xray(trace_store):
 
                 sample_words = trace.input_data.split()[:5]
 
-                st.write("### Example Embeddings")
+                st.write("### Embedding Example")
 
-                for word in sample_words:
+                st.code("""
+                Business Word
 
-                    st.code(
-                        f"{word} → [0.24, -0.91, 0.67, 0.11, ...]"
-                    )
+                Postal Code
+
+                    ↓
+
+                Embedding Vector
+
+                [0.24, -0.91, 0.67, 0.11, ...]
+
+                    ↓
+
+                Meaning Understood By AI
+
+                Address Validation
+                """)
+
+                st.info("""
+                The neural network cannot understand words directly.
+
+                It converts words into embeddings (numbers).
+
+                Embeddings help the model identify meaning and relationships between concepts.
+                """)
+                st.write("### Related Concepts Discovered")
+
+                st.code("""
+                Postal Code
+                      ↓
+                Customer Address
+                      ↓
+                Invoice Address
+                      ↓
+                Customer Communication
+                """)
 
                 st.write("### Attention Heatmap")
 
