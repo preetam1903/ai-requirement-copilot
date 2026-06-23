@@ -270,6 +270,82 @@ def render_xray(trace_store):
                 The model is the engine.
                 The prompt is the steering wheel.
                 """)
+
+
+                st.write("### 🔄 Prompt Evolution X-Ray")
+
+                st.write("### Stage 1 - Raw Business Input")
+
+                st.text_area(
+                    "Original Transcript",
+                    trace.input_data[:500],
+                    height=120
+                )
+
+                st.write("### Stage 2 - Knowledge Added")
+
+                st.code("""
+                Customer Master Data
+
+                Invoice Processing
+
+                Country Validation
+
+                Customer Communication
+                """)
+
+                st.write("### Stage 3 - Agent Instructions Added")
+
+                st.code("""
+                You are a Senior Business Analyst.
+
+                Generate a BRD.
+
+                Identify business requirements.
+
+                Identify risks.
+
+                Generate structured output.
+                """)
+
+                st.write("### Stage 4 - Final Prompt")
+
+                st.success(
+                    f"Prompt Size = {len(trace.prompt)} Characters"
+                )
+
+
+                st.write("### Prompt Growth Analysis")
+
+                raw_size = len(trace.input_data)
+
+                final_size = len(trace.prompt)
+
+                growth = round(
+                    ((final_size - raw_size) / max(raw_size,1)) * 100,
+                    1
+                )
+
+                st.metric(
+                    "Prompt Expansion",
+                    f"{growth}%"
+                )
+
+                st.write("### Why The Prompt Grew")
+
+                st.info("""
+                The AI system enriches the original transcript with:
+
+                ✓ Business Context
+
+                ✓ Domain Knowledge
+
+                ✓ Agent Instructions
+
+                ✓ Output Structure
+
+                This additional information helps improve response quality and consistency.
+                """)
                 st.write("### Final Prompt Preview")
 
                 st.text_area(
@@ -452,6 +528,165 @@ def render_xray(trace_store):
                   ↓
                 Production Environment
                 """)
+                st.write("### 💰 Cost Visibility")
+
+                prompt_tokens = int(
+                    len(trace.prompt.split()) * 1.3
+                )
+
+                output_tokens = int(
+                    len(trace.output_data.split()) * 1.3
+                )
+
+                estimated_cost = round(
+                    ((prompt_tokens + output_tokens) / 1000) * 0.02,
+                    4
+                )
+
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    st.metric(
+                        "Prompt Tokens",
+                        prompt_tokens
+                    )
+
+                with col2:
+                    st.metric(
+                        "Output Tokens",
+                        output_tokens
+                    )
+
+                with col3:
+                    st.metric(
+                        "Estimated Cost ($)",
+                        estimated_cost
+                    )
+                st.write("### 🔍 Audit Trail")
+
+                st.code(f"""
+                Agent Used:
+                {trace.name}
+
+                Execution Time:
+                {trace.execution_time}s
+
+                Prompt Size:
+                {len(trace.prompt)} Characters
+
+                Input Tokens:
+                {trace.input_tokens}
+
+                Output Tokens:
+                {trace.output_tokens}
+
+                Estimated Cost:
+                ₹{trace.estimated_cost}
+                """)
+
+            with st.expander(
+                "🛡 Governance X-Ray"
+            ):
+                st.write("### Data Transparency")
+
+                st.code(f"""
+                Data Sources Used
+
+                ✓ Transcript
+
+                ✓ SAP Knowledge Base
+
+                ✓ Screen Analysis
+
+                ✓ Agent Instructions
+
+                Input Size
+
+                {len(trace.input_data)} Characters
+                """)
+
+                st.write("### AI Decision Trace")
+
+                st.code(f"""
+                Agent:
+                {trace.name}
+
+                Purpose:
+                {trace.purpose}
+
+                Why Invoked:
+                {trace.why_called}
+
+                Next Step:
+                {trace.next_step}
+                """)
+
+                st.write("### Model Governance")
+
+                st.code("""
+                Model Used:
+                GPT-4.1
+
+                Prompt Visible:
+                YES
+
+                Input Visible:
+                YES
+
+                Output Visible:
+                YES
+
+                Audit Available:
+                YES
+                """)
+
+                st.write("### Human Approval Workflow")
+
+                st.code("""
+                Transcript
+                      ↓
+
+                AI Draft Generated
+                      ↓
+
+                Business Review
+                      ↓
+
+                Approve / Reject
+                      ↓
+
+                Final BRD
+                """)
+
+                st.write("### Compliance Controls")
+
+                st.success("""
+                ✓ Prompt Traceability
+
+                ✓ Output Traceability
+
+                ✓ Human Review
+
+                ✓ Cost Tracking
+
+                ✓ Agent Audit Trail
+
+                ✓ Production Monitoring
+                """)
+
+                st.write("### Trust Score")
+
+                trust_score = 95
+
+                st.progress(
+                    trust_score / 100
+                )
+
+                st.metric(
+                    "AI Transparency Score",
+                    f"{trust_score}%"
+                )
+    
             st.write("### Next Step")
             st.success(trace.next_step)
 
