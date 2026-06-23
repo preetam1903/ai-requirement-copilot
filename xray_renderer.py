@@ -389,7 +389,69 @@ def render_xray(trace_store):
             The attention mechanism helps the model determine which words and concepts are most relevant when generating the response.
             """)
 
-                
+            with st.expander(
+                "🏭 Production X-Ray"
+            ):
+
+                st.write("### How This Demo Works Today")
+
+                st.code("""
+            Business User
+                ↓
+            Streamlit UI
+                ↓
+            Meeting Agent
+                ↓
+            Prompt
+                ↓
+            OpenAI API
+                ↓
+            Generated BRD
+                ↓
+            Business User
+            """)
+
+                st.write("### How Production Deployment Works")
+
+                st.code("""
+            Business User
+                ↓
+            Web Application
+                ↓
+            FastAPI Service
+                ↓
+            Agent Orchestrator
+                ↓
+            Prompt Service
+                ↓
+            Azure OpenAI
+                ↓
+            Response
+                ↓
+            Database
+                ↓
+            Audit Logs
+            """)
+
+                st.info("""
+            Production systems separate UI, AI services,
+            data storage and monitoring into independent components.
+            """)
+                st.write("### Deployment Pipeline")
+
+                st.code("""
+                Developer
+                  ↓
+                GitHub
+                  ↓
+                Docker Build
+                  ↓
+                Container Registry
+                  ↓
+                Azure Container Apps
+                  ↓
+                Production Environment
+                """)
             st.write("### Next Step")
             st.success(trace.next_step)
 
