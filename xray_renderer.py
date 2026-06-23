@@ -76,41 +76,13 @@ def render_xray(trace_store):
                 "📨 WHAT - Prompt Construction"
             ):
 
-                st.markdown("""
-            ### AI Processing Flow
-
-            Transcript
-            ⬇️
-            Tokenization
-            ⬇️
-            Prompt Assembly
-            ⬇️
-            LLM Processing
-            ⬇️
-            Response Generation
-            ⬇️
-            Agent Output
-            """)
+                
 
                 
 
             
 
-                st.metric(
-                    "Tokens",
-                    approx_tokens
-                )
-                estimated_cost = round(
-                    approx_tokens * 0.00002,
-                    4
-                )
-
-                st.metric(
-                    "Estimated Cost ($)",
-                    estimated_cost
-                )
-
-                st.success(" | ".join(tokens))
+               
 
                 st.write("### Prompt Size")
 
