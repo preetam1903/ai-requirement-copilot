@@ -12,15 +12,34 @@ def render_xray(trace_store):
             st.subheader(
                 "👤 WHO - Agent Execution"
             )
-            st.write("### Mission")
+            st.write("### Agent")
 
+            st.success(trace.name)
+            st.write("### Mission")
+            st.write("### Responsibility")
+
+            st.success("""
+            ✓ Read transcript
+
+            ✓ Understand business discussion
+
+            ✓ Generate BRD
+
+            ✓ Pass output to next step
+            """)
             st.info(
                 trace.purpose
             )
 
             st.write("### Why was I Invoked")
-            st.write(trace.why_called)
+            st.info(trace.why_called)
+            st.write("### Agent Decision")
 
+            st.info(f"""
+            The system detected a transcript upload.
+
+            {trace.name} was automatically selected because it specializes in converting business discussions into structured BRD documents.
+            """)
             col1, col2, col3 = st.columns(3)
 
             with col1:
@@ -47,6 +66,15 @@ def render_xray(trace_store):
                 trace.input_data,
                 height=200
             )
+            st.success("""
+            ✓ Meeting Transcript
+    
+            ✓ Business Context
+
+            ✓ Knowledge Base
+
+            ✓ Screen Analysis
+            """)
 
             with st.expander(
                 "📜 View Prompt Used"
@@ -90,38 +118,31 @@ def render_xray(trace_store):
                     "Characters",
                     len(trace.prompt)
                 )
-                st.write("### Prompt Statistics")
+                raw_size = len(trace.input_data)
 
-                prompt_chars = len(trace.prompt)
+                final_size = len(trace.prompt)
 
-                prompt_words = len(
-                    trace.prompt.split()
+                growth = round(
+                    ((final_size - raw_size) / max(raw_size,1)) * 100,
+                    1
                 )
+                st.write("### Prompt Health")
 
-                approx_tokens = int(
-                    prompt_words * 1.3
-                )
+                col1, col2 = st.columns(2)
 
-                st.metric(
-                    "Prompt Characters",
-                    prompt_chars
-                )
+                with col1:
+                    st.metric(
+                        "Prompt Size",
+                        f"{len(trace.prompt):,} chars"
+                    )
 
-                st.metric(
-                    "Prompt Words",
-                    prompt_words
-                )
-
-                st.metric(
-                    "Approx Tokens",
-                    approx_tokens
-                )
-                st.write("### Generated Output Size")
-
-                st.metric(
-                    "Characters",
-                    len(trace.output_data)
-                )
+                with col2:
+                    st.metric(
+                        "Expansion",
+                        f"{growth}%"
+                    )
+                
+                
 
                 st.info(
                     "The LLM converts the input into tokens, combines it with instructions and predicts the next words to generate the response."
@@ -212,14 +233,7 @@ def render_xray(trace_store):
 
                 st.write("### Prompt Growth Analysis")
 
-                raw_size = len(trace.input_data)
-
-                final_size = len(trace.prompt)
-
-                growth = round(
-                    ((final_size - raw_size) / max(raw_size,1)) * 100,
-                    1
-                )
+                
 
                 st.metric(
                     "Prompt Expansion",
