@@ -229,7 +229,33 @@ def render_xray(trace_store):
                 st.success(
                     f"Prompt Size = {len(trace.prompt)} Characters"
                 )
+                st.write("### 🔍 Prompt Difference X-Ray")
 
+                raw_size = len(trace.input_data)
+
+                final_size = len(trace.prompt)
+
+                added_size = final_size - raw_size
+
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    st.metric(
+                        "User Input",
+                        f"{raw_size:,}"
+                    )
+
+                with col2:
+                    st.metric(
+                        "AI Added",
+                        f"{added_size:,}"
+                    )
+
+                with col3:
+                    st.metric(
+                        "Final Prompt",
+                        f"{final_size:,}"
+                    )
 
                 st.write("### Prompt Growth Analysis")
 
@@ -239,7 +265,21 @@ def render_xray(trace_store):
                     "Prompt Expansion",
                     f"{growth}%"
                 )
+                st.write("### What AI Added")
 
+                st.success("""
+                ✓ Business Domain Knowledge
+
+                ✓ SAP Module Context
+
+                ✓ Structured BRD Instructions
+
+                ✓ Requirement Extraction Rules
+
+                ✓ Risk Identification Guidance
+
+                ✓ Output Formatting Instructions
+                """)
                 st.write("### Why The Prompt Grew")
 
                 st.info("""
