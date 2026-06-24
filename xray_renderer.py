@@ -833,20 +833,35 @@ def render_xray(trace_store):
                 st.write("### How This Demo Works Today")
 
                 st.code("""
-            Business User
-                ↓
-            Streamlit UI
-                ↓
-            Meeting Agent
-                ↓
-            Prompt
-                ↓
-            OpenAI API
-                ↓
-            Generated BRD
-                ↓
-            Business User
-            """)
+                Business User
+                    ↓
+                Streamlit UI
+                    ↓
+                Meeting Agent
+                    ↓
+                Prompt
+                    ↓
+                OpenAI API
+                    ↓
+                Generated BRD
+                    ↓
+                Business User
+                """)
+                st.info("""
+                Current Demo Architecture
+
+                • Streamlit provides the user interface
+
+                • Meeting Agent processes the transcript
+
+                • Prompt is constructed dynamically
+
+                • OpenAI generates the BRD
+
+                • Results are displayed immediately
+
+                This architecture is ideal for demonstrations and rapid prototyping.
+                """)
 
                 st.write("### How Production Deployment Works")
 
@@ -874,6 +889,31 @@ def render_xray(trace_store):
             Production systems separate UI, AI services,
             data storage and monitoring into independent components.
             """)
+
+                st.info("""
+                Production Architecture
+
+                🌐 Web Application
+                Handles user interactions
+
+                ⚙️ FastAPI
+                Exposes secure APIs
+
+                🤖 Agent Orchestrator
+                Coordinates AI agents
+
+                📨 Prompt Service
+                Builds prompts consistently
+
+                🧠 Azure OpenAI
+                Performs AI reasoning
+
+                🗄 Database
+                Stores outputs and audit history
+
+                📝 Audit Logs
+                Provides traceability and compliance
+                """)
                 st.write("### Deployment Pipeline")
 
                 st.code("""
@@ -889,6 +929,28 @@ def render_xray(trace_store):
                   ↓
                 Production Environment
                 """)
+                st.info("""
+                Deployment Explained
+
+                GitHub
+                Stores application source code
+
+                Docker Build
+                Packages the application
+
+                Container Registry
+                Stores Docker images
+
+                Azure Container Apps
+                Runs the application in production
+
+                Production Environment
+                Accessible to business users
+                """)
+
+
+
+                
                 st.write("### 💰 Cost Visibility")
 
                 prompt_tokens = int(
