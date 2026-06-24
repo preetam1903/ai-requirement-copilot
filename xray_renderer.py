@@ -535,9 +535,301 @@ def render_xray(trace_store):
                 """)
 
             with st.expander(
-                "🏭 Production X-Ray"
+                "🏭 How-Production X-Ray"
             ):
+                st.write("### Business Requirement Journey")
 
+                st.code("""
+                👤 Business User
+                    ↓
+
+                📄 Transcript Upload
+                    ↓
+
+                🤖 Agent Selection
+                    ↓
+
+                📨 Prompt Construction
+                    ↓
+
+                🧠 Azure OpenAI
+                    ↓
+
+                📋 BRD Generation
+                    ↓
+
+                🛡 Governance Check
+                    ↓
+
+                👤 Human Approval
+                    ↓
+
+                📁 Final BRD
+                """)
+
+                st.info("""
+                This shows how a business requirement moves through the AI platform from transcript upload to final approved BRD.
+                """)
+                st.write("### 🏗 Production Components Explained")
+
+                st.code("""
+                🌐 Streamlit
+
+                What It Does
+                Provides the user interface.
+
+                Why Needed
+                Allows business users to interact with AI.
+
+                ────────────────────────────
+
+                ⚙️ FastAPI
+
+                What It Does
+                Provides APIs between UI and AI services.
+
+                Why Needed
+                Separates frontend from backend.
+
+                ────────────────────────────
+
+                🤖 Agent Orchestrator
+
+                What It Does
+                Coordinates multiple AI agents.
+
+                Why Needed
+                Controls execution sequence and data flow.
+
+                ────────────────────────────
+
+                📨 Prompt Service
+
+                What It Does
+                Builds the final prompt sent to the LLM.
+
+                Why Needed
+                Combines transcript, knowledge and instructions.
+
+                ────────────────────────────
+
+                🧠 Azure OpenAI
+
+                What It Does
+                Performs reasoning and generation.
+
+                Why Needed
+                Creates BRDs, requirements and recommendations.
+
+                ────────────────────────────
+
+                🗄 SQL Database
+
+                What It Does
+                Stores transcripts, outputs and audit history.
+
+                Why Needed
+                Provides persistence and traceability.
+
+                ────────────────────────────
+
+                📦 Docker
+
+                What It Does
+                Packages the application into a portable container.
+
+                Why Needed
+                Ensures the application runs consistently everywhere.
+
+                ────────────────────────────
+
+                ☁ Azure Container Apps
+
+                What It Does
+                Runs Docker containers in production.
+
+                Why Needed
+                Provides scalability and enterprise hosting.
+                """)
+
+                st.write("### 🎼 Agent Orchestration Flow")
+
+                st.code("""
+                📄 Transcript
+                    ↓
+
+                🎼 Agent Orchestrator
+                    ↓
+
+                🤖 Meeting Agent
+                    ↓
+
+                🧠 AI Understanding Agent
+                    ↓
+
+                ⚠ Challenge Agent
+                    ↓
+
+                🏗 HLD Agent
+                    ↓
+
+                🧪 Test Case Agent
+                    ↓
+
+                📋 Final Delivery Package
+                """)
+
+                st.info("""
+                The Agent Orchestrator acts like a project manager.
+
+                It decides which agent runs next, passes outputs between agents and ensures the workflow completes successfully.
+                """)
+
+                st.write("### 🚀 Production Roadmap")
+
+                st.code("""
+                Phase 1
+
+                Demo Platform
+
+                Duration
+                1 Week
+
+                Components
+
+                ✓ Streamlit
+
+                ✓ OpenAI
+
+                ✓ Core Agents
+
+                ✓ X-Ray Framework
+
+
+                    ↓
+
+
+                Phase 2
+
+                Pilot Deployment
+
+                Duration
+                2-3 Weeks
+
+                Components
+
+                ✓ FastAPI
+
+                ✓ SQL Database
+
+                ✓ Monitoring
+
+                ✓ Authentication
+
+                ✓ Audit Logs
+
+
+                    ↓
+
+
+                Phase 3
+
+                Enterprise Production
+
+                Duration
+                4-6 Weeks
+
+                Components
+
+                ✓ Docker
+
+                ✓ Azure Container Apps
+
+                ✓ CI/CD Pipeline
+
+                ✓ Governance Controls
+
+                ✓ Human Approval Workflow
+
+                ✓ Enterprise Monitoring
+                """)
+
+                st.success("""
+                Estimated Journey
+
+                Demo → Pilot → Production
+
+                Approximately 6-10 Weeks depending on enterprise requirements.
+                """)
+
+                st.write("### 🛡 Failure Handling")
+
+                st.code("""
+                Azure OpenAI Failure
+                    ↓
+
+                Retry Request
+                    ↓
+
+                Fallback Model
+                    ↓
+
+                Log Error
+                    ↓
+
+                Notify Support Team
+                    ↓
+
+                User Notification
+                """)
+
+                st.info("""
+                Production systems must handle failures gracefully.
+
+                The platform should automatically retry requests, log issues and notify support teams before users are impacted.
+                """)
+
+                st.write("### 📊 Production Monitoring")
+
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    st.metric(
+                        "Success Rate",
+                        "99.2%"
+                    )
+
+                with col2:
+                    st.metric(
+                        "Avg Response",
+                        "2.4 sec"
+                    )
+
+                with col3:
+                    st.metric(
+                        "Availability",
+                        "99.9%"
+                    )
+
+                st.success("""
+                Monitoring Tracks
+
+                ✓ Response Time
+
+                ✓ Token Usage
+
+                ✓ Cost
+
+                ✓ Errors
+
+                ✓ Agent Failures
+
+                ✓ System Health
+                """)
+
+
+
+                
                 st.write("### How This Demo Works Today")
 
                 st.code("""
@@ -656,7 +948,7 @@ def render_xray(trace_store):
             with st.expander(
                 "🛡 Governance X-Ray"
             ):
-                st.write("### Data Transparency")
+                st.write("### 📚 Data Lineage")
 
                 st.code(f"""
                 Data Sources Used
@@ -674,7 +966,7 @@ def render_xray(trace_store):
                 {len(trace.input_data)} Characters
                 """)
 
-                st.write("### AI Decision Trace")
+                st.write("### 🔍 Decision Traceability")
 
                 st.code(f"""
                 Agent:
@@ -690,7 +982,7 @@ def render_xray(trace_store):
                 {trace.next_step}
                 """)
 
-                st.write("### Model Governance")
+                st.write("### 🧠 AI Governance Controls")
 
                 st.code("""
                 Model Used:
